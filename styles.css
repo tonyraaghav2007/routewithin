@@ -1794,28 +1794,28 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border: 1px solid var(--border-purple);
+  background: rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid rgba(124, 58, 237, 0.18);
   border-radius: var(--radius-lg);
   padding: 2.25rem 2rem;
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 8px 32px 0 rgba(124, 58, 237, 0.08), inset 0 0 0 1px rgba(255, 255, 255, 0.6);
   position: relative;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .contact-info-card:hover {
   border-color: var(--border-purple-hover);
-  box-shadow: var(--shadow-hover);
+  box-shadow: 0 12px 36px 0 rgba(124, 58, 237, 0.14), inset 0 0 0 1px rgba(255, 255, 255, 0.8);
 }
 
 .contact-info-card .glass-card {
-  background: rgba(245, 243, 255, 0.55);
+  background: rgba(255, 255, 255, 0.35);
   border: 1px solid rgba(124, 58, 237, 0.18);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-sm), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
 }
 
 
