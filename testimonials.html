@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#7c3aed">
+  
+  <title>Success Stories & Hall of Fame — RouteWithin | Dimple Sandhu</title>
+  <meta name="description" content="Discover verified transformational reviews, video testimonials, and marriage breakthroughs from alumni of Coach Dimple Sandhu's RouteWithin and Anter Prakash coaching.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/Amitmund/images@main/routewithin/rw-logo-2_150k.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css?v=20261012g">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-bar">
+    <div class="top-bar-content">
+      <span class="pulse-dot"></span>
+      <span>Next Free Live Cohort: <strong>Guru Purnima Inner Alignment Immersion</strong> • This Saturday at 4:30 PM IST</span>
+      <a href="programs.html#featured-live">Reserve Seat Free →</a>
+    </div>
+  </div>
+
+  <!-- Sticky Navbar -->
+  <nav class="navbar" id="mainNavbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo" aria-label="RouteWithin Homepage">
+        <img src="https://cdn.jsdelivr.net/gh/Amitmund/images@main/routewithin/rw-logo-2_150k.png" alt="RouteWithin Logo" class="brand-icon">
+        <div>
+          <div class="brand-title">ROUTE<span>WITHIN</span></div>
+          <span class="brand-subtitle">Anter Prakash • Explore Yourself</span>
+        </div>
+      </a>
+
+      <!-- Desktop Links: Success Stories Active -->
+      <ul class="nav-links">
+        <li><a href="programs.html" class="nav-link">Programs</a></li>
+        <li><a href="testimonials.html" class="nav-link active">Success Stories</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="signin.html" class="nav-signin-link">Sign In</a>
+        <a href="apply.html" class="btn btn-primary btn-sm">Apply Now</a>
+        <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Toggle navigation menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <a href="programs.html" class="mobile-nav-link">Programs</a>
+    <a href="testimonials.html" class="mobile-nav-link" style="color:var(--purple-primary);">Success Stories</a>
+    <a href="contact.html" class="mobile-nav-link">Contact</a>
+    <div style="display: flex; gap: 12px; margin-top: 14px; align-items: center;">
+      <a href="signin.html" class="nav-signin-link" style="flex: 1; text-align: center;">Sign In</a>
+      <a href="apply.html" class="btn btn-primary btn-sm" style="flex: 1; text-align: center;">Apply Now</a>
+    </div>
+  </div>
+
+  <main>
+    <!-- Page Hero -->
+    <header class="page-hero">
+      <div class="container">
+        <div class="page-breadcrumbs">
+          <a href="index.html">Home</a> <span>/</span> <span>Success Stories & Hall of Fame</span>
+        </div>
+        <div class="section-tag">REAL CLIENT BREAKTHROUGHS</div>
+        <h1 class="section-title">Verified <span class="purple-gradient-text">Success Stories</span></h1>
+        <p class="section-subtitle">
+          Over 1,000+ individuals, couples, and leaders have rewired reactive communication loops and found lasting peace through the Anter Prakash system.
+        </p>
+
+        <!-- Metrics Authority Ribbon -->
+        <div style="display: flex; justify-content: flex-start; gap: 40px; margin-top: 24px; flex-wrap: wrap;">
+          <div>
+            <div style="font-family: var(--font-heading); font-size: 2.2rem; font-weight: 900; color: var(--purple-primary);">1,000+</div>
+            <div style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Seekers Mentored</div>
+          </div>
+          <div>
+            <div style="font-family: var(--font-heading); font-size: 2.2rem; font-weight: 900; color: var(--purple-deep);">96%</div>
+            <div style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Conflict Reduction</div>
+          </div>
+          <div>
+            <div style="font-family: var(--font-heading); font-size: 2.2rem; font-weight: 900; color: #059669;">50+</div>
+            <div style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Cohorts Conducted</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Filter Tabs & Video Testimonial Grid -->
+    <section class="hall-of-fame-section">
+      <div class="container">
+        <div class="hof-filter-tabs">
+          <button class="hof-tab-btn active" onclick="filterHallOfFame('all')">All Breakthroughs</button>
+          <button class="hof-tab-btn" onclick="filterHallOfFame('couples')">Marriage & Couples</button>
+          <button class="hof-tab-btn" onclick="filterHallOfFame('mindset')">Personal Emotional Mastery</button>
+          <button class="hof-tab-btn" onclick="filterHallOfFame('family')">Family & Communication</button>
+        </div>
+
+        <div class="testimonials-grid">
+          <!-- Story 1 -->
+          <div class="testimonial-video-card" data-category="couples">
+            <div class="video-thumb-container" onclick="openVideoModal('https://www.youtube.com/embed/XFVP9e8r24s?autoplay=1')">
+              <img src="https://img.youtube.com/vi/XFVP9e8r24s/maxresdefault.jpg" alt="Video Review Thumbnail Dimple" class="video-thumb-img">
+              <div class="thumb-play-pill">▶ Watch Story</div>
+            </div>
+            <div class="testimonial-body">
+              <div class="stars-row">★★★★★</div>
+              <p class="testimonial-quote">
+                "I was skeptical about NLP coaching until I joined Dimple's masterclass. In 4 weeks, the continuous friction between my spouse and me dissolved into conscious understanding."
+              </p>
+              <div class="testimonial-author">
+                <div>
+                  <div class="author-name">@Dimple Reviewer</div>
+                  <div style="font-size: 0.72rem; color: var(--text-muted);">Verified Cohort Member</div>
+                </div>
+                <span class="author-badge">Verified Story</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Story 2 -->
+          <div class="testimonial-video-card" data-category="mindset">
+            <div class="video-thumb-container" onclick="openVideoModal('https://www.youtube.com/embed/cvRYYMbNscQ?autoplay=1')">
+              <img src="https://img.youtube.com/vi/cvRYYMbNscQ/maxresdefault.jpg" alt="Video Review Thumbnail Webinar" class="video-thumb-img">
+              <div class="thumb-play-pill">▶ Watch Story</div>
+            </div>
+            <div class="testimonial-body">
+              <div class="stars-row">★★★★★</div>
+              <p class="testimonial-quote">
+                "The Anter Prakash concept changed my entire worldview. I realized I was fighting my own inner shadows through the people around me. Pure peace after months of chaos."
+              </p>
+              <div class="testimonial-author">
+                <div>
+                  <div class="author-name">@Live Webinar Participant</div>
+                  <div style="font-size: 0.72rem; color: var(--text-muted);">Masterclass Graduate</div>
+                </div>
+                <span class="author-badge">Inner Peace</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Story 3 -->
+          <div class="testimonial-video-card" data-category="family">
+            <div class="video-thumb-container" onclick="openVideoModal('https://www.youtube.com/embed/deGp9JSE8gI?autoplay=1')">
+              <img src="https://img.youtube.com/vi/deGp9JSE8gI/maxresdefault.jpg" alt="Video Review Thumbnail 2nd July" class="video-thumb-img">
+              <div class="thumb-play-pill">▶ Watch Story</div>
+            </div>
+            <div class="testimonial-body">
+              <div class="stars-row">★★★★★</div>
+              <p class="testimonial-quote">
+                "My relationship with my parents and children completely shifted. The linguistic frameworks taught in RouteWithin prevent fights before they even begin."
+              </p>
+              <div class="testimonial-author">
+                <div>
+                  <div class="author-name">@Breakthrough Case Study</div>
+                  <div style="font-size: 0.72rem; color: var(--text-muted);">Community Alumni</div>
+                </div>
+                <span class="author-badge">Family Harmony</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Story 4 (Written In-Depth Case Study) -->
+          <div class="testimonial-video-card" data-category="couples">
+            <div style="background: var(--purple-ultra-soft); padding: 36px 24px; text-align: center; border-bottom: 1px solid var(--border-purple);">
+              <div style="font-size: 2.2rem;">💍</div>
+              <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--purple-deep); margin-top: 8px;">Saved From Brink of Separation</h4>
+              <p style="font-size: 0.8rem; color: var(--text-muted);">Mumbai, India • Cohort #14</p>
+            </div>
+            <div class="testimonial-body">
+              <div class="stars-row">★★★★★</div>
+              <p class="testimonial-quote">
+                "We had already spoken to divorce lawyers. After completing the 4-Pillar Anter Prakash Architecture, we realized 90% of our fights were unhealed childhood defense projections. We are closer today than on our wedding day."
+              </p>
+              <div class="testimonial-author">
+                <div>
+                  <div class="author-name">Rajesh & Preeti K.</div>
+                  <div style="font-size: 0.72rem; color: var(--text-muted);">Senior Corporate Executives</div>
+                </div>
+                <span class="author-badge">Couples Mastery</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Story 5 (Written In-Depth Case Study) -->
+          <div class="testimonial-video-card" data-category="mindset">
+            <div style="background: var(--purple-ultra-soft); padding: 36px 24px; text-align: center; border-bottom: 1px solid var(--border-purple);">
+              <div style="font-size: 2.2rem;">🧘</div>
+              <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--purple-deep); margin-top: 8px;">Overcoming Severe Anxious Attachment</h4>
+              <p style="font-size: 0.8rem; color: var(--text-muted);">Bengaluru, India • 1-on-1 VIP Mentorship</p>
+            </div>
+            <div class="testimonial-body">
+              <div class="stars-row">★★★★★</div>
+              <p class="testimonial-quote">
+                "I used to panic whenever my partner needed personal space or didn't text back within 10 minutes. The Subconscious Decoupling drill permanently reprogrammed that physiological terror into centered self-soothing."
+              </p>
+              <div class="testimonial-author">
+                <div>
+                  <div class="author-name">Neha S.</div>
+                  <div style="font-size: 0.72rem; color: var(--text-muted);">Product Director</div>
+                </div>
+                <span class="author-badge">Attachment Rewired</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Story 6 (Written In-Depth Case Study) -->
+          <div class="testimonial-video-card" data-category="family">
+            <div style="background: var(--purple-ultra-soft); padding: 36px 24px; text-align: center; border-bottom: 1px solid var(--border-purple);">
+              <div style="font-size: 2.2rem;">🏡</div>
+              <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--purple-deep); margin-top: 8px;">In-Law Harmonization</h4>
+              <p style="font-size: 0.8rem; color: var(--text-muted);">Delhi NCR • Cohort #22</p>
+            </div>
+            <div class="testimonial-body">
+              <div class="stars-row">★★★★★</div>
+              <p class="testimonial-quote">
+                "Living in a joint family had become a daily emotional landmine. The Linguistic Resonance framework taught me how to set unshakeable boundaries without ever raising my voice or causing resentment."
+              </p>
+              <div class="testimonial-author">
+                <div>
+                  <div class="author-name">Simran G.</div>
+                  <div style="font-size: 0.72rem; color: var(--text-muted);">Educator & Mother</div>
+                </div>
+                <span class="author-badge">Family Peace</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA Callout -->
+        <div class="glass-card text-center" style="margin-top: 60px; padding: 48px 24px; border: 2px solid var(--border-purple);">
+          <div class="section-tag">YOUR JOURNEY AWAITS</div>
+          <h3 style="font-size: 2rem; font-weight: 900; color: var(--text-heading); margin-bottom: 12px;">
+            Ready to Write Your Own <span class="purple-gradient-text">Breakthrough Story?</span>
+          </h3>
+          <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto 28px;">
+            Join our next free live masterclass or submit a confidential consultation application to begin your transformation today.
+          </p>
+          <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+            <a href="programs.html" class="btn btn-primary btn-lg">Explore Programs & Cohorts →</a>
+            <a href="contact.html" class="btn btn-secondary btn-lg">Book VIP Consultation</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Video Modal -->
+  <div class="modal-backdrop" id="videoModal">
+    <div class="modal-content-box">
+      <button class="modal-close-x" onclick="closeVideoModal()">&times;</button>
+      <div class="video-container-ratio">
+        <iframe id="videoModalIframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Authority Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <img src="https://cdn.jsdelivr.net/gh/Amitmund/images@main/routewithin/rw-logo-2_150k.png" alt="RouteWithin Logo" class="brand-icon">
+            <div>
+              <div class="brand-title">ROUTE<span>WITHIN</span></div>
+              <span class="brand-subtitle">Anter Prakash • Explore Yourself</span>
+            </div>
+          </div>
+          <p class="footer-bio">
+            A transformational ecosystem founded by Dimple Sandhu to bridge communication divides, rewire subconscious neural patterns, and awaken unconditional relationship peace from the inside out.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="index.html" class="footer-link">Home</a></li>
+            <li><a href="programs.html" class="footer-link">Programs & Cohorts</a></li>
+            <li><a href="testimonials.html" class="footer-link">Success Stories</a></li>
+            <li><a href="contact.html" class="footer-link">VIP Consultation</a></li>
+            <li><a href="signin.html" class="footer-link">Member Portal</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Programs & Tools</h4>
+          <ul class="footer-links">
+            <li><a href="programs.html" class="footer-link">Guru Purnima Masterclass</a></li>
+            <li><a href="index.html#assessment" class="footer-link">Relationship Audit Quiz</a></li>
+            <li><a href="testimonials.html" class="footer-link">Hall of Fame Reviews</a></li>
+            <li><a href="apply.html" class="footer-link">Cohort Application</a></li>
+            <li><a href="contact.html" class="footer-link">1-on-1 Consultation</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contact & Direct</h4>
+          <ul class="footer-links">
+            <li><a href="tel:+919872250153" class="footer-link">+91 987 225 0153</a></li>
+            <li><a href="mailto:care@routewithin.com" class="footer-link">care@routewithin.com</a></li>
+            <li><span style="color: var(--text-muted); font-size: 0.85rem;">Bharat (Global Virtual)</span></li>
+            <li><a href="programs.html" class="footer-link" style="color: var(--purple-primary);">Live Masterclass ↗</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>&copy; 2026 RouteWithin. Anter Prakash. All Rights Reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+
+
+  <div class="toast-notice" id="toastNotice">Notification</div>
+
+  <script src="app.js?v=20261012g"></script>
+</body>
+</html>

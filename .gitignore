@@ -1,0 +1,15 @@
+# Node modules & dependencies
+node_modules/
+.npm
+
+# Operating System & IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
+
+# Build / Temp artifacts
+dist/
+build/
+.cache/
