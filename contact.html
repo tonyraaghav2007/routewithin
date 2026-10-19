@@ -3,20 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#7c3aed">
+  <meta name="theme-color" content="#8B6F47">
   
-  <title>Contact & VIP Consultation — RouteWithin | Dimple Sandhu</title>
-  <meta name="description" content="Get in touch with RouteWithin and Coach Dimple Sandhu. Schedule a confidential relationship consultation or inquire about live masterclasses and private mentorship.">
+  <title>Let's Connect — RouteWithin | Book a Session with Dimple Sandhu</title>
+  <meta name="description" content="Take the first step towards clarity, confidence and healthier relationships. Book a confidential 1:1 coaching session with Dimple Sandhu at RouteWithin.">
+  <meta name="keywords" content="Book a Session, RouteWithin Contact, Dimple Sandhu, Relationship Coach Consultation">
+
+  <!-- Open Graph / Social Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Let's Connect — RouteWithin">
+  <meta property="og:description" content="Take the first step towards clarity, confidence and healthier relationships.">
+  <meta property="og:image" content="assets/about_coach.jpg">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/Amitmund/images@main/routewithin/rw-logo-2_150k.png">
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="styles.css?v=20261012h">
+  <link rel="stylesheet" href="styles.css?v=20261019a">
+  <script>
+    (function() {
+      const saved = localStorage.getItem('routewithin_theme');
+      if (saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
 </head>
 <body>
 
@@ -25,7 +37,7 @@
     <div class="top-bar-content">
       <span class="pulse-dot"></span>
       <span>Next Free Live Cohort: <strong>Guru Purnima Inner Alignment Immersion</strong> • This Saturday at 4:30 PM IST</span>
-      <a href="programs.html#featured-live">Reserve Seat Free →</a>
+      <a href="index.html#events">Reserve Your Seat Free →</a>
     </div>
   </div>
 
@@ -35,21 +47,43 @@
       <a href="index.html" class="brand-logo" aria-label="RouteWithin Homepage">
         <img src="https://cdn.jsdelivr.net/gh/Amitmund/images@main/routewithin/rw-logo-2_150k.png" alt="RouteWithin Logo" class="brand-icon">
         <div>
-          <div class="brand-title">ROUTE<span>WITHIN</span></div>
+          <div class="brand-title">Route<span>Within</span></div>
           <span class="brand-subtitle">Anter Prakash • Explore Yourself</span>
         </div>
       </a>
 
-      <!-- Desktop Links: Contact Active -->
+      <!-- Desktop Navigation Links -->
       <ul class="nav-links">
-        <li><a href="programs.html" class="nav-link">Programs</a></li>
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="programs.html" class="nav-link">Services</a></li>
+        <li><a href="how-it-works.html" class="nav-link">How It Works</a></li>
         <li><a href="testimonials.html" class="nav-link">Success Stories</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
         <li><a href="contact.html" class="nav-link active">Contact</a></li>
       </ul>
 
+      <!-- Action Buttons -->
       <div class="nav-actions">
-        <a href="signin.html" class="nav-signin-link">Sign In</a>
-        <a href="apply.html" class="btn btn-primary btn-sm">Apply Now</a>
+        <button id="themeToggle" class="theme-toggle-btn" type="button" aria-label="Switch between dark and light mode" title="Switch between dark and light mode">
+          <span class="theme-icon-container">
+            <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </span>
+        </button>
+        <a href="apply.html" class="btn btn-primary btn-sm">Book a Session</a>
         <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Toggle navigation menu">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
@@ -59,149 +93,161 @@
 
   <!-- Mobile Drawer -->
   <div class="mobile-drawer" id="mobileDrawer">
-    <a href="programs.html" class="mobile-nav-link">Programs</a>
+    <div class="mobile-theme-row">
+      <span class="mobile-theme-label">Appearance</span>
+      <div class="mobile-theme-status">
+        <span class="mobile-theme-badge">Light Mode</span>
+        <button id="mobileThemeToggle" class="theme-toggle-btn" type="button" aria-label="Switch between dark and light mode">
+          <span class="theme-icon-container">
+            <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="5"></circle></svg>
+            <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </span>
+        </button>
+      </div>
+    </div>
+    <a href="index.html" class="mobile-nav-link">Home</a>
+    <a href="about.html" class="mobile-nav-link">About</a>
+    <a href="programs.html" class="mobile-nav-link">Services</a>
+    <a href="how-it-works.html" class="mobile-nav-link">How It Works</a>
     <a href="testimonials.html" class="mobile-nav-link">Success Stories</a>
-    <a href="contact.html" class="mobile-nav-link" style="color:var(--purple-primary);">Contact</a>
-    <div style="display: flex; gap: 12px; margin-top: 14px; align-items: center;">
-      <a href="signin.html" class="nav-signin-link" style="flex: 1; text-align: center;">Sign In</a>
-      <a href="apply.html" class="btn btn-primary btn-sm" style="flex: 1; text-align: center;">Apply Now</a>
+    <a href="blog.html" class="mobile-nav-link">Blog</a>
+    <a href="contact.html" class="mobile-nav-link active">Contact</a>
+    <div style="display: flex; gap: 12px; margin-top: 14px;">
+      <a href="apply.html" class="btn btn-primary btn-sm" style="flex: 1; text-align: center;">Book a Session</a>
     </div>
   </div>
 
   <main>
-    <!-- Page Hero -->
-    <header class="page-hero">
+    <!-- 1. HEADER (COLUMN 7) -->
+    <section style="padding: 70px 0 45px; background: var(--bg-surface); text-align: center;">
       <div class="container">
-        <div class="page-breadcrumbs">
-          <a href="index.html">Home</a> <span>/</span> <span>Contact & Consultation</span>
-        </div>
-        <div class="section-tag">DIRECT MENTORSHIP & INQUIRIES</div>
-        <h1 class="section-title">Connect With <span class="purple-gradient-text">RouteWithin</span></h1>
-        <p class="section-subtitle">
-          Whether you seek private 1-on-1 alignment, corporate relational workshops, or live webinar support, our team is here to guide your journey within.
-        </p>
-      </div>
-    </header>
-
-    <!-- Contact & Application Section -->
-    <section class="contact-section">
-      <div class="container contact-container-grid">
-        <!-- Direct Points -->
-        <div class="contact-info-card">
-          <div class="section-tag emerald">OFFICIAL COMMUNICATION CHANNELS</div>
-          <h2 class="section-title">Speak Directly With <span class="purple-gradient-text">Our Team</span></h2>
-          <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.6;">
-            We respond to all genuine seeker inquiries within 24 business hours. Confidentiality is unconditionally guaranteed.
+        <div style="max-width: 760px; margin: 0 auto;" class="reveal-on-scroll">
+          <h1 style="font-family: var(--font-heading); font-size: 3.2rem; color: var(--text-heading); margin-bottom: 10px;">
+            Let's Connect
+          </h1>
+          <p style="font-size: 1.15rem; color: var(--text-secondary); line-height: 1.7;">
+            Take the first step towards clarity, confidence and healthier relationships.
           </p>
-
-          <div class="info-point">
-            <div class="info-icon">📞</div>
-            <div>
-              <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-heading);">Direct Coach Hotline & WhatsApp</h4>
-              <p style="color: var(--text-muted); font-size: 0.85rem;">+91 987 225 0153 (Mon - Sat, 10 AM - 7 PM IST)</p>
-            </div>
-          </div>
-
-          <div class="info-point">
-            <div class="info-icon">✉️</div>
-            <div>
-              <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-heading);">Official Support Email</h4>
-              <p style="color: var(--text-muted); font-size: 0.85rem;">care@routewithin.com</p>
-            </div>
-          </div>
-
-          <div class="info-point">
-            <div class="info-icon">📍</div>
-            <div>
-              <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-heading);">Geographic Headquarters</h4>
-              <p style="color: var(--text-muted); font-size: 0.85rem;">Serving Seekers Globally from Bharat (India)</p>
-            </div>
-          </div>
-
-          <div class="info-point">
-            <div class="info-icon">💻</div>
-            <div>
-              <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-heading);">Virtual Classroom</h4>
-              <p style="color: var(--text-muted); font-size: 0.85rem;">Interactive Live Zoom Room • Sat 4:30 PM IST</p>
-            </div>
-          </div>
-
-          <!-- Social Proof Banner -->
-          <div class="glass-card" style="padding: 20px; border-color: rgba(124, 58, 237, 0.2);">
-            <div style="display: flex; align-items: center; gap: 12px;">
-              <span style="font-size: 1.5rem;">🔒</span>
-              <p style="font-size: 0.8rem; color: var(--purple-primary); line-height: 1.4;">
-                <strong>100% Confidential Guarantee:</strong> All discussions, personal challenges, and assessments are protected under complete client privacy and non-disclosure standards.
-              </p>
-            </div>
-          </div>
         </div>
+      </div>
+    </section>
 
-        <!-- Consultation Form -->
-        <div class="form-wrapper">
-          <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--text-heading); margin-bottom: 20px;">
-            Book Your Free Breakthrough Audit
-          </h3>
+    <!-- 2. BOOKING / CONTACT FORM (MATCHING COLUMN 7) -->
+    <section style="padding: 70px 0; background: var(--bg-base);">
+      <div class="container" style="max-width: 860px;">
+        
+        <div style="background: var(--bg-card); border-radius: 24px; padding: 44px; border: 1px solid rgba(139, 111, 71, 0.2); box-shadow: var(--shadow-md);" class="reveal-scale">
+          
+          <!-- Mode Tabs -->
+          <div style="display: flex; gap: 12px; margin-bottom: 32px; border-bottom: 1px solid rgba(139, 111, 71, 0.15); padding-bottom: 16px;">
+            <button id="tabBookBtn" onclick="switchContactTab('book')" class="btn btn-primary btn-md" style="border-radius: var(--radius-full);">
+              Book a Session
+            </button>
+            <button id="tabMessageBtn" onclick="switchContactTab('message')" class="btn btn-secondary btn-md" style="border-radius: var(--radius-full);">
+              Send a Message
+            </button>
+          </div>
 
-          <form id="leadCaptureForm" onsubmit="handleLeadSubmit(event)">
+          <!-- The Form -->
+          <form id="connectForm" onsubmit="handleConnectSubmit(event)">
             <div class="form-group">
-              <label class="form-label" for="fullName">Full Name *</label>
-              <input type="text" id="fullName" class="form-input" required placeholder="e.g. Ananya Sharma">
+              <label class="form-label" for="contactName">Full Name *</label>
+              <input type="text" id="contactName" class="form-input" required placeholder="Your full name">
             </div>
 
             <div class="form-row">
               <div class="form-group">
-                <label class="form-label" for="contactNumber">WhatsApp / Phone Number *</label>
-                <input type="tel" id="contactNumber" class="form-input" required placeholder="e.g. +91 98765 43210">
+                <label class="form-label" for="contactEmail">Email Address *</label>
+                <input type="email" id="contactEmail" class="form-input" required placeholder="name@example.com">
               </div>
 
               <div class="form-group">
-                <label class="form-label" for="emailAddress">Email Address (Optional)</label>
-                <input type="email" id="emailAddress" class="form-input" placeholder="name@example.com">
+                <label class="form-label" for="contactPhone">Phone Number (Optional)</label>
+                <input type="tel" id="contactPhone" class="form-input" placeholder="+91 98765 43210">
               </div>
             </div>
 
             <div class="form-group">
-              <label class="form-label">Gender Identity</label>
-              <div class="gender-radio-group">
-                <label class="gender-option">
-                  <input type="radio" name="gender" value="Female" checked> Female
-                </label>
-                <label class="gender-option">
-                  <input type="radio" name="gender" value="Male"> Male
-                </label>
-                <label class="gender-option">
-                  <input type="radio" name="gender" value="Other"> Prefer not to say
-                </label>
-              </div>
+              <label class="form-label" for="contactService">Select a Service *</label>
+              <select id="contactService" class="form-input" required style="cursor: pointer;">
+                <option value="">Please select a program...</option>
+                <option value="1:1 Relationship Coaching">1:1 Relationship Coaching</option>
+                <option value="Marriage & Long-Term Support">Marriage & Long-Term Relationship Support</option>
+                <option value="Self-Discovery & Confidence">Self-Discovery & Confidence</option>
+                <option value="Free Clarity Call">Free 15-Minute Clarity Call</option>
+              </select>
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="messageGoals">Describe Your Goals or Challenges *</label>
-              <textarea id="messageGoals" rows="3" class="form-textarea" required placeholder="Share what you hope to heal, re-align, or understand better..."></textarea>
+              <label class="form-label" for="contactMessage">Your Message (Optional)</label>
+              <textarea id="contactMessage" rows="4" class="form-textarea" placeholder="Share a few words about what you hope to explore or heal..."></textarea>
             </div>
 
-            <!-- Anti-Spam Security Challenge -->
-            <div class="form-group">
-              <div class="captcha-box">
-                <div>
-                  <span class="captcha-question">Security Verification: What is 5 + 4?</span>
-                  <div style="font-size: 0.72rem; color: var(--text-muted);">Prevent automated submissions</div>
-                </div>
-                <input type="number" id="captchaAnswer" class="captcha-input" required placeholder="?">
-              </div>
+            <div style="margin: 20px 0 28px; display: flex; align-items: center; gap: 8px; font-size: 0.88rem; color: var(--text-muted);">
+              <span>🔒</span>
+              <span>Your information is completely confidential</span>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 10px;">
-              Submit for Priority Review →
+            <button type="submit" id="submitBtnLabel" class="btn btn-primary btn-lg" style="width: 100%; text-align: center;">
+              Book a Session
             </button>
           </form>
+
+          <!-- Direct Channels Box -->
+          <div style="margin-top: 36px; padding-top: 28px; border-top: 1px solid rgba(139, 111, 71, 0.15); display: flex; flex-direction: column; gap: 14px;">
+            <div style="font-size: 0.95rem; color: var(--text-secondary); display: flex; align-items: center; gap: 8px;">
+              <span>📞</span>
+              <strong>Direct Coach Hotline:</strong> 
+              <a href="tel:+919872250153" style="color: var(--brown-primary); font-weight: 600; text-decoration: underline;">+91 987 225 0153</a>
+              <span style="font-size: 0.82rem; color: var(--text-muted);">(Mon - Sat, 10 AM - 7 PM IST)</span>
+            </div>
+            <div style="font-size: 0.95rem; color: var(--text-secondary); display: flex; align-items: center; gap: 8px;">
+              <span>✉️</span>
+              <strong>Official Support Email:</strong> 
+              <a href="mailto:care@routewithin.com" style="color: var(--brown-primary); font-weight: 600; text-decoration: underline;">care@routewithin.com</a>
+            </div>
+            <div style="font-size: 0.95rem; color: var(--text-secondary); display: flex; align-items: center; gap: 8px;">
+              <span>📍</span>
+              <strong>Headquarters:</strong> 
+              <span>DLF Phase 5, Gurugram • Serving Globally from Bharat</span>
+            </div>
+            <div style="font-size: 0.95rem; color: var(--text-secondary); display: flex; align-items: center; gap: 8px;">
+              <span>📸</span>
+              <strong>Follow on Instagram:</strong> 
+              <a href="https://www.instagram.com/dimplesandhu1469" target="_blank" style="color: var(--brown-primary); font-weight: 600; text-decoration: underline;">@routewithin</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 3. BOTTOM IMAGE / QUOTE CARD (COLUMN 7) -->
+    <section style="padding: 70px 0; background: var(--bg-surface);">
+      <div class="container">
+        <div class="split-quote-cta reveal-scale" style="max-width: 900px; margin: 0 auto;">
+          <div class="split-cta-image">
+            <img src="assets/couch_woman.jpg" alt="You don't have to navigate this alone" class="split-cta-img-tag">
+          </div>
+          <div class="split-cta-content" style="padding: 44px 36px;">
+            <h3 style="font-family: var(--font-heading); font-size: 2.1rem; color: var(--text-heading); margin-bottom: 12px; line-height: 1.3;">
+              You don't have to navigate this alone.
+            </h3>
+            <p style="font-size: 1.05rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 24px;">
+              I'm here to support you on your journey towards profound peace, understanding, and heartfelt fulfillment.
+            </p>
+            <div>
+              <button onclick="document.getElementById('contactName').focus()" class="btn btn-primary btn-md">
+                Book a Session
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Authority Footer -->
+  <!-- Global Footer -->
   <footer class="footer">
     <div class="container">
       <div class="footer-top-grid">
@@ -209,58 +255,95 @@
           <div class="brand-logo">
             <img src="https://cdn.jsdelivr.net/gh/Amitmund/images@main/routewithin/rw-logo-2_150k.png" alt="RouteWithin Logo" class="brand-icon">
             <div>
-              <div class="brand-title">ROUTE<span>WITHIN</span></div>
+              <div class="brand-title">Route<span>Within</span></div>
               <span class="brand-subtitle">Anter Prakash • Explore Yourself</span>
             </div>
           </div>
           <p class="footer-bio">
-            A transformational ecosystem founded by Dimple Sandhu to bridge communication divides, rewire subconscious neural patterns, and awaken unconditional relationship peace from the inside out.
+            A safe, calmer and more fulfilling relationship journey — starts within.
           </p>
+          <div class="social-links">
+            <a href="https://www.instagram.com/dimplesandhu1469" target="_blank" class="social-btn" aria-label="Instagram">
+              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/dimple-sandhu-0253445b/" target="_blank" class="social-btn" aria-label="LinkedIn">
+              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@dimplesandhu70" target="_blank" class="social-btn" aria-label="YouTube">
+              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+          </div>
         </div>
 
         <div class="footer-col">
           <h4>Navigation</h4>
           <ul class="footer-links">
             <li><a href="index.html" class="footer-link">Home</a></li>
-            <li><a href="programs.html" class="footer-link">Programs & Cohorts</a></li>
+            <li><a href="about.html" class="footer-link">About</a></li>
+            <li><a href="programs.html" class="footer-link">Services</a></li>
+            <li><a href="how-it-works.html" class="footer-link">How It Works</a></li>
             <li><a href="testimonials.html" class="footer-link">Success Stories</a></li>
-            <li><a href="contact.html" class="footer-link">VIP Consultation</a></li>
-            <li><a href="signin.html" class="footer-link">Member Portal</a></li>
+            <li><a href="blog.html" class="footer-link">Blog</a></li>
+            <li><a href="contact.html" class="footer-link">Contact</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
-          <h4>Programs & Tools</h4>
+          <h4>Programs</h4>
           <ul class="footer-links">
-            <li><a href="programs.html" class="footer-link">Guru Purnima Masterclass</a></li>
-            <li><a href="index.html#assessment" class="footer-link">Relationship Audit Quiz</a></li>
-            <li><a href="testimonials.html" class="footer-link">Hall of Fame Reviews</a></li>
-            <li><a href="apply.html" class="footer-link">Cohort Application</a></li>
-            <li><a href="contact.html" class="footer-link">1-on-1 Consultation</a></li>
+            <li><a href="programs.html" class="footer-link">1:1 Relationship Coaching</a></li>
+            <li><a href="programs.html" class="footer-link">Marriage & Long-Term Support</a></li>
+            <li><a href="programs.html" class="footer-link">Self-Discovery & Confidence</a></li>
+            <li><a href="apply.html" class="footer-link">Book a Session</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
-          <h4>Contact & Direct</h4>
-          <ul class="footer-links">
-            <li><a href="tel:+919872250153" class="footer-link">+91 987 225 0153</a></li>
-            <li><a href="mailto:care@routewithin.com" class="footer-link">care@routewithin.com</a></li>
-            <li><span style="color: var(--text-muted); font-size: 0.85rem;">Bharat (Global Virtual)</span></li>
-            <li><a href="programs.html" class="footer-link" style="color: var(--purple-primary);">Zoom Live Room ↗</a></li>
-          </ul>
+          <h4>Join our newsletter</h4>
+          <p style="font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-bottom: 14px;">Get insights, tips and resources directly to your inbox.</p>
+          <div style="display: flex; gap: 8px;">
+            <input type="email" placeholder="Your email address" style="flex: 1; padding: 10px 14px; border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius-full); background: rgba(255,255,255,0.06); color: white; font-size: 0.85rem; outline: none;">
+            <button class="btn btn-primary btn-sm" onclick="showToast('Subscribed!')">Subscribe</button>
+          </div>
         </div>
       </div>
 
       <div class="footer-bottom-bar">
-        <div>&copy; 2026 RouteWithin. Anter Prakash. All Rights Reserved.</div>
+        <div>&copy; 2024 RouteWithin. All rights reserved.</div>
+        <div class="footer-legal-links">
+          <a href="#" class="footer-link" onclick="showToast('Privacy Policy: All client discussions protected.')">Privacy Policy</a>
+          <a href="#" class="footer-link" onclick="showToast('Terms: Dedicated to personal transformation.')">Terms & Conditions</a>
+        </div>
       </div>
     </div>
   </footer>
 
+  <div class="toast-notice" id="toastNotice">Notification message</div>
+  
+  <script>
+    function switchContactTab(tab) {
+      const bookBtn = document.getElementById('tabBookBtn');
+      const msgBtn = document.getElementById('tabMessageBtn');
+      const submitLabel = document.getElementById('submitBtnLabel');
 
+      if (tab === 'book') {
+        bookBtn.className = 'btn btn-primary btn-md';
+        msgBtn.className = 'btn btn-secondary btn-md';
+        submitLabel.textContent = 'Book a Session';
+      } else {
+        msgBtn.className = 'btn btn-primary btn-md';
+        bookBtn.className = 'btn btn-secondary btn-md';
+        submitLabel.textContent = 'Send Message';
+      }
+    }
 
-  <div class="toast-notice" id="toastNotice">Notification</div>
-
-  <script src="app.js?v=20261012g"></script>
+    function handleConnectSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('contactName').value;
+      showToast(`Thank you, ${name}! Your request has been received. Coach Dimple will reach out within 24 hours.`);
+      e.target.reset();
+    }
+  </script>
+  <script src="app.js?v=20261019a"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#7c3aed">
+  <meta name="theme-color" content="#8B6F47">
   
   <title>Member Sign In — RouteWithin Portal</title>
   <meta name="description" content="Sign in to the RouteWithin Member Portal. Access your Anter Prakash cohort recordings, worksheets, and live masterclass vault.">
@@ -11,12 +11,17 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/Amitmund/images@main/routewithin/rw-logo-2_150k.png">
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="styles.css?v=20261012g">
+  <link rel="stylesheet" href="styles.css?v=20261019a">
+  <script>
+    (function() {
+      const saved = localStorage.getItem('routewithin_theme');
+      if (saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
 </head>
 <body>
 
@@ -26,21 +31,43 @@
       <a href="index.html" class="brand-logo" aria-label="RouteWithin Homepage">
         <img src="https://cdn.jsdelivr.net/gh/Amitmund/images@main/routewithin/rw-logo-2_150k.png" alt="RouteWithin Logo" class="brand-icon">
         <div>
-          <div class="brand-title">ROUTE<span>WITHIN</span></div>
+          <div class="brand-title">Route<span>Within</span></div>
           <span class="brand-subtitle">Anter Prakash • Explore Yourself</span>
         </div>
       </a>
 
       <!-- Desktop Links -->
       <ul class="nav-links">
-        <li><a href="programs.html" class="nav-link">Programs</a></li>
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="programs.html" class="nav-link">Services</a></li>
+        <li><a href="how-it-works.html" class="nav-link">How It Works</a></li>
         <li><a href="testimonials.html" class="nav-link">Success Stories</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
         <li><a href="contact.html" class="nav-link">Contact</a></li>
       </ul>
 
       <div class="nav-actions">
-        <a href="signin.html" class="nav-signin-link" style="color:var(--purple-primary); font-weight:800;">Sign In</a>
-        <a href="apply.html" class="btn btn-primary btn-sm">Apply Now</a>
+        <button id="themeToggle" class="theme-toggle-btn" type="button" aria-label="Switch between dark and light mode" title="Switch between dark and light mode">
+          <span class="theme-icon-container">
+            <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </span>
+        </button>
+        <a href="signin.html" class="nav-signin-link" style="color:var(--brown-primary); font-weight:800;">Sign In</a>
+        <a href="apply.html" class="btn btn-primary btn-sm">Book a Session</a>
         <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Toggle navigation menu">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
@@ -50,12 +77,28 @@
 
   <!-- Mobile Drawer -->
   <div class="mobile-drawer" id="mobileDrawer">
-    <a href="programs.html" class="mobile-nav-link">Programs</a>
+    <div class="mobile-theme-row">
+      <span class="mobile-theme-label">Appearance</span>
+      <div class="mobile-theme-status">
+        <span class="mobile-theme-badge">Light Mode</span>
+        <button id="mobileThemeToggle" class="theme-toggle-btn" type="button" aria-label="Switch between dark and light mode">
+          <span class="theme-icon-container">
+            <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="5"></circle></svg>
+            <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </span>
+        </button>
+      </div>
+    </div>
+    <a href="index.html" class="mobile-nav-link">Home</a>
+    <a href="about.html" class="mobile-nav-link">About</a>
+    <a href="programs.html" class="mobile-nav-link">Services</a>
+    <a href="how-it-works.html" class="mobile-nav-link">How It Works</a>
     <a href="testimonials.html" class="mobile-nav-link">Success Stories</a>
+    <a href="blog.html" class="mobile-nav-link">Blog</a>
     <a href="contact.html" class="mobile-nav-link">Contact</a>
     <div style="display: flex; gap: 12px; margin-top: 14px; align-items: center;">
-      <a href="signin.html" class="nav-signin-link" style="flex: 1; text-align: center; color:var(--purple-primary);">Sign In</a>
-      <a href="apply.html" class="btn btn-primary btn-sm" style="flex: 1; text-align: center;">Apply Now</a>
+      <a href="signin.html" class="nav-signin-link" style="flex: 1; text-align: center; color:var(--brown-primary);">Sign In</a>
+      <a href="apply.html" class="btn btn-primary btn-sm" style="flex: 1; text-align: center;">Book a Session</a>
     </div>
   </div>
 
@@ -67,7 +110,7 @@
           <div class="auth-info-side">
             <div>
               <div class="section-tag">PORTAL ACCESS</div>
-              <h1 class="section-title">Welcome to the <span class="purple-gradient-text">Member Vault</span></h1>
+              <h1 class="section-title">Welcome to the <span class="gradient-text">Member Vault</span></h1>
             </div>
             <p style="font-size: 1.05rem; color: var(--text-secondary); line-height: 1.65;">
               Continue your inner alignment practice. Log in to access your live Zoom links, weekly cohort masterclass replays, and Anter Prakash workbook blueprints.
@@ -105,11 +148,11 @@
               </div>
             </div>
 
-            <div style="padding: 16px 20px; background: rgba(124, 58, 237, 0.05); border-left: 3px solid var(--purple-primary); border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
+            <div style="padding: 16px 20px; background: rgba(139, 111, 71, 0.08); border-left: 3px solid var(--brown-primary); border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
               <p style="font-size: 0.88rem; font-style: italic; color: var(--text-secondary); line-height: 1.5;">
                 "The Anter Prakash vault gave me practical words for emotions I couldn't articulate for over twenty years."
               </p>
-              <span style="display: block; font-size: 0.78rem; font-weight: 800; color: var(--purple-primary); margin-top: 6px;">— Cohort Graduate, New Delhi</span>
+              <span style="display: block; font-size: 0.78rem; font-weight: 800; color: var(--brown-primary); margin-top: 6px;">— Cohort Graduate, New Delhi</span>
             </div>
           </div>
 
@@ -144,13 +187,13 @@
               <div class="form-group" style="margin-top: 16px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                   <label class="form-label" for="signInPassword" style="margin-bottom: 0;">Password</label>
-                  <a href="#" onclick="showToast('Password recovery sent to registered email.'); return false;" style="font-size: 0.78rem; color: var(--purple-primary); font-weight: 700;">Forgot Password?</a>
+                  <a href="#" onclick="showToast('Password recovery sent to registered email.'); return false;" style="font-size: 0.78rem; color: var(--brown-primary); font-weight: 700;">Forgot Password?</a>
                 </div>
                 <input type="password" id="signInPassword" class="form-input" required placeholder="••••••••••••">
               </div>
 
               <div style="display: flex; align-items: center; gap: 8px; margin: 18px 0;">
-                <input type="checkbox" id="rememberMe" checked style="accent-color: var(--purple-primary); width: 16px; height: 16px;">
+                <input type="checkbox" id="rememberMe" checked style="accent-color: var(--brown-primary); width: 16px; height: 16px;">
                 <label for="rememberMe" style="font-size: 0.82rem; color: var(--text-secondary); cursor: pointer;">Stay signed in on this device</label>
               </div>
 
@@ -160,7 +203,7 @@
             </form>
 
             <div class="text-center" style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border-subtle); font-size: 0.85rem; color: var(--text-secondary);">
-              Not enrolled in a cohort yet? <a href="apply.html" style="color: var(--purple-primary); font-weight: 800; text-decoration: underline;">Apply for Admission Here</a>
+              Not enrolled in a cohort yet? <a href="apply.html" style="color: var(--brown-primary); font-weight: 800; text-decoration: underline;">Apply for Admission Here</a>
             </div>
           </div>
         </div>

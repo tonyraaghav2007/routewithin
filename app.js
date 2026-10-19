@@ -4,13 +4,183 @@
  * Self-Assessment Quiz, AI Assistant, Hall of Fame Filters, & Forms.
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+function initApp() {
+  initTheme();
   initNavbar();
   initCountdown();
   initAudioPlayer();
   initQuiz();
   initScrollAnimations();
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initApp);
+} else {
+  // DOM is already ready
+  initApp();
+}
+
+// Also initialize theme immediately before DOM fully loads to prevent theme flash
+initTheme();
+
+/* ==========================================================================
+   0. AESTHETIC THEME CONTROLLER & COOL VIEW-TRANSITION RIPPLE ANIMATION
+   ========================================================================== */
+
+function initTheme() {
+  const saved = localStorage.getItem('routewithin_theme');
+  // Default to light mode always
+  const initialTheme = saved || 'light';
+
+  applyTheme(initialTheme);
+
+  // Setup click listeners for all toggle buttons
+  const toggleButtons = document.querySelectorAll('.theme-toggle-btn');
+  toggleButtons.forEach(btn => {
+    // Avoid double binding
+    if (btn.dataset.themeBound) return;
+    btn.dataset.themeBound = 'true';
+
+    btn.addEventListener('click', (e) => {
+      const activeTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      const targetTheme = activeTheme === 'dark' ? 'light' : 'dark';
+      toggleThemeWithAnimation(targetTheme, e);
+    });
+  });
+
+  // Watch for system OS theme changes if user hasn't explicitly set a preference
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (!localStorage.getItem('routewithin_theme')) {
+        applyTheme(e.matches ? 'dark' : 'light');
+      }
+    });
+  }
+
+  // Cross-tab theme sync
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'routewithin_theme' && e.newValue) {
+      applyTheme(e.newValue);
+    }
+  });
+}
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  try {
+    localStorage.setItem('routewithin_theme', theme);
+  } catch (err) {
+    // Local storage unavailable
+  }
+
+  // Update mobile browser chrome bar theme color
+  const metaTheme = document.querySelector('meta[name="theme-color"]');
+  if (metaTheme) {
+    metaTheme.setAttribute('content', theme === 'dark' ? '#1A1410' : '#8B6F47');
+  }
+
+  // Update aria-label and tooltips
+  const isDark = theme === 'dark';
+  document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
+    const label = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+    btn.setAttribute('aria-label', label);
+    btn.setAttribute('title', label);
+  });
+
+  // Update mobile drawer badge if present
+  document.querySelectorAll('.mobile-theme-badge').forEach(badge => {
+    badge.textContent = isDark ? 'Dark Mode' : 'Light Mode';
+  });
+}
+
+function toggleThemeWithAnimation(targetTheme, event) {
+  // Add smooth global transition class to coordinate all element property transitions
+  document.documentElement.classList.add('theme-transitioning');
+  setTimeout(() => {
+    document.documentElement.classList.remove('theme-transitioning');
+  }, 1100);
+
+  // 1. Tactile glowing energy shockwave originating from click coordinate
+  createThemeShockwave(event, targetTheme);
+
+  // 2. Modern View Transitions API (Chrome 111+, Edge) with slow & smooth circular reveal
+  if (document.startViewTransition && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let x = window.innerWidth - 70;
+    let y = 36;
+    if (event && event.clientX) {
+      x = event.clientX;
+      y = event.clientY;
+    } else if (event && event.currentTarget) {
+      const rect = event.currentTarget.getBoundingClientRect();
+      x = rect.left + rect.width / 2;
+      y = rect.top + rect.height / 2;
+    }
+
+    const endRadius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y)
+    );
+
+    const transition = document.startViewTransition(() => {
+      applyTheme(targetTheme);
+    });
+
+    transition.ready.then(() => {
+      const clipPath = [
+        `circle(0px at ${x}px ${y}px)`,
+        `circle(${endRadius}px at ${x}px ${y}px)`
+      ];
+
+      document.documentElement.animate(
+        {
+          clipPath: clipPath
+        },
+        {
+          duration: 950, // Slower, luxurious cinematic glide
+          easing: 'cubic-bezier(0.16, 1, 0.3, 1)', // Smooth ease-out deceleration
+          pseudoElement: '::view-transition-new(root)'
+        }
+      );
+    });
+  } else {
+    // 3. Fallback smooth CSS transition interpolation
+    applyTheme(targetTheme);
+  }
+}
+
+function createThemeShockwave(event, targetTheme) {
+  const shockwave = document.createElement('div');
+  shockwave.className = 'theme-switch-shockwave';
+
+  let x = window.innerWidth - 70;
+  let y = 36;
+  if (event && event.currentTarget) {
+    const rect = event.currentTarget.getBoundingClientRect();
+    x = rect.left + rect.width / 2;
+    y = rect.top + rect.height / 2;
+  } else if (event && event.clientX) {
+    x = event.clientX;
+    y = event.clientY;
+  }
+
+  shockwave.style.left = `${x}px`;
+  shockwave.style.top = `${y}px`;
+
+  if (targetTheme === 'dark') {
+    // Expanding warm dark shockwave
+    shockwave.style.background = 'radial-gradient(circle, rgba(139, 111, 71, 0.4) 0%, rgba(61, 43, 31, 0.3) 40%, rgba(26, 20, 16, 0.7) 70%, transparent 100%)';
+    shockwave.style.boxShadow = '0 0 80px rgba(139, 111, 71, 0.5)';
+  } else {
+    // Expanding warm cream sunbeam shockwave
+    shockwave.style.background = 'radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(250, 245, 239, 0.5) 40%, rgba(139, 111, 71, 0.15) 70%, transparent 100%)';
+    shockwave.style.boxShadow = '0 0 80px rgba(139, 111, 71, 0.3)';
+  }
+
+  document.body.appendChild(shockwave);
+  setTimeout(() => {
+    shockwave.remove();
+  }, 1250);
+}
 
 /* ==========================================================================
    1. NAVBAR & MOBILE DRAWER
@@ -41,6 +211,95 @@ function initNavbar() {
         drawer.classList.remove('open');
       });
     });
+  }
+}
+
+/* ==========================================================================
+   1.1 SCROLL REVEAL & PARALLAX ANIMATIONS
+   ========================================================================== */
+
+function initRevealOnScroll() {
+  const revealElements = document.querySelectorAll('.reveal-on-scroll, .reveal-scale, .reveal-fade-in');
+  if (!revealElements.length) return;
+  
+  if (!('IntersectionObserver' in window)) {
+    revealElements.forEach(el => el.classList.add('is-revealed'));
+    return;
+  }
+
+  // Immediately reveal anything already visible in viewport
+  revealElements.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      const delayStr = el.style.getPropertyValue('--delay');
+      const delay = delayStr ? parseInt(delayStr, 10) : 0;
+      if (delay > 0) {
+        setTimeout(() => el.classList.add('is-revealed'), delay);
+      } else {
+        el.classList.add('is-revealed');
+      }
+    }
+  });
+
+  // Safety fallback: reveal elements in or near viewport after short timeout
+  setTimeout(() => {
+    revealElements.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 1.3) {
+        el.classList.add('is-revealed');
+      }
+    });
+  }, 800);
+
+  const observerOptions = {
+    threshold: 0.05,
+    rootMargin: '0px 0px 80px 0px'
+  };
+
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const delayStr = el.style.getPropertyValue('--delay');
+        const delay = delayStr ? parseInt(delayStr, 10) : 0;
+
+        if (delay > 0) {
+          setTimeout(() => {
+            el.classList.add('is-revealed');
+          }, delay);
+        } else {
+          el.classList.add('is-revealed');
+        }
+
+        observer.unobserve(el);
+      }
+    });
+  }, observerOptions);
+
+  revealElements.forEach(el => {
+    if (!el.classList.contains('is-revealed')) {
+      revealObserver.observe(el);
+    }
+  });
+
+  // Subtle Parallax on Scenic Mountain Background
+  const scenicBannerBg = document.querySelector('.scenic-banner-bg');
+  if (scenicBannerBg && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const rect = scenicBannerBg.parentElement.getBoundingClientRect();
+          if (rect.top < window.innerHeight && rect.bottom > 0) {
+            const progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+            const moveY = (progress - 0.5) * 35;
+            scenicBannerBg.style.transform = `scale(1.06) translateY(${moveY}px)`;
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
   }
 }
 
@@ -330,7 +589,7 @@ function renderQuizQuestion() {
       btn.className = 'quiz-option-btn';
       btn.innerHTML = `
         <span>${opt.text}</span>
-        <span style="font-size:0.85rem; color:var(--purple-light);">➔</span>
+        <span style="font-size:0.85rem; color:var(--brown-primary);">➔</span>
       `;
       btn.onclick = () => {
         totalQuizScore += opt.score;
@@ -438,6 +697,7 @@ function initScrollAnimations() {
   initScrollProgressBar();
   initBackToTop();
   initSmoothAnchorLinks();
+  initRevealOnScroll();
   initScrollObserver();
   initCounterAnimations();
 }

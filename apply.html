@@ -3,20 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#7c3aed">
+  <meta name="theme-color" content="#8B6F47">
   
-  <title>Cohort Admission Application — RouteWithin | Dimple Sandhu</title>
-  <meta name="description" content="Submit your confidential application for the RouteWithin 6-Week Anter Prakash Cohort or Private VIP Coaching with Dimple Sandhu.">
+  <title>Book a Session — RouteWithin | Dimple Sandhu</title>
+  <meta name="description" content="Submit your confidential booking request for 1:1 coaching, marriage support, or self-discovery with Dimple Sandhu.">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/Amitmund/images@main/routewithin/rw-logo-2_150k.png">
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="styles.css?v=20261012g">
+  <link rel="stylesheet" href="styles.css?v=20261019a">
+  <script>
+    (function() {
+      const saved = localStorage.getItem('routewithin_theme');
+      if (saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
 </head>
 <body>
 
@@ -25,7 +30,7 @@
     <div class="top-bar-content">
       <span class="pulse-dot"></span>
       <span>Next Free Live Cohort: <strong>Guru Purnima Inner Alignment Immersion</strong> • This Saturday at 4:30 PM IST</span>
-      <a href="programs.html#featured-live">Reserve Seat Free →</a>
+      <a href="index.html#events">Reserve Seat Free →</a>
     </div>
   </div>
 
@@ -35,21 +40,42 @@
       <a href="index.html" class="brand-logo" aria-label="RouteWithin Homepage">
         <img src="https://cdn.jsdelivr.net/gh/Amitmund/images@main/routewithin/rw-logo-2_150k.png" alt="RouteWithin Logo" class="brand-icon">
         <div>
-          <div class="brand-title">ROUTE<span>WITHIN</span></div>
+          <div class="brand-title">Route<span>Within</span></div>
           <span class="brand-subtitle">Anter Prakash • Explore Yourself</span>
         </div>
       </a>
 
       <!-- Desktop Links -->
       <ul class="nav-links">
-        <li><a href="programs.html" class="nav-link">Programs</a></li>
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="programs.html" class="nav-link">Services</a></li>
+        <li><a href="how-it-works.html" class="nav-link">How It Works</a></li>
         <li><a href="testimonials.html" class="nav-link">Success Stories</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
         <li><a href="contact.html" class="nav-link">Contact</a></li>
       </ul>
 
       <div class="nav-actions">
-        <a href="signin.html" class="nav-signin-link">Sign In</a>
-        <a href="apply.html" class="btn btn-primary btn-sm" style="box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.35);">Apply Now</a>
+        <button id="themeToggle" class="theme-toggle-btn" type="button" aria-label="Switch between dark and light mode" title="Switch between dark and light mode">
+          <span class="theme-icon-container">
+            <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </span>
+        </button>
+        <a href="apply.html" class="btn btn-primary btn-sm">Book a Session</a>
         <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Toggle navigation menu">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
@@ -59,12 +85,27 @@
 
   <!-- Mobile Drawer -->
   <div class="mobile-drawer" id="mobileDrawer">
-    <a href="programs.html" class="mobile-nav-link">Programs</a>
+    <div class="mobile-theme-row">
+      <span class="mobile-theme-label">Appearance</span>
+      <div class="mobile-theme-status">
+        <span class="mobile-theme-badge">Light Mode</span>
+        <button id="mobileThemeToggle" class="theme-toggle-btn" type="button" aria-label="Switch between dark and light mode">
+          <span class="theme-icon-container">
+            <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="5"></circle></svg>
+            <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </span>
+        </button>
+      </div>
+    </div>
+    <a href="index.html" class="mobile-nav-link">Home</a>
+    <a href="about.html" class="mobile-nav-link">About</a>
+    <a href="programs.html" class="mobile-nav-link">Services</a>
+    <a href="how-it-works.html" class="mobile-nav-link">How It Works</a>
     <a href="testimonials.html" class="mobile-nav-link">Success Stories</a>
+    <a href="blog.html" class="mobile-nav-link">Blog</a>
     <a href="contact.html" class="mobile-nav-link">Contact</a>
     <div style="display: flex; gap: 12px; margin-top: 14px; align-items: center;">
-      <a href="signin.html" class="nav-signin-link" style="flex: 1; text-align: center;">Sign In</a>
-      <a href="apply.html" class="btn btn-primary btn-sm" style="flex: 1; text-align: center;">Apply Now</a>
+      <a href="apply.html" class="btn btn-primary btn-sm" style="flex: 1; text-align: center;">Book a Session</a>
     </div>
   </div>
 
@@ -76,7 +117,7 @@
           <a href="index.html">Home</a> <span>/</span> <span>Cohort & Mentorship Application</span>
         </div>
         <div class="section-tag emerald">CONFIDENTIAL ADMISSION INTAKE</div>
-        <h1 class="section-title">Apply for the <span class="purple-gradient-text">Anter Prakash Immersion</span></h1>
+        <h1 class="section-title">Apply for the <span class="gradient-text">Anter Prakash Immersion</span></h1>
         <p class="section-subtitle">
           To preserve an intimate, high-impact environment, each live cohort is strictly capped. Complete the diagnostic below to ensure alignment.
         </p>
@@ -91,7 +132,7 @@
           <div style="display: flex; flex-direction: column; gap: 24px;">
             <div>
               <div class="section-tag emerald">ADMISSIONS PROTOCOL</div>
-              <h2 class="section-title">Confidential Intake <span class="purple-gradient-text">Screening</span></h2>
+              <h2 class="section-title">Confidential Intake <span class="gradient-text">Screening</span></h2>
             </div>
             <p style="font-size: 1.05rem; color: var(--text-secondary); line-height: 1.65;">
               Because Coach Dimple Sandhu conducts live breakthrough clinics, cohort admissions are capped at 35 participants to preserve safe, high-touch group intimacy.
@@ -129,20 +170,20 @@
               </div>
             </div>
 
-            <div style="padding: 18px 20px; background: rgba(124, 58, 237, 0.05); border-left: 3px solid var(--purple-primary); border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
+            <div style="padding: 18px 20px; background: rgba(139, 111, 71, 0.08); border-left: 3px solid var(--brown-primary); border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
               <p style="font-size: 0.88rem; font-style: italic; color: var(--text-secondary); line-height: 1.5;">
                 "Healing starts the moment you stop defending who you used to be and commit to the truth of what you want to create."
               </p>
-              <span style="display: block; font-size: 0.78rem; font-weight: 800; color: var(--purple-primary); margin-top: 6px;">— Dimple Sandhu</span>
+              <span style="display: block; font-size: 0.78rem; font-weight: 800; color: var(--brown-primary); margin-top: 6px;">— Dimple Sandhu</span>
             </div>
           </div>
 
           <!-- Right Column: Intake Application Form -->
-          <div class="glass-card" style="padding: 44px; border: 2px solid var(--border-purple);">
+          <div class="glass-card" style="padding: 44px; border: 2px solid rgba(139, 111, 71, 0.2);">
             <!-- Step Indicators -->
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; border-bottom: 1px solid var(--border-purple); padding-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; border-bottom: 1px solid rgba(139, 111, 71, 0.15); padding-bottom: 20px;">
               <div>
-                <span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--purple-primary);">OFFICIAL INTAKE</span>
+                <span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--brown-primary);">OFFICIAL INTAKE</span>
                 <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--text-heading);">Relational Alignment Assessment</h2>
               </div>
               <div style="display: flex; align-items: center; gap: 8px; font-size: 0.8rem; font-weight: 700; color: #059669; background: #ecfdf5; padding: 6px 14px; border-radius: var(--radius-full);">
@@ -181,7 +222,7 @@
               <label class="form-label">Which Program Level Are You Applying For? *</label>
               <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 8px;">
                 <label class="glass-card" style="padding: 16px; cursor: pointer; display: flex; align-items: center; gap: 10px;">
-                  <input type="radio" name="programTier" value="Signature 6-Week Cohort" checked style="accent-color: var(--purple-primary); width: 18px; height: 18px;">
+                  <input type="radio" name="programTier" value="Signature 6-Week Cohort" checked style="accent-color: var(--brown-primary); width: 18px; height: 18px;">
                   <div>
                     <strong style="display: block; font-size: 0.95rem; color: var(--text-heading);">6-Week Anter Prakash Cohort</strong>
                     <span style="font-size: 0.78rem; color: var(--text-muted);">Weekly clinics & group vault</span>
@@ -189,7 +230,7 @@
                 </label>
 
                 <label class="glass-card" style="padding: 16px; cursor: pointer; display: flex; align-items: center; gap: 10px;">
-                  <input type="radio" name="programTier" value="Private 1-on-1 Mentorship" style="accent-color: var(--purple-primary); width: 18px; height: 18px;">
+                  <input type="radio" name="programTier" value="Private 1-on-1 Mentorship" style="accent-color: var(--brown-primary); width: 18px; height: 18px;">
                   <div>
                     <strong style="display: block; font-size: 0.95rem; color: var(--text-heading);">Private 1-on-1 Mentorship</strong>
                     <span style="font-size: 0.78rem; color: var(--text-muted);">Direct confidential coaching with Dimple</span>
@@ -203,19 +244,19 @@
               <label class="form-label">What Best Describes Your Primary Relational Hurdle? *</label>
               <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
                 <label style="display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--text-secondary); cursor: pointer;">
-                  <input type="radio" name="hurdle" value="Reactivity" checked style="accent-color: var(--purple-primary);">
+                  <input type="radio" name="hurdle" value="Reactivity" checked style="accent-color: var(--brown-primary);">
                   Sudden explosive arguments over trivial triggers (kitchen chores, tones, schedules)
                 </label>
                 <label style="display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--text-secondary); cursor: pointer;">
-                  <input type="radio" name="hurdle" value="Stonewalling" style="accent-color: var(--purple-primary);">
+                  <input type="radio" name="hurdle" value="Stonewalling" style="accent-color: var(--brown-primary);">
                   Stonewalling, prolonged silent treatments, and emotional withdrawal
                 </label>
                 <label style="display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--text-secondary); cursor: pointer;">
-                  <input type="radio" name="hurdle" value="Emotional Distance" style="accent-color: var(--purple-primary);">
+                  <input type="radio" name="hurdle" value="Emotional Distance" style="accent-color: var(--brown-primary);">
                   Living like polite roommates: romance and deep emotional intimacy have eroded
                 </label>
                 <label style="display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--text-secondary); cursor: pointer;">
-                  <input type="radio" name="hurdle" value="Family Dynamics" style="accent-color: var(--purple-primary);">
+                  <input type="radio" name="hurdle" value="Family Dynamics" style="accent-color: var(--brown-primary);">
                   Extended family/in-law friction causing daily stress between partners
                 </label>
               </div>
@@ -254,7 +295,7 @@
 
           <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
             <div class="glass-card" style="padding: 24px;">
-              <div style="font-family: var(--font-heading); font-size: 2rem; font-weight: 900; color: var(--purple-primary); margin-bottom: 8px;">01</div>
+              <div style="font-family: var(--font-heading); font-size: 2rem; font-weight: 900; color: var(--brown-primary); margin-bottom: 8px;">01</div>
               <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--text-heading); margin-bottom: 6px;">Admissions Review</h4>
               <p style="color: var(--text-secondary); font-size: 0.85rem; line-height: 1.5;">
                 Coach Dimple's senior coaching team reads your diagnostic within 24 hours to ensure high group cohort fit.
@@ -262,7 +303,7 @@
             </div>
 
             <div class="glass-card" style="padding: 24px;">
-              <div style="font-family: var(--font-heading); font-size: 2rem; font-weight: 900; color: var(--purple-deep); margin-bottom: 8px;">02</div>
+              <div style="font-family: var(--font-heading); font-size: 2rem; font-weight: 900; color: var(--brown-deep); margin-bottom: 8px;">02</div>
               <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--text-heading); margin-bottom: 6px;">15-Min Alignment Call</h4>
               <p style="color: var(--text-secondary); font-size: 0.85rem; line-height: 1.5;">
                 We connect over a brief WhatsApp discovery call to clarify your goals and answer any logistical questions.
@@ -276,6 +317,7 @@
                 Upon acceptance, you receive instant credentials to the Member Vault and your orientation calendar invite.
               </p>
             </div>
+          </div>
           </div>
         </div>
       </div>
@@ -327,7 +369,7 @@
             <li><a href="tel:+919872250153" class="footer-link">+91 987 225 0153</a></li>
             <li><a href="mailto:care@routewithin.com" class="footer-link">care@routewithin.com</a></li>
             <li><span style="color: var(--text-muted); font-size: 0.85rem;">Bharat (Global Virtual)</span></li>
-            <li><a href="programs.html" class="footer-link" style="color: var(--purple-primary);">Live Masterclass ↗</a></li>
+            <li><a href="programs.html" class="footer-link" style="color: var(--brown-primary);">Live Masterclass ↗</a></li>
           </ul>
         </div>
       </div>

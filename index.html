@@ -3,28 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#7c3aed">
+  <meta name="theme-color" content="#8B6F47">
   
-  <title>RouteWithin — Anter Prakash | Explore Yourself with Dimple Sandhu</title>
-  <meta name="description" content="Master your inner world and lead a life of fulfilling relationships. Certified NLP & Alignment Coach Dimple Sandhu guides you to break subconscious loops and build profound connection.">
-  <meta name="keywords" content="Dimple Sandhu, RouteWithin, Anter Prakash, NLP Alignment, Relationship Coach, Mindset Coaching, Guru Purnima, India Coaching">
+  <title>RouteWithin — A calmer you. A healthier relationship.</title>
+  <meta name="description" content="Guidance, clarity and support for women who want to feel heard, valued and fulfilled in their relationships. Certified NLP & Alignment Coach Dimple Sandhu guides you to break subconscious loops and build profound connection.">
+  <meta name="keywords" content="Dimple Sandhu, RouteWithin, Anter Prakash, NLP Alignment, Relationship Coach, Mindset Coaching, Women Coaching, India Coaching">
   <meta name="author" content="Dimple Sandhu">
 
   <!-- Open Graph / Social Meta -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="RouteWithin — Anter Prakash | Explore Yourself">
+  <meta property="og:title" content="RouteWithin — A calmer you. A healthier relationship.">
   <meta property="og:description" content="Discover the secrets to harmonious relationships and subconscious alignment through NLP & Anter Prakash.">
   <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Amitmund/images@main/routewithin/routewithin-golden-banner.jpeg">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/Amitmund/images@main/routewithin/rw-logo-2_150k.png">
 
-  <!-- Google Fonts: Outfit (Headings) & Plus Jakarta Sans (Body) - matching Siddharth Rajsekar style -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="styles.css?v=20261012h">
+  <link rel="stylesheet" href="styles.css?v=20261019a">
+  <script>
+    (function() {
+      const saved = localStorage.getItem('routewithin_theme');
+      // Default to light mode
+      if (saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
 </head>
 <body>
 
@@ -37,28 +43,49 @@
     </div>
   </div>
 
-  <!-- 2. GLASSMORPHIC STICKY NAVBAR (RouteWithin Signature Separate Pages Nav) -->
+  <!-- 2. ELEGANT STICKY NAVBAR -->
   <nav class="navbar" id="mainNavbar">
     <div class="container nav-container">
       <a href="index.html" class="brand-logo" aria-label="RouteWithin Homepage">
         <img src="https://cdn.jsdelivr.net/gh/Amitmund/images@main/routewithin/rw-logo-2_150k.png" alt="RouteWithin Logo" class="brand-icon">
         <div>
-          <div class="brand-title">ROUTE<span>WITHIN</span></div>
+          <div class="brand-title">Route<span>Within</span></div>
           <span class="brand-subtitle">Anter Prakash • Explore Yourself</span>
         </div>
       </a>
 
-      <!-- Desktop Navigation Links: 3 Core Options matching routewithin.com -->
+      <!-- Desktop Navigation Links -->
       <ul class="nav-links">
-        <li><a href="programs.html" class="nav-link">Programs</a></li>
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="programs.html" class="nav-link">Services</a></li>
+        <li><a href="how-it-works.html" class="nav-link">How It Works</a></li>
         <li><a href="testimonials.html" class="nav-link">Success Stories</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
         <li><a href="contact.html" class="nav-link">Contact</a></li>
       </ul>
 
-      <!-- Action Buttons: Sign In and Apply Now -->
+      <!-- Action Buttons -->
       <div class="nav-actions">
-        <a href="signin.html" class="nav-signin-link">Sign In</a>
-        <a href="apply.html" class="btn btn-primary btn-sm">Apply Now</a>
+        <button id="themeToggle" class="theme-toggle-btn" type="button" aria-label="Switch between dark and light mode" title="Switch between dark and light mode">
+          <span class="theme-icon-container">
+            <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </span>
+        </button>
+        <a href="apply.html" class="btn btn-primary btn-sm">Book a Session</a>
         <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Toggle navigation menu">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
@@ -68,24 +95,51 @@
 
   <!-- Mobile Navigation Drawer -->
   <div class="mobile-drawer" id="mobileDrawer">
-    <a href="programs.html" class="mobile-nav-link">Programs</a>
+    <div class="mobile-theme-row">
+      <span class="mobile-theme-label">Appearance</span>
+      <div class="mobile-theme-status">
+        <span class="mobile-theme-badge">Light Mode</span>
+        <button id="mobileThemeToggle" class="theme-toggle-btn" type="button" aria-label="Switch between dark and light mode" title="Switch between dark and light mode">
+          <span class="theme-icon-container">
+            <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </span>
+        </button>
+      </div>
+    </div>
+    <a href="index.html" class="mobile-nav-link active">Home</a>
+    <a href="about.html" class="mobile-nav-link">About</a>
+    <a href="programs.html" class="mobile-nav-link">Services</a>
+    <a href="how-it-works.html" class="mobile-nav-link">How It Works</a>
     <a href="testimonials.html" class="mobile-nav-link">Success Stories</a>
+    <a href="blog.html" class="mobile-nav-link">Blog</a>
     <a href="contact.html" class="mobile-nav-link">Contact</a>
     <div style="display: flex; gap: 12px; margin-top: 14px; align-items: center;">
-      <a href="signin.html" class="nav-signin-link" style="flex: 1; text-align: center;">Sign In</a>
-      <a href="apply.html" class="btn btn-primary btn-sm" style="flex: 1; text-align: center;">Apply Now</a>
+      <a href="apply.html" class="btn btn-primary btn-sm" style="flex: 1; text-align: center;">Book a Session</a>
     </div>
   </div>
 
   <main>
-    <!-- 3. CINEMATIC HERO SECTION (Siddharth Rajsekar Authority Style) -->
+    <!-- 3. HERO SECTION — Reference Layout with Authentic RouteWithin Information -->
     <header class="hero-section" id="hero">
       <div class="container hero-grid">
         <div class="hero-content">
-          <div class="section-tag">
+          <div class="section-tag" style="margin-bottom: 16px;">
             <span>✦</span> INDIA'S PREMIER NLP & RELATIONSHIP ALIGNMENT PLATFORM
           </div>
-          
+
           <h1 class="hero-headline">
             Anter Prakash.<br>
             <span class="gradient-text">Master Your Inner World, Heal Your Relationships.</span>
@@ -95,8 +149,8 @@
             Everything you seek is already within you. Realign unconscious friction, break destructive communication loops, and cultivate deeply fulfilling partnerships with Master NLP Coach <strong>Dimple Sandhu</strong>.
           </p>
 
-          <div class="hero-session-pill">
-            <span class="pulse-dot" style="background:#10b981;"></span>
+          <div class="hero-session-pill" style="display: inline-flex; align-items: center; gap: 10px; background: rgba(198, 123, 92, 0.12); border: 1px solid rgba(198, 123, 92, 0.25); border-radius: 50px; padding: 7px 18px; margin-bottom: 24px; font-size: 0.88rem; font-weight: 600; color: var(--text-heading);">
+            <span class="pulse-dot" style="width: 8px; height: 8px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
             <span>Upcoming Masterclass: Guru Purnima Cohort • Sat 4:30 PM - 5:30 PM IST</span>
           </div>
 
@@ -106,13 +160,13 @@
               <span>→</span>
             </a>
             <button class="btn btn-secondary btn-lg" onclick="openVideoModal('https://www.youtube.com/embed/XFVP9e8r24s?autoplay=1')">
-              <span style="color:var(--purple-primary);">▶</span>
+              <span style="color: var(--terracotta);">▶</span>
               <span>Watch Transformation Reel</span>
             </button>
           </div>
 
-          <!-- Hero Metrics Authority Ribbon -->
-          <div class="hero-metrics-bar">
+          <!-- Hero Metrics Authority Ribbon (Original RouteWithin Numbers) -->
+          <div class="hero-metrics-bar" style="margin-top: 28px;">
             <div class="metric-item">
               <div class="metric-number">1,000+</div>
               <div class="metric-label">Lives Touched</div>
@@ -130,13 +184,33 @@
               <div class="metric-label">Live Cohorts Held</div>
             </div>
           </div>
+
+          <!-- 4 Feature Pills from Reference Layout -->
+          <div class="hero-badges-strip reveal-on-scroll">
+            <div class="hero-badge-pill">
+              <div class="hero-badge-icon">🧘</div>
+              <div class="hero-badge-text">Personalised NLP Coaching</div>
+            </div>
+            <div class="hero-badge-pill">
+              <div class="hero-badge-icon">🔒</div>
+              <div class="hero-badge-text">A Safe & Confidential Space</div>
+            </div>
+            <div class="hero-badge-pill">
+              <div class="hero-badge-icon">🛠️</div>
+              <div class="hero-badge-text">Practical Subconscious Tools</div>
+            </div>
+            <div class="hero-badge-pill">
+              <div class="hero-badge-icon">✨</div>
+              <div class="hero-badge-text">Real, Lasting Relational Harmony</div>
+            </div>
+          </div>
         </div>
 
         <!-- Coach Visual Card -->
-        <div class="hero-visual">
+        <div class="hero-visual reveal-scale">
           <div class="coach-glow-circle"></div>
           <div class="coach-image-wrapper">
-            <img src="https://cdn.jsdelivr.net/gh/Amitmund/images@main/routewithin/routewithin_owner_new.png" 
+            <img src="assets/hero_coach.jpg" 
                  alt="Dimple Sandhu - Master NLP & Relationship Coach" 
                  class="coach-photo">
             
@@ -152,79 +226,144 @@
       </div>
     </header>
 
-    <!-- 4. FEATURED DOCUMENTARY SPOTLIGHT (Smart 2-Column Cinema Layout) -->
-    <section class="documentary-section" id="documentary">
-      <div class="container doc-showcase-grid">
-        <!-- Left Column: Narrative, Quote, Key Chapters & Actions -->
-        <div class="doc-story-side">
-          <div>
-            <div class="section-tag">A CINEMATIC BIOGRAPHICAL JOURNEY</div>
-            <h2 class="section-title">The Journey Within: <span class="purple-gradient-text">Anter Prakash</span></h2>
-          </div>
-          
-          <div class="doc-quote-callout">
-            "You Cannot Heal With Another What You Have Not Faced Within Yourself."
-          </div>
-
-          <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.65;">
-            Follow Dimple Sandhu's ground-breaking exploration into the unseen architecture of relational discord. Discover how modern couples and leaders are turning repetitive emotional wounds into conscious clarity using the sacred path of Anter Prakash.
-          </p>
-
-          <div class="doc-key-chapters">
-            <div class="doc-chapter-pill">
-              <span class="pill-idx">CH 01</span>
-              <span>Subconscious Mirrors & Blame</span>
-            </div>
-            <div class="doc-chapter-pill">
-              <span class="pill-idx">CH 02</span>
-              <span>Neuro-Linguistic Conflict Anchors</span>
-            </div>
-            <div class="doc-chapter-pill">
-              <span class="pill-idx">CH 03</span>
-              <span>Vedic Self-Inquiry Awakening</span>
-            </div>
-            <div class="doc-chapter-pill">
-              <span class="pill-idx">CH 04</span>
-              <span>Lifelong Relational Harmony</span>
-            </div>
-          </div>
-
-          <div class="doc-actions-row">
-            <a href="programs.html" class="btn btn-primary btn-md">Join Next Live Cohort (Sat 4:30 PM) →</a>
-            <button class="btn btn-secondary btn-md" onclick="showToast('Film companion study guide unlocked!')">Download Companion Guide</button>
-          </div>
+    <!-- 4. "LISTEN TO THIS" — THE JOURNEY WITHIN: ANTER PRAKASH VIDEO SPOTLIGHT -->
+    <section class="listen-section" id="video-intro">
+      <div class="container">
+        <div class="listen-header reveal-on-scroll">
+          <p class="listen-script-sub">Before you do anything else...</p>
+          <h2 class="listen-title">The Journey Within: Anter Prakash</h2>
+          <p class="listen-desc">Follow Dimple Sandhu's ground-breaking exploration into the unseen architecture of relational discord. Discover how modern couples and leaders are turning repetitive emotional wounds into conscious clarity using the sacred path of Anter Prakash.</p>
         </div>
 
-        <!-- Right Column: 16:9 Responsive Playable YouTube Video Feature Box -->
-        <div class="doc-video-side">
-          <div class="video-feature-container">
-            <div class="video-16-9-wrapper">
-              <iframe 
-                src="https://www.youtube.com/embed/deGp9JSE8gI?rel=0&modestbranding=1" 
-                title="The Journey Within - Anter Prakash Film by Coach Dimple Sandhu" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                allowfullscreen>
-              </iframe>
-            </div>
-            <div class="video-feature-meta">
-              <div class="video-meta-info">
-                <span class="video-badge">★ EXCLUSIVE MASTERCLASS FILM</span>
-                <h3 class="video-title">Anter Prakash: The Awakening of Compassionate Self-Inquiry</h3>
-                <p class="video-subtitle">Watch Coach Dimple Sandhu deconstruct relational discord and subconscious triggers.</p>
-              </div>
-            </div>
+        <div class="listen-video-card reveal-scale">
+          <div class="video-16-9-wrapper" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 16px;">
+            <iframe 
+              src="https://www.youtube.com/embed/XFVP9e8r24s?rel=0&modestbranding=1" 
+              title="The Journey Within: Anter Prakash with Coach Dimple Sandhu" 
+              style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowfullscreen>
+            </iframe>
           </div>
+        </div>
+        <p class="listen-caption">Watch Coach Dimple Sandhu deconstruct relational discord and subconscious triggers.</p>
+        <div style="display: flex; gap: 14px; justify-content: center; margin-top: 20px; flex-wrap: wrap;">
+          <a href="#events" class="btn btn-primary btn-md">Join Next Live Cohort (Sat 4:30 PM) →</a>
+          <button class="btn btn-secondary btn-md" onclick="downloadCompanionGuide()">Download Companion Guide</button>
         </div>
       </div>
     </section>
 
-    <!-- 5. SIGNATURE FRAMEWORK: THE 4 PILLARS (Freedom Business Model Reference) -->
+    <!-- 5. "MAYBE YOU'RE HERE BECAUSE..." — 6 EMOTIVE CARDS (DARK FOREST GREEN) -->
+    <section class="emotive-section" id="emotions">
+      <div class="container">
+        <div class="emotive-header reveal-on-scroll">
+          <h2 class="emotive-title">Maybe you're here because...</h2>
+        </div>
+
+        <div class="emotive-cards-grid">
+          <!-- Card 1 -->
+          <a href="apply.html" class="emotive-card reveal-on-scroll" style="--delay: 50ms;">
+            <img src="assets/card_alone.jpg" alt="You love him, but still feel alone." class="emotive-card-bg">
+            <div class="emotive-card-overlay"></div>
+            <div class="emotive-card-content">
+              <p class="emotive-card-quote">"You love him, but still feel alone."</p>
+              <span class="emotive-card-sub">Find Connection →</span>
+            </div>
+          </a>
+
+          <!-- Card 2 -->
+          <a href="apply.html" class="emotive-card reveal-on-scroll" style="--delay: 100ms;">
+            <img src="assets/card_unheard.jpg" alt="You communicate, but don't feel heard." class="emotive-card-bg">
+            <div class="emotive-card-overlay"></div>
+            <div class="emotive-card-content">
+              <p class="emotive-card-quote">"You communicate, but don't feel heard."</p>
+              <span class="emotive-card-sub">Bridge The Gap →</span>
+            </div>
+          </a>
+
+          <!-- Card 3 -->
+          <a href="apply.html" class="emotive-card reveal-on-scroll" style="--delay: 150ms;">
+            <img src="assets/card_overthinking.jpg" alt="You keep overthinking everything." class="emotive-card-bg">
+            <div class="emotive-card-overlay"></div>
+            <div class="emotive-card-content">
+              <p class="emotive-card-quote">"You keep overthinking everything."</p>
+              <span class="emotive-card-sub">Calm Your Mind →</span>
+            </div>
+          </a>
+
+          <!-- Card 4 -->
+          <a href="apply.html" class="emotive-card reveal-on-scroll" style="--delay: 200ms;">
+            <img src="assets/card_tired.jpg" alt="You're tired of always being the one trying." class="emotive-card-bg">
+            <div class="emotive-card-overlay"></div>
+            <div class="emotive-card-content">
+              <p class="emotive-card-quote">"You're tired of always being the one trying."</p>
+              <span class="emotive-card-sub">Restore Balance →</span>
+            </div>
+          </a>
+
+          <!-- Card 5 -->
+          <a href="apply.html" class="emotive-card reveal-on-scroll" style="--delay: 250ms;">
+            <img src="assets/card_crossroads.jpg" alt="You're unsure whether to stay or leave." class="emotive-card-bg">
+            <div class="emotive-card-overlay"></div>
+            <div class="emotive-card-content">
+              <p class="emotive-card-quote">"You're unsure whether to stay or leave."</p>
+              <span class="emotive-card-sub">Gain Clarity →</span>
+            </div>
+          </a>
+
+          <!-- Card 6 -->
+          <a href="apply.html" class="emotive-card reveal-on-scroll" style="--delay: 300ms;">
+            <img src="assets/card_lost_self.jpg" alt="You've lost yourself in the process." class="emotive-card-bg">
+            <div class="emotive-card-overlay"></div>
+            <div class="emotive-card-content">
+              <p class="emotive-card-quote">"You've lost yourself in the process."</p>
+              <span class="emotive-card-sub">Return To You →</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. "YOU'RE NOT ALONE." SECTION -->
+    <section class="not-alone-section" id="not-alone">
+      <div class="container not-alone-grid">
+        <div class="not-alone-content reveal-on-scroll">
+          <h2 class="not-alone-heading">You're not alone.</h2>
+          <p class="not-alone-text">
+            So many experience the same confusion, emotional distance, and repetitive arguments. In Anter Prakash, you discover that you do not experience other people; you experience your own thinking about other people. Everything you seek is already within you. This is a compassionate, confidential sanctuary to understand, heal, and restore alignment.
+          </p>
+          <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+            <a href="apply.html" class="btn btn-primary btn-lg">Book an Alignment Session</a>
+            <a href="programs.html" class="btn btn-secondary btn-lg">Explore Programs</a>
+          </div>
+        </div>
+
+        <div class="not-alone-image-wrap reveal-scale">
+          <img src="assets/couch_woman.jpg" alt="A calm, supported woman finding clarity with RouteWithin" class="not-alone-img">
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. SCENIC MOUNTAIN SUNSET QUOTE BANNER -->
+    <section class="scenic-quote-banner" id="quote-banner">
+      <img src="assets/sunset_mountains.jpg" alt="Scenic mountains at sunset" class="scenic-banner-bg">
+      <div class="scenic-banner-overlay"></div>
+      <div class="scenic-banner-content reveal-on-scroll">
+        <p class="scenic-quote-text">
+          "You cannot heal with another what you have not yet recognized within yourself."
+        </p>
+        <span class="scenic-quote-author">— DIMPLE SANDHU • ROUTEWITHIN</span>
+      </div>
+    </section>
+
+    <!-- 8. THE 4 PILLARS: THE ANTER PRAKASH ALIGNMENT ARCHITECTURE -->
     <section class="framework-section" id="framework">
       <div class="container">
         <div class="section-header-split">
           <div>
             <div class="section-tag">PROPRIETARY METHODOLOGY</div>
-            <h2 class="section-title">The Anter Prakash <span class="purple-gradient-text">Alignment Architecture</span></h2>
+            <h2 class="section-title">The Anter Prakash <span class="gradient-text">Alignment Architecture</span></h2>
           </div>
           <p class="section-subtitle-side">
             A battle-tested 4-step transformational system engineered to permanently rewire reactive behaviors into calm, empathetic, magnetic relationships.
@@ -235,20 +374,20 @@
           <!-- Pillar 1 -->
           <div class="pillar-card">
             <div class="pillar-number">01</div>
-            <div class="pillar-icon-box">🧠</div>
+            <div class="pillar-icon-box">🧘</div>
             <h3 class="pillar-title">Subconscious Decoupling</h3>
             <p class="pillar-description">
               Identify and dissolve the automated defense triggers formed in early childhood. Learn to neutralize emotional overwhelm before reactive words slip out.
             </p>
             <div class="pillar-tags">
-              <span>✦</span> NLP Timeline Anchoring
+              <span>✦</span> Neural Pattern Clearance
             </div>
           </div>
 
           <!-- Pillar 2 -->
           <div class="pillar-card">
             <div class="pillar-number">02</div>
-            <div class="pillar-icon-box">🗣️</div>
+            <div class="pillar-icon-box">💬</div>
             <h3 class="pillar-title">Linguistic Resonance</h3>
             <p class="pillar-description">
               Upgrade your verbal tonality and syntax. Replace accusatory statements with empathetic mirroring frameworks that make your partner feel truly heard.
@@ -267,7 +406,7 @@
               What frustrates you in others is frequently an unintegrated aspect of your own inner self. Master emotional self-soothing and projection clearance.
             </p>
             <div class="pillar-tags">
-              <span>✦</span> Anter Prakash Self-Reflection
+              <span>✦</span> Inside-Out Self-Inquiry
             </div>
           </div>
 
@@ -277,23 +416,22 @@
             <div class="pillar-icon-box">✨</div>
             <h3 class="pillar-title">Relational Equilibrium</h3>
             <p class="pillar-description">
-              Construct durable rituals of intimacy, boundaries, and mutual growth. Transition from co-dependency to elevated co-elevation and passion.
+              Construct durable rituals of intimacy, boundaries, and mutual growth. Transition from co-dependency to elevated co-elevation and unshakeable peace.
             </p>
             <div class="pillar-tags">
-              <span>✦</span> Sustainable Intimacy Code
+              <span>✦</span> Sustainable Intimacy
             </div>
           </div>
         </div>
-      </div>
     </section>
 
-    <!-- 6. PODCAST & MASTERCLASS PLAYER ("Freedom Business Podcast" Reference) -->
+    <!-- 6. PODCAST & MASTERCLASS PLAYER -->
     <section class="podcast-section" id="podcast">
       <div class="container">
         <div class="section-header-split">
           <div>
             <div class="section-tag">AUDIO & INSIGHTS HUB</div>
-            <h2 class="section-title">Conversations Within <span class="purple-gradient-text">Podcast</span></h2>
+            <h2 class="section-title">Conversations Within <span style="color: var(--terracotta-soft);">Podcast</span></h2>
           </div>
           <p class="section-subtitle-side">
             Bite-sized, profound audio lessons by Dimple Sandhu addressing marriage friction, emotional exhaustion, parenting harmony, and inner peace.
@@ -337,13 +475,13 @@
               </div>
 
               <div class="buttons-row">
-                <div style="font-size: 0.8rem; color: var(--purple-primary); font-weight: 700;">
+                <div style="font-size: 0.8rem; color: var(--terracotta-soft); font-weight: 700;">
                   🎙️ Hosted by Dimple Sandhu
                 </div>
                 <button class="play-main-btn" id="playAudioBtn" onclick="togglePlayAudio()" aria-label="Play or pause audio">
                   <span id="playIcon">▶</span>
                 </button>
-                <button class="btn btn-secondary btn-sm" onclick="showToast('Episode shared to clipboard!')">
+                <button class="btn btn-secondary btn-sm" style="border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.7);" onclick="showToast('Episode shared to clipboard!')">
                   Share Ep
                 </button>
               </div>
@@ -400,7 +538,7 @@
       </div>
     </section>
 
-    <!-- 7. THE BESTSELLER BOOK SHOWCASE ("You Can Coach" Reference) -->
+    <!-- 7. THE BESTSELLER BOOK SHOWCASE -->
     <section class="book-section" id="book">
       <div class="container book-grid">
         <div class="book-visual">
@@ -409,7 +547,7 @@
 
         <div class="book-content">
           <div class="section-tag">THE NATIONAL BESTSELLER</div>
-          <h2 class="section-title">The Route Within: <span class="purple-gradient-text">Mastering Mindset & Alignment</span></h2>
+          <h2 class="section-title">The Route Within: <span class="gradient-text">Mastering Mindset & Alignment</span></h2>
           <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.65;">
             Written by <strong>Dimple Sandhu</strong>, this comprehensive blueprint demystifies the psychology of modern connection. Read by over 10,000+ seekers, it provides actionable worksheets, diagnostic prompts, and NLP reframing templates you can apply today.
           </p>
@@ -441,11 +579,11 @@
       </div>
     </section>
 
-    <!-- 8. INTERACTIVE RELATIONSHIP & ALIGNMENT AUDIT (Smart 2-Column Layout) -->
+    <!-- 8. INTERACTIVE RELATIONSHIP AUDIT -->
     <section class="assessment-section" id="assessment">
       <div class="container">
         <div class="assessment-grid">
-          <!-- Left Column: Context, Benefits & Authority -->
+          <!-- Left Column: Context -->
           <div class="assessment-side-info">
             <div>
               <div class="section-tag emerald">SELF-DISCOVERY AUDIT</div>
@@ -487,11 +625,11 @@
               </div>
             </div>
 
-            <div style="padding: 16px 20px; background: rgba(124, 58, 237, 0.05); border-left: 3px solid var(--purple-primary); border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
-              <p style="font-size: 0.88rem; font-style: italic; color: var(--text-secondary); line-height: 1.5;">
+            <div class="doc-quote-callout">
+              <p style="font-size: 0.92rem; font-style: italic; color: var(--text-secondary); line-height: 1.5; margin: 0;">
                 "You cannot heal with another what you have not yet recognized within yourself."
               </p>
-              <span style="display: block; font-size: 0.78rem; font-weight: 800; color: var(--purple-primary); margin-top: 6px;">— Dimple Sandhu, Master NLP Coach</span>
+              <span style="display: block; font-size: 0.78rem; font-weight: 800; color: var(--brown-primary); margin-top: 6px;">— Dimple Sandhu, Master NLP Coach</span>
             </div>
           </div>
 
@@ -504,7 +642,7 @@
             <!-- Dynamic Question View -->
             <div id="quizQuestionView">
               <div class="quiz-step-header">
-                <span style="font-size: 0.8rem; font-weight: 700; color: var(--purple-primary);" id="quizStepIndicator">QUESTION 1 OF 5</span>
+                <span style="font-size: 0.8rem; font-weight: 700; color: var(--brown-primary);" id="quizStepIndicator">QUESTION 1 OF 5</span>
                 <h3 class="quiz-question" id="quizQuestionText">When a disagreement starts with your partner or family, what is your immediate reflex?</h3>
                 <p class="quiz-hint" id="quizHintText">Select the option that feels most honest to your natural instinct.</p>
               </div>
@@ -530,7 +668,7 @@
               </p>
 
               <div style="display: flex; gap: 16px; margin-top: 12px; flex-wrap: wrap; justify-content: center;">
-                <a href="#events" class="btn btn-primary btn-lg">Attend Guru Purnima Cohort to Bridge Gaps →</a>
+                <a href="#events" class="btn btn-primary btn-lg">Attend Guru Purnima Cohort →</a>
                 <button class="btn btn-secondary btn-lg" onclick="resetQuiz()">Retake Assessment ↺</button>
               </div>
             </div>
@@ -539,13 +677,13 @@
       </div>
     </section>
 
-    <!-- 9. UPCOMING LIVE IMMERSIONS (Guru Purnima Masterclass) -->
+    <!-- 9. UPCOMING LIVE IMMERSIONS -->
     <section class="events-section" id="events">
       <div class="container">
         <div class="section-header-split">
           <div>
             <div class="section-tag emerald">LIVE INTERACTIVE MASTERCLASS</div>
-            <h2 class="section-title">Upcoming Live Cohort: <span class="purple-gradient-text">Guru Purnima Edition</span></h2>
+            <h2 class="section-title">Upcoming Live Cohort: <span class="gradient-text">Guru Purnima Edition</span></h2>
           </div>
           <p class="section-subtitle-side">
             Join hundreds of committed individuals every week on Zoom Live for direct coaching, live Q&A with Dimple Sandhu, and breakthrough NLP exercises.
@@ -561,7 +699,7 @@
 
           <div class="event-details-side">
             <div style="display: flex; gap: 10px; align-items: center;">
-              <span class="doc-pill" style="background: rgba(16, 185, 129, 0.15); color: #34d399; font-weight: 800;">
+              <span class="doc-pill" style="background: rgba(107, 142, 107, 0.15); color: var(--emerald-accent); font-weight: 800;">
                 🟢 100% FREE INTRODUCTORY WEBINAR
               </span>
               <span class="doc-pill">ZOOM LIVE</span>
@@ -610,13 +748,13 @@
       </div>
     </section>
 
-    <!-- 10. HALL OF FAME & VIDEO STORIES (Siddharth Rajsekar Reference) -->
+    <!-- 10. HALL OF FAME & VERIFIED SUCCESS STORIES -->
     <section class="hall-of-fame-section" id="reviews">
       <div class="container">
         <div class="section-header-split">
           <div>
             <div class="section-tag">HALL OF FAME & TRANSFORMATIONS</div>
-            <h2 class="section-title">Verified <span class="purple-gradient-text">Success Stories</span></h2>
+            <h2 class="section-title">Verified <span class="gradient-text">Success Stories</span></h2>
           </div>
           <p class="section-subtitle-side">
             Real individuals, couples, and leaders who executed inside-out behavioral rewiring and transformed conflict into unshakeable companionship.
@@ -634,7 +772,7 @@
           <!-- Story 1 -->
           <div class="testimonial-video-card" data-category="couples">
             <div class="video-thumb-container" onclick="openVideoModal('https://www.youtube.com/embed/XFVP9e8r24s?autoplay=1')">
-              <img src="https://img.youtube.com/vi/XFVP9e8r24s/maxresdefault.jpg" alt="Video Review Thumbnail Dimple" class="video-thumb-img">
+              <img src="https://img.youtube.com/vi/XFVP9e8r24s/maxresdefault.jpg" alt="Video Review Thumbnail" class="video-thumb-img">
               <div class="thumb-play-pill">▶ Watch Story</div>
             </div>
             <div class="testimonial-body">
@@ -644,8 +782,8 @@
               </p>
               <div class="testimonial-author">
                 <div>
-                  <div class="author-name">@Dimple Reviewer</div>
-                  <div style="font-size: 0.72rem; color: var(--text-muted);">Verified Cohort Member</div>
+                  <div class="author-name">Deepa & Rajiv M.</div>
+                  <div style="font-size: 0.72rem; color: var(--text-muted);">Gurugram • Marriage Alignment</div>
                 </div>
                 <span class="author-badge">Verified Story</span>
               </div>
@@ -655,7 +793,7 @@
           <!-- Story 2 -->
           <div class="testimonial-video-card" data-category="mindset">
             <div class="video-thumb-container" onclick="openVideoModal('https://www.youtube.com/embed/cvRYYMbNscQ?autoplay=1')">
-              <img src="https://img.youtube.com/vi/cvRYYMbNscQ/maxresdefault.jpg" alt="Video Review Thumbnail Webinar" class="video-thumb-img">
+              <img src="https://img.youtube.com/vi/cvRYYMbNscQ/maxresdefault.jpg" alt="Video Review Thumbnail" class="video-thumb-img">
               <div class="thumb-play-pill">▶ Watch Story</div>
             </div>
             <div class="testimonial-body">
@@ -665,8 +803,8 @@
               </p>
               <div class="testimonial-author">
                 <div>
-                  <div class="author-name">@Live Webinar Participant</div>
-                  <div style="font-size: 0.72rem; color: var(--text-muted);">Masterclass Graduate</div>
+                  <div class="author-name">Sunita V.</div>
+                  <div style="font-size: 0.72rem; color: var(--text-muted);">Mumbai • Emotional Mastery</div>
                 </div>
                 <span class="author-badge">Inner Peace</span>
               </div>
@@ -676,18 +814,18 @@
           <!-- Story 3 -->
           <div class="testimonial-video-card" data-category="family">
             <div class="video-thumb-container" onclick="openVideoModal('https://www.youtube.com/embed/deGp9JSE8gI?autoplay=1')">
-              <img src="https://img.youtube.com/vi/deGp9JSE8gI/maxresdefault.jpg" alt="Video Review Thumbnail 2nd July" class="video-thumb-img">
+              <img src="https://img.youtube.com/vi/deGp9JSE8gI/maxresdefault.jpg" alt="Video Review Thumbnail" class="video-thumb-img">
               <div class="thumb-play-pill">▶ Watch Story</div>
             </div>
             <div class="testimonial-body">
               <div class="stars-row">★★★★★</div>
               <p class="testimonial-quote">
-                "My relationship with my parents and children completely shifted. The linguistic frameworks taught in RouteWithin prevent fights before they even begin."
+                "My relationship with my partner and family completely shifted. The linguistic frameworks taught in RouteWithin prevent fights before they even begin."
               </p>
               <div class="testimonial-author">
                 <div>
-                  <div class="author-name">@Breakthrough Case Study</div>
-                  <div style="font-size: 0.72rem; color: var(--text-muted);">Community Alumni</div>
+                  <div class="author-name">Vikram S.</div>
+                  <div style="font-size: 0.72rem; color: var(--text-muted);">Bengaluru • 1:1 Mentorship</div>
                 </div>
                 <span class="author-badge">Family Harmony</span>
               </div>
@@ -697,14 +835,14 @@
       </div>
     </section>
 
-    <!-- 11. VIP CONSULTATION & DIRECT APPLICATION MATRIX -->
+    <!-- 11. CONTACT / BOOK SESSION -->
     <section class="contact-section" id="contact">
       <div class="container contact-container-grid">
         <div class="contact-info-card">
-          <div class="section-tag emerald">PRIVATE 1-ON-1 SESSIONS</div>
-          <h2 class="section-title">Begin Your <span class="purple-gradient-text">Alignment Journey</span></h2>
+          <div class="section-tag">LET'S CONNECT</div>
+          <h2 class="section-title">You don't have to <span class="gradient-text">navigate this alone.</span></h2>
           <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.6;">
-            Ready for a deep personal breakthrough? Submit your details below to schedule an introductory consultation with Dimple Sandhu or her senior NLP coaches.
+            I'm here to support you on your journey. Whether you're looking for clarity, healing or simply a safe space to talk — reach out today.
           </p>
 
           <div class="info-point">
@@ -726,18 +864,18 @@
           <div class="info-point">
             <div class="info-icon">📍</div>
             <div>
-              <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-heading);">Geographic Headquarters</h4>
-              <p style="color: var(--text-muted); font-size: 0.85rem;">Serving Seekers Globally from Bharat (India)</p>
+              <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-heading);">Headquarters & Reach</h4>
+              <p style="color: var(--text-muted); font-size: 0.85rem;">DLF Phase 5, Gurugram • Serving Globally from Bharat</p>
             </div>
           </div>
 
-          <!-- Social Proof Banner -->
-          <div class="glass-card" style="padding: 20px; border-color: rgba(124, 58, 237, 0.2);">
-            <div style="display: flex; align-items: center; gap: 12px;">
-              <span style="font-size: 1.5rem;">🔒</span>
-              <p style="font-size: 0.8rem; color: var(--purple-primary); line-height: 1.4;">
-                <strong>100% Confidential Guarantee:</strong> All discussions, relationship challenges, and assessments are protected under complete privacy.
-              </p>
+          <!-- Newsletter -->
+          <div class="glass-card" style="padding: 24px; border-color: rgba(139, 111, 71, 0.2);">
+            <h4 style="font-size: 1rem; font-weight: 700; color: var(--text-heading); margin-bottom: 8px;">Get new insights in your inbox</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px;">Practical tips, resources and support — delivered to your inbox.</p>
+            <div style="display: flex; gap: 8px;">
+              <input type="email" placeholder="Your email address" class="form-input" style="flex: 1; margin-bottom: 0;">
+              <button class="btn btn-primary btn-sm" onclick="showToast('Subscribed! Welcome to the community.')">Subscribe</button>
             </div>
           </div>
         </div>
@@ -745,7 +883,7 @@
         <!-- Consultation Form -->
         <div class="form-wrapper">
           <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--text-heading); margin-bottom: 20px;">
-            Book Your Free Breakthrough Audit
+            Book Your Free Breakthrough Session
           </h3>
 
           <form id="leadCaptureForm" onsubmit="handleLeadSubmit(event)">
@@ -798,7 +936,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 10px;">
-              Submit for Priority Review →
+              Book a Session →
             </button>
           </form>
         </div>
@@ -806,7 +944,7 @@
     </section>
   </main>
 
-  <!-- 12. AUTHORITY FOOTER (Siddharth Rajsekar Reference) -->
+  <!-- 12. FOOTER -->
   <footer class="footer">
     <div class="container">
       <div class="footer-top-grid">
@@ -814,12 +952,12 @@
           <div class="brand-logo">
             <img src="https://cdn.jsdelivr.net/gh/Amitmund/images@main/routewithin/rw-logo-2_150k.png" alt="RouteWithin Logo" class="brand-icon">
             <div>
-              <div class="brand-title">ROUTE<span>WITHIN</span></div>
+              <div class="brand-title">Route<span>Within</span></div>
               <span class="brand-subtitle">Anter Prakash • Explore Yourself</span>
             </div>
           </div>
           <p class="footer-bio">
-            A transformational ecosystem founded by Dimple Sandhu to bridge communication divides, rewire subconscious neural patterns, and awaken unconditional relationship peace from the inside out.
+            A safe, calmer and more fulfilling relationship journey — starts within.
           </p>
           <div class="social-links">
             <a href="https://www.instagram.com/dimplesandhu1469" target="_blank" class="social-btn" aria-label="Instagram">
@@ -837,50 +975,44 @@
         <div class="footer-col">
           <h4>Navigation</h4>
           <ul class="footer-links">
-            <li><a href="index.html" class="footer-link">Home Fold</a></li>
-            <li><a href="programs.html" class="footer-link">Programs & Cohorts</a></li>
+            <li><a href="index.html" class="footer-link">Home</a></li>
+            <li><a href="programs.html" class="footer-link">Services</a></li>
             <li><a href="testimonials.html" class="footer-link">Success Stories</a></li>
-            <li><a href="contact.html" class="footer-link">VIP Consultation</a></li>
-            <li><a href="signin.html" class="footer-link">Member Portal</a></li>
+            <li><a href="contact.html" class="footer-link">Contact</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
-          <h4>Programs & Tools</h4>
+          <h4>Programs</h4>
           <ul class="footer-links">
-            <li><a href="programs.html" class="footer-link">Guru Purnima Masterclass</a></li>
+            <li><a href="programs.html" class="footer-link">Coaching Programs</a></li>
             <li><a href="index.html#assessment" class="footer-link">Relationship Audit Quiz</a></li>
             <li><a href="testimonials.html" class="footer-link">Hall of Fame Reviews</a></li>
-            <li><a href="apply.html" class="footer-link">Cohort Application</a></li>
-            <li><a href="contact.html" class="footer-link">1-on-1 Consultation</a></li>
+            <li><a href="apply.html" class="footer-link">Book a Session</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
-          <h4>Contact & Direct</h4>
-          <ul class="footer-links">
-            <li><a href="tel:+919872250153" class="footer-link">+91 987 225 0153</a></li>
-            <li><a href="mailto:care@routewithin.com" class="footer-link">care@routewithin.com</a></li>
-            <li><span style="color: var(--text-muted); font-size: 0.85rem;">Bharat (Global Virtual)</span></li>
-            <li><a href="programs.html" class="footer-link" style="color: var(--purple-primary);">Live Masterclass ↗</a></li>
-          </ul>
+          <h4>Join our newsletter</h4>
+          <p style="font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-bottom: 14px;">Get insights, tips and resources directly to your inbox.</p>
+          <div style="display: flex; gap: 8px;">
+            <input type="email" placeholder="Your email address" style="flex: 1; padding: 10px 14px; border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius-full); background: rgba(255,255,255,0.06); color: white; font-size: 0.85rem; outline: none;">
+            <button class="btn btn-primary btn-sm" onclick="showToast('Subscribed!')">Subscribe</button>
+          </div>
         </div>
       </div>
 
       <div class="footer-bottom-bar">
-        <div>&copy; 2026 RouteWithin. Anter Prakash. All Rights Reserved.</div>
+        <div>&copy; 2024 RouteWithin. All rights reserved.</div>
         <div class="footer-legal-links">
           <a href="#" class="footer-link" onclick="showToast('Privacy Policy: All client discussions protected.')">Privacy Policy</a>
-          <a href="#" class="footer-link" onclick="showToast('Terms: Dedicated to personal transformation.')">Terms of Service</a>
-          <a href="#" class="footer-link" onclick="showToast('Refund Guarantee on 1-on-1 programs.')">Refund Policy</a>
+          <a href="#" class="footer-link" onclick="showToast('Terms: Dedicated to personal transformation.')">Terms & Conditions</a>
         </div>
       </div>
     </div>
   </footer>
 
-
-
-  <!-- 14. VIDEO MODAL PLAYER -->
+  <!-- VIDEO MODAL PLAYER -->
   <div class="modal-backdrop" id="videoModal">
     <div class="modal-content-box">
       <button class="modal-close-x" onclick="closeVideoModal()">&times;</button>
@@ -890,9 +1022,9 @@
     </div>
   </div>
 
-  <!-- 15. TOAST NOTIFICATION CONTAINER -->
+  <!-- TOAST NOTIFICATION CONTAINER -->
   <div class="toast-notice" id="toastNotice">Notification message</div>
 
-  <script src="app.js?v=20261012g"></script>
+  <script src="app.js?v=20261019a"></script>
 </body>
 </html>
