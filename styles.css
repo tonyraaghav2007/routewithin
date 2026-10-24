@@ -3652,7 +3652,184 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* ==========================================================================
+   VERTICAL & 9:16 DISPLAY SYSTEM ARCHITECTURE
+   Comprehensive scaling for smartphones, portrait monitors, and mobile viewports
+   ========================================================================== */
+
+/* 1. PORTRAIT / 9:16 ORIENTATION & MOBILE VIEWPORTS (<= 768px or aspect-ratio <= 1:1) */
+@media (max-aspect-ratio: 1/1), (orientation: portrait), (max-width: 48rem) {
+  
+  /* 9:16 Hero Section & Vertical Cover Image */
+  .hero-full-landing {
+    min-height: calc(100svh - 4.25rem);
+    min-height: calc(100dvh - 4.25rem);
+    background-image: url('assets/hero_landing_vertical.jpg');
+    background-position: center bottom;
+    background-size: cover;
+    background-repeat: no-repeat;
+    align-items: flex-start;
+    padding-top: 1.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  /* Protective top-to-bottom vertical gradient so headline & subtitle are 100% readable while the cozy subject below remains visible */
+  .hero-full-landing::before {
+    background: linear-gradient(
+      to bottom,
+      rgba(250, 245, 239, 0.96) 0%,
+      rgba(250, 245, 239, 0.90) 35%,
+      rgba(250, 245, 239, 0.65) 58%,
+      rgba(250, 245, 239, 0.20) 80%,
+      rgba(250, 245, 239, 0.60) 100%
+    );
+  }
+
+  [data-theme="dark"] .hero-full-landing {
+    background-color: #1A1410;
+    background-image: url('assets/hero_landing_vertical.jpg');
+  }
+
+  [data-theme="dark"] .hero-full-landing::before {
+    background: linear-gradient(
+      to bottom,
+      rgba(26, 20, 16, 0.97) 0%,
+      rgba(26, 20, 16, 0.92) 35%,
+      rgba(26, 20, 16, 0.65) 58%,
+      rgba(26, 20, 16, 0.20) 80%,
+      rgba(26, 20, 16, 0.65) 100%
+    );
+  }
+
+  .hero-full-container {
+    padding-top: 1.25rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .hero-full-content {
+    max-width: 100%;
+  }
+
+  .hero-full-title {
+    font-size: clamp(2.15rem, 8.5vw, 2.9rem);
+    line-height: 1.15;
+    margin-bottom: 0.875rem;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-full-subtitle {
+    font-size: clamp(0.95rem, 3.8vw, 1.08rem);
+    line-height: 1.6;
+    margin-bottom: 1.625rem;
+    max-width: 28rem;
+  }
+
+  .hero-full-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 22rem;
+  }
+
+  .btn-hero-watch,
+  .btn-hero-book {
+    width: 100%;
+    justify-content: center;
+    padding: 0.875rem 1.5rem;
+    font-size: 0.98rem;
+    min-height: 3.125rem;
+  }
+
+  .hero-scroll-indicator {
+    bottom: 0.5rem;
+    opacity: 0.75;
+  }
+
+  /* 4-Feature Strip below Hero */
+  .hero-features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem 0.75rem;
+  }
+
+  .hero-feature-item {
+    justify-content: flex-start;
+  }
+
+  .hero-feature-text {
+    font-size: 0.84rem;
+  }
+
+  .hero-feature-icon {
+    width: 2.1rem;
+    height: 2.1rem;
+  }
+
+  /* Listen & Podcast Grid on Vertical Displays */
+  .listen-grid {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .audit-layout-grid {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .cinema-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  /* Audio player waveform & controls fit */
+  .audio-player-box {
+    padding: 1.25rem 1rem;
+  }
+
+  .audio-scrubber-row {
+    gap: 0.5rem;
+  }
+}
+
+/* 2. SPECIFIC TUNING FOR PHONES / ULTRA-TALL 9:16 - 9:19.5 (<= 480px / 30rem) */
 @media (max-width: 30rem) {
+  .hero-full-landing {
+    min-height: calc(100svh - 4rem);
+    min-height: calc(100dvh - 4rem);
+    padding-top: 1rem;
+  }
+
+  .hero-full-container {
+    padding-top: 0.85rem;
+    padding-bottom: 3.25rem;
+  }
+
+  .hero-full-title {
+    font-size: 2.1rem;
+    line-height: 1.16;
+    margin-bottom: 0.75rem;
+  }
+
+  .hero-full-subtitle {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    margin-bottom: 1.35rem;
+  }
+
+  .hero-full-actions {
+    max-width: 100%;
+    gap: 0.65rem;
+  }
+
+  .hero-features-grid {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
   .hero-headline {
     font-size: 1.8rem;
   }
@@ -3675,6 +3852,30 @@ h1, h2, h3, h4, h5, h6 {
 
   .metric-number {
     font-size: 1.4rem;
+  }
+
+  /* Modal on compact vertical screen */
+  .webinar-modal-card {
+    max-height: 92dvh;
+    border-radius: 1.15rem;
+  }
+
+  .webinar-modal-poster-col {
+    max-height: 190px;
+  }
+
+  .webinar-modal-info-col {
+    padding: 1.25rem 1rem;
+  }
+
+  .webinar-modal-title {
+    font-size: 1.25rem;
+  }
+
+  .webinar-modal-schedule {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
   }
 }
 
