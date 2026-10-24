@@ -962,3 +962,58 @@ function closeMobileMenu() {
   if (drawer) drawer.classList.remove('open');
 }
 
+/* ==========================================================================
+   11. VIDEO MODAL UTILITY
+   ========================================================================== */
+
+function openHeroVideoModal() {
+  openVideoModal('https://www.youtube.com/embed/XFVP9e8r24s?autoplay=1');
+}
+
+function openVideoModal(url) {
+  let modal = document.getElementById('globalVideoModal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'globalVideoModal';
+    modal.className = 'modal-backdrop';
+    modal.innerHTML = `
+      <div class="modal-content-box">
+        <button class="modal-close-x" onclick="closeVideoModal()" aria-label="Close video">×</button>
+        <div class="video-container-ratio">
+          <iframe id="globalVideoIframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+    `;
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeVideoModal();
+    });
+    document.body.appendChild(modal);
+  }
+  let targetUrl = url || 'https://www.youtube.com/embed/XFVP9e8r24s?autoplay=1';
+  if (targetUrl.includes('/shorts/')) {
+    targetUrl = targetUrl.replace('/shorts/', '/embed/');
+    if (!targetUrl.includes('autoplay=1')) {
+      targetUrl += (targetUrl.includes('?') ? '&' : '?') + 'autoplay=1';
+    }
+  } else if (targetUrl.includes('watch?v=')) {
+    targetUrl = targetUrl.replace('watch?v=', 'embed/');
+    if (!targetUrl.includes('autoplay=1')) {
+      targetUrl += (targetUrl.includes('?') ? '&' : '?') + 'autoplay=1';
+    }
+  }
+  const iframe = document.getElementById('globalVideoIframe');
+  if (iframe) iframe.src = targetUrl;
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeVideoModal() {
+  const modal = document.getElementById('globalVideoModal');
+  if (modal) {
+    modal.classList.remove('open');
+    const iframe = document.getElementById('globalVideoIframe');
+    if (iframe) iframe.src = '';
+  }
+  document.body.style.overflow = '';
+}
+
