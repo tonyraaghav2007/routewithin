@@ -222,7 +222,7 @@ function initNavbar() {
 function initRevealOnScroll() {
   const revealElements = document.querySelectorAll('.reveal-on-scroll, .reveal-scale, .reveal-fade-in');
   if (!revealElements.length) return;
-  
+
   if (!('IntersectionObserver' in window)) {
     revealElements.forEach(el => el.classList.add('is-revealed'));
     return;
@@ -318,7 +318,7 @@ function initCountdown() {
     const now = new Date();
     const dayOfWeek = now.getDay(); // 0 is Sunday, 6 is Saturday
     let daysUntilSaturday = (6 - dayOfWeek + 7) % 7;
-    
+
     // If today is Saturday but past 4:30 PM IST (11:00 UTC), target next Saturday
     const target = new Date();
     target.setDate(now.getDate() + (daysUntilSaturday === 0 && now.getHours() >= 17 ? 7 : daysUntilSaturday));
@@ -396,7 +396,7 @@ function togglePlayAudio() {
   if (isAudioPlaying) {
     if (playIcon) playIcon.textContent = '⏸';
     showToast('Playing: Episode ' + document.getElementById('currentEpNumber').textContent);
-    
+
     audioTimer = setInterval(() => {
       currentSeconds += audioSpeed;
       if (currentSeconds >= totalSeconds) {
@@ -678,7 +678,7 @@ function handleLeadSubmit(event) {
 
   // Success Feedback
   showToast(`Thank you ${name}! Your consultation request is confirmed.`);
-  
+
   // Re-route to WhatsApp option or direct Zoom registration
   setTimeout(() => {
     const confirmChoice = confirm(`Success! Would you like to connect directly with Coach Dimple Sandhu's team on WhatsApp right now?`);
@@ -770,7 +770,7 @@ function initBackToTop() {
  */
 function initSmoothAnchorLinks() {
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
+    anchor.addEventListener('click', function (e) {
       const targetId = this.getAttribute('href');
       if (!targetId || targetId === '#') return;
 
@@ -821,11 +821,11 @@ function initScrollObserver() {
 
   revealTargets.forEach(el => {
     if (!el.classList.contains('scroll-reveal') && !el.classList.contains('scroll-stagger')) {
-      if (el.classList.contains('pillars-grid') || 
-          el.classList.contains('programs-grid') || 
-          el.classList.contains('hof-grid') || 
-          el.classList.contains('features-grid') ||
-          el.classList.contains('curriculum-modules-grid')) {
+      if (el.classList.contains('pillars-grid') ||
+        el.classList.contains('programs-grid') ||
+        el.classList.contains('hof-grid') ||
+        el.classList.contains('features-grid') ||
+        el.classList.contains('curriculum-modules-grid')) {
         el.classList.add('scroll-stagger');
       } else if (el.classList.contains('hero-visual') || el.classList.contains('video-player-wrapper')) {
         el.classList.add('scroll-reveal-zoom');
@@ -1028,15 +1028,15 @@ function initWebinarSuite() {
   // Automatic popup trigger: 2.5s after landing if not dismissed in this session
   // Skip auto popup on registration, thank-you, and admin pages
   const path = window.location.pathname.toLowerCase();
-  const isExcludedPage = path.includes('webinar-register') || 
-                         path.includes('thank-you') ||
-                         path.includes('admin-leads');
+  const isExcludedPage = path.includes('webinar-register') ||
+    path.includes('thank-you') ||
+    path.includes('admin-leads');
 
   if (!isExcludedPage) {
     let dismissed = false;
     try {
       dismissed = sessionStorage.getItem('rw_webinar_popup_dismissed');
-    } catch (e) {}
+    } catch (e) { }
 
     if (!dismissed) {
       setTimeout(() => {
@@ -1100,7 +1100,7 @@ function createWebinarModalIfMissing() {
           <div class="webinar-modal-schedule">
             <div class="schedule-item">
               <span style="color: #A65A3D; font-weight: 600; font-size: 0.76rem; text-transform: uppercase;">Event Date</span>
-              <strong>Saturday, Jul 18, 2026</strong>
+              <strong>Wednesday, Oct 28, 2026</strong>
             </div>
             <div class="schedule-item">
               <span style="color: #A65A3D; font-weight: 600; font-size: 0.76rem; text-transform: uppercase;">Timing</span>
@@ -1153,7 +1153,7 @@ function closeWebinarModal() {
     document.body.style.overflow = '';
     try {
       sessionStorage.setItem('rw_webinar_popup_dismissed', 'true');
-    } catch (e) {}
+    } catch (e) { }
   }
 }
 
