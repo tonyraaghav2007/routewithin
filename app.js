@@ -3,7 +3,6 @@
  * Handles Real-Time Countdown, Audio Streaming, Video Modals,
  * Self-Assessment Quiz, AI Assistant, Hall of Fame Filters, & Forms.
  */
-
 function initApp() {
   initTheme();
   initNavbar();
