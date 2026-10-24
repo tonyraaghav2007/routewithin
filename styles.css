@@ -2848,8 +2848,9 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.3;
 }
 
-/* Video Section (Listen to this) */
+/* Video Section (Listen to this) — Temporarily hidden pending new video shoot */
 .listen-section {
+  display: none !important;
   padding: 4.375rem 0 5rem;
   background: var(--bg-surface);
   text-align: center;
