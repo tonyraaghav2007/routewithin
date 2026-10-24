@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin Lead Dashboard — RouteWithin (Private Portal)</title>
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/Amitmund/images@main/routewithin/rw-logo-2_150k.png">
+  <link rel="stylesheet" href="styles.css?v=20261024">
+  <style>
+    .auth-overlay {
+      position: fixed;
+      inset: 0;
+      background: #17110C;
+      z-index: 999999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .auth-box {
+      background: #231913;
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      border-radius: 1.25rem;
+      padding: 2.5rem;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+    .auth-input {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      font-size: 1.1rem;
+      text-align: center;
+      letter-spacing: 0.15em;
+      border-radius: 0.5rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: #17110C;
+      color: #FFFFFF;
+      margin: 1.25rem 0;
+    }
+    .auth-input:focus {
+      outline: none;
+      border-color: #D4AF37;
+    }
+    .auth-btn {
+      width: 100%;
+      background: #D4AF37;
+      color: #17110C;
+      font-weight: 700;
+      padding: 0.85rem;
+      border-radius: 0.5rem;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body class="admin-leads-page">
+
+  <!-- ADMIN PASSCODE GATE (Private Access Only) -->
+  <div class="auth-overlay" id="authGate">
+    <div class="auth-box">
+      <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🔒</div>
+      <h2 style="font-family: var(--font-heading, 'Playfair Display', serif); color: #FFFFFF; margin-bottom: 0.3rem;">RouteWithin Admin</h2>
+      <p style="font-size: 0.85rem; color: #D4C4AD; margin-bottom: 1.25rem;">Authorized Personnel Only. Enter Security PIN:</p>
+      
+      <form onsubmit="event.preventDefault(); verifyPin();">
+        <input type="password" id="adminPin" class="auth-input" placeholder="••••" maxlength="10" autofocus autocomplete="current-password">
+        <button type="submit" class="auth-btn">Unlock Lead Portal →</button>
+      </form>
+      <p id="authError" style="display:none; color: #E8A88C; font-size: 0.8rem; margin-top: 0.85rem;">Incorrect PIN. (Default PIN: <code>2026</code>)</p>
+    </div>
+  </div>
+
+  <!-- MAIN ADMIN DASHBOARD -->
+  <div class="admin-leads-container" id="adminDashboard" style="display: none;">
+    
+    <!-- Top Header -->
+    <header class="admin-header">
+      <div class="admin-brand">
+        <img src="assets/rw_logo.png" alt="Logo" style="width: 2.2rem; height: 2.2rem; border-radius: 0.5rem;">
+        <div>
+          <h1>RouteWithin — Private Registrations Portal</h1>
+          <span>Lead Capture & Attendee CRM • Coach Dimple Sandhu</span>
+        </div>
+      </div>
+      <div style="display: flex; gap: 0.75rem; align-items: center;">
+        <a href="index.html" class="btn-admin" target="_blank" style="text-decoration: none;">View Live Website ↗</a>
+        <button class="btn-admin" onclick="lockPortal()">Logout / Lock</button>
+      </div>
+    </header>
+
+    <!-- KPI Metric Cards -->
+    <div class="admin-stats-row">
+      <div class="admin-stat-card featured">
+        <div style="font-size: 0.82rem; color: #D4C4AD; text-transform: uppercase; letter-spacing: 0.05em;">Total Registrations</div>
+        <div class="admin-stat-num" id="statTotal">0</div>
+      </div>
+      <div class="admin-stat-card">
+        <div style="font-size: 0.82rem; color: #9FD09F; text-transform: uppercase; letter-spacing: 0.05em;">100% Free Pro Bono</div>
+        <div class="admin-stat-num" style="color: #9FD09F;" id="statFree">0</div>
+      </div>
+      <div class="admin-stat-card">
+        <div style="font-size: 0.82rem; color: #F3E5AB; text-transform: uppercase; letter-spacing: 0.05em;">Paid / VIP Programs</div>
+        <div class="admin-stat-num" style="color: #F3E5AB;" id="statPaid">0</div>
+      </div>
+      <div class="admin-stat-card">
+        <div style="font-size: 0.82rem; color: #25D366; text-transform: uppercase; letter-spacing: 0.05em;">WhatsApp Community</div>
+        <div class="admin-stat-num" style="color: #25D366;" id="statWa">100%</div>
+      </div>
+    </div>
+
+    <!-- Toolbar: Search & Action Buttons -->
+    <div class="admin-toolbar">
+      <input type="text" id="leadSearch" class="admin-search-input" placeholder="🔍 Search by name, phone, email, city..." oninput="filterLeads()">
+      
+      <div class="admin-actions">
+        <button class="btn-admin primary" onclick="exportToCSV()">📥 Export to CSV / Excel</button>
+        <button class="btn-admin" onclick="addSampleLead()">+ Add Sample Lead</button>
+        <button class="btn-admin" onclick="clearLeads()" style="color: #E8A88C;">Clear All</button>
+      </div>
+    </div>
+
+    <!-- Leads Table -->
+    <div class="admin-table-wrap">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Date & Time</th>
+            <th>Full Name</th>
+            <th>WhatsApp / Phone</th>
+            <th>Email Address</th>
+            <th>City</th>
+            <th>Course / Event</th>
+            <th>Type</th>
+            <th>Life Challenge / Note</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="leadsTableBody">
+          <!-- Injected via JavaScript -->
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <script>
+    const DEFAULT_PIN = '2026';
+
+    function verifyPin() {
+      const pin = document.getElementById('adminPin').value.trim();
+      if (pin === DEFAULT_PIN || pin === 'RW@2026') {
+        sessionStorage.setItem('rw_admin_authenticated', 'true');
+        document.getElementById('authGate').style.display = 'none';
+        document.getElementById('adminDashboard').style.display = 'block';
+        loadLeadsTable();
+      } else {
+        document.getElementById('authError').style.display = 'block';
+      }
+    }
+
+    function lockPortal() {
+      sessionStorage.removeItem('rw_admin_authenticated');
+      window.location.reload();
+    }
+
+    // Auto-login if previously verified in this session
+    if (sessionStorage.getItem('rw_admin_authenticated') === 'true') {
+      document.getElementById('authGate').style.display = 'none';
+      document.getElementById('adminDashboard').style.display = 'block';
+      window.addEventListener('DOMContentLoaded', loadLeadsTable);
+    }
+
+    function getLeads() {
+      try {
+        return JSON.parse(localStorage.getItem('routewithin_webinar_registrations') || '[]');
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function loadLeadsTable(leadsToRender) {
+      const leads = leadsToRender || getLeads();
+      const tbody = document.getElementById('leadsTableBody');
+      tbody.innerHTML = '';
+
+      // Update KPIs
+      const allLeads = getLeads();
+      document.getElementById('statTotal').textContent = allLeads.length;
+      document.getElementById('statFree').textContent = allLeads.filter(l => (l.type || '').toLowerCase().includes('free')).length;
+      document.getElementById('statPaid').textContent = allLeads.filter(l => (l.type || '').toLowerCase().includes('paid')).length;
+
+      if (leads.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="10" style="text-align: center; padding: 3rem; color: #8C7A66;">
+              No registrations recorded yet. Click <strong>"+ Add Sample Lead"</strong> above or submit the <a href="webinar-register.html" target="_blank" style="color: #D4AF37;">registration form</a> to test!
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      leads.forEach((lead) => {
+        const cleanPhone = (lead.phone || '').replace(/[^0-9]/g, '');
+        const dateStr = lead.registeredAt ? new Date(lead.registeredAt).toLocaleString() : 'Just now';
+        const isFree = (lead.type || '').toLowerCase().includes('free');
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td style="font-family: monospace; font-size: 0.8rem; color: #D4AF37;">${lead.id || 'REG-00'}</td>
+          <td style="font-size: 0.8rem; color: #D4C4AD;">${dateStr}</td>
+          <td><strong>${escapeHtml(lead.name || 'Anonymous')}</strong></td>
+          <td>
+            <a href="https://wa.me/${cleanPhone}" target="_blank" class="btn-wa-link" title="Open Chat on WhatsApp">
+              💬 ${escapeHtml(lead.phone || 'N/A')}
+            </a>
+          </td>
+          <td><a href="mailto:${escapeHtml(lead.email || '')}" style="color: #F5EDE3; text-decoration: underline;">${escapeHtml(lead.email || 'N/A')}</a></td>
+          <td>${escapeHtml(lead.city || 'N/A')}</td>
+          <td><span style="font-size: 0.84rem;">${escapeHtml(lead.course || 'Guru Purnima Masterclass')}</span></td>
+          <td>
+            <span class="${isFree ? 'badge-free' : 'badge-paid'}">
+              ${isFree ? 'Free Pro Bono' : 'Paid Program'}
+            </span>
+          </td>
+          <td style="font-size: 0.8rem; max-width: 200px; color: #D4C4AD;">${escapeHtml(lead.challenge || 'General clarity')}</td>
+          <td>
+            <button onclick="deleteLead('${lead.id}')" style="background:none; border:none; color: #E8A88C; cursor:pointer;" title="Delete Lead">🗑️</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function filterLeads() {
+      const q = document.getElementById('leadSearch').value.toLowerCase().trim();
+      const all = getLeads();
+      if (!q) {
+        loadLeadsTable(all);
+        return;
+      }
+      const filtered = all.filter(l => 
+        (l.name || '').toLowerCase().includes(q) ||
+        (l.phone || '').toLowerCase().includes(q) ||
+        (l.email || '').toLowerCase().includes(q) ||
+        (l.city || '').toLowerCase().includes(q) ||
+        (l.course || '').toLowerCase().includes(q)
+      );
+      loadLeadsTable(filtered);
+    }
+
+    function addSampleLead() {
+      const samples = [
+        { name: 'Aarohi Sen', phone: '+91 98201 12345', email: 'aarohi.sen@example.com', city: 'Mumbai', challenge: 'Overcoming emotional overthinking & anxiety', course: 'Guru Purnima Pro Bono Coaching & Masterclass', type: 'Free Pro Bono' },
+        { name: 'Sunita Mehra', phone: '+91 98112 54321', email: 'sunita.m@example.com', city: 'Delhi NCR', challenge: 'Healing communication friction with partner', course: 'Guru Purnima Pro Bono Coaching & Masterclass', type: 'Free Pro Bono' },
+        { name: 'Kavita Pillai', phone: '+91 94471 99887', email: 'kavita.p@example.com', city: 'Bangalore', challenge: 'Relationship at crossroads', course: 'Signature 1:1 Relationship Alignment', type: 'Paid Program' }
+      ];
+      const random = samples[Math.floor(Math.random() * samples.length)];
+      if (typeof window.registerWebinarLead === 'function') {
+        window.registerWebinarLead(random);
+      } else {
+        const list = getLeads();
+        random.id = 'REG-' + Date.now().toString(36).toUpperCase();
+        random.registeredAt = new Date().toISOString();
+        list.unshift(random);
+        localStorage.setItem('routewithin_webinar_registrations', JSON.stringify(list));
+      }
+      loadLeadsTable();
+    }
+
+    function deleteLead(id) {
+      if (!confirm('Are you sure you want to remove this lead record?')) return;
+      const list = getLeads().filter(l => l.id !== id);
+      localStorage.setItem('routewithin_webinar_registrations', JSON.stringify(list));
+      loadLeadsTable();
+    }
+
+    function clearLeads() {
+      if (!confirm('Warning: This will delete ALL registrations stored locally. Proceed?')) return;
+      localStorage.removeItem('routewithin_webinar_registrations');
+      loadLeadsTable();
+    }
+
+    function exportToCSV() {
+      const leads = getLeads();
+      if (leads.length === 0) {
+        alert('No leads available to export.');
+        return;
+      }
+
+      let csv = 'ID,Date,Full Name,WhatsApp Number,Email,City,Course,Type,Challenge,Status\n';
+      leads.forEach(l => {
+        const row = [
+          `"${l.id || ''}"`,
+          `"${l.registeredAt ? new Date(l.registeredAt).toLocaleString() : ''}"`,
+          `"${(l.name || '').replace(/"/g, '""')}"`,
+          `"${l.phone || ''}"`,
+          `"${l.email || ''}"`,
+          `"${(l.city || '').replace(/"/g, '""')}"`,
+          `"${(l.course || '').replace(/"/g, '""')}"`,
+          `"${l.type || 'Free'}"`,
+          `"${(l.challenge || '').replace(/"/g, '""')}"`,
+          `"${l.status || 'Joined'}"`
+        ];
+        csv += row.join(',') + '\n';
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `RouteWithin_Webinar_Registrations_${new Date().toISOString().split('T')[0]}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+  </script>
+</body>
+</html>

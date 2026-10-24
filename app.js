@@ -11,6 +11,7 @@ function initApp() {
   initAudioPlayer();
   initQuiz();
   initScrollAnimations();
+  initWebinarSuite();
 }
 
 if (document.readyState === 'loading') {
@@ -1016,4 +1017,172 @@ function closeVideoModal() {
   }
   document.body.style.overflow = '';
 }
+
+/* ==========================================================================
+   12. GURU PURNIMA WEBINAR SUITE: POPUP MODAL & REGISTRATION CORE
+   ========================================================================== */
+
+function initWebinarSuite() {
+  createWebinarModalIfMissing();
+
+  // Automatic popup trigger: 2.5s after landing if not dismissed in this session
+  // Skip auto popup on registration, thank-you, and admin pages
+  const path = window.location.pathname.toLowerCase();
+  const isExcludedPage = path.includes('webinar-register') || 
+                         path.includes('thank-you') ||
+                         path.includes('admin-leads');
+
+  if (!isExcludedPage) {
+    let dismissed = false;
+    try {
+      dismissed = sessionStorage.getItem('rw_webinar_popup_dismissed');
+    } catch (e) {}
+
+    if (!dismissed) {
+      setTimeout(() => {
+        openWebinarModal();
+      }, 2500);
+    }
+  }
+
+  // Keyboard accessibility
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeWebinarModal();
+    }
+  });
+}
+
+function createWebinarModalIfMissing() {
+  if (document.getElementById('guruPurnimaModal')) return;
+
+  const modal = document.createElement('div');
+  modal.id = 'guruPurnimaModal';
+  modal.className = 'webinar-modal-backdrop';
+  modal.setAttribute('role', 'dialog');
+  modal.setAttribute('aria-modal', 'true');
+  modal.setAttribute('aria-label', 'Guru Purnima Webinar and Pro Bono Coaching');
+
+  modal.innerHTML = `
+    <div class="webinar-modal-card">
+      <button class="webinar-modal-close" onclick="closeWebinarModal()" aria-label="Close modal">&times;</button>
+      
+      <div class="webinar-modal-poster-col">
+        <img src="assets/gurupurnima.jpg" alt="Happy Guru Purnima Pro Bono Coaching Journey Poster" class="webinar-modal-poster-img" loading="eager">
+      </div>
+
+      <div class="webinar-modal-info-col">
+        <div>
+          <span class="webinar-modal-kicker">
+            <span class="webinar-flag-pulse"></span> Free Introductory Seminar / Webinar
+          </span>
+
+          <h2 class="webinar-modal-title">Happy Guru Purnima Pro Bono Coaching Journey</h2>
+          <p class="webinar-modal-subtitle">
+            A sacred gift of guidance & transformation by Master Coach <strong>Dimple Sandhu</strong>. Offered with Seva & Gratitude for your inner peace and emotional freedom.
+          </p>
+
+          <ul class="webinar-modal-highlights">
+            <li>
+              <span class="icon">✨</span>
+              <span><strong>100% Free Pro Bono Offer:</strong> Serious commitment, real emotional transformation.</span>
+            </li>
+            <li>
+              <span class="icon">👥</span>
+              <span><strong>Limited to 2 1:1 Spots:</strong> Plus exclusive access to the live weekly alignment immersion.</span>
+            </li>
+            <li>
+              <span class="icon">🕊️</span>
+              <span><strong>For Women Seeking Harmony:</strong> Heal communication gaps, anxiety, and reclaim self-worth.</span>
+            </li>
+          </ul>
+
+          <div class="webinar-modal-schedule">
+            <div class="schedule-item">
+              <span style="color: #A65A3D; font-weight: 600; font-size: 0.76rem; text-transform: uppercase;">Event Date</span>
+              <strong>Saturday, Jul 18, 2026</strong>
+            </div>
+            <div class="schedule-item">
+              <span style="color: #A65A3D; font-weight: 600; font-size: 0.76rem; text-transform: uppercase;">Timing</span>
+              <strong>4:30 PM – 5:30 PM IST</strong>
+            </div>
+            <div class="schedule-item">
+              <span style="color: #A65A3D; font-weight: 600; font-size: 0.76rem; text-transform: uppercase;">Access</span>
+              <strong style="color: #2E7D32;">100% Free (Zoom)</strong>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <a href="webinar-register.html" class="webinar-modal-cta-btn" onclick="closeWebinarModal()">
+            Fill Interest Form & Register Free →
+          </a>
+          <p class="webinar-modal-note">
+            Direct WhatsApp Community joining link provided on the next confirmation screen.
+          </p>
+        </div>
+      </div>
+    </div>
+  `;
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeWebinarModal();
+    }
+  });
+
+  document.body.appendChild(modal);
+}
+
+function openWebinarModal() {
+  createWebinarModalIfMissing();
+  const modal = document.getElementById('guruPurnimaModal');
+  if (modal) {
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeWebinarModal() {
+  const modal = document.getElementById('guruPurnimaModal');
+  if (modal) {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    try {
+      sessionStorage.setItem('rw_webinar_popup_dismissed', 'true');
+    } catch (e) {}
+  }
+}
+
+// Global Registration Helper (Used by webinar-register.html)
+function registerWebinarLead(data) {
+  try {
+    const existing = JSON.parse(localStorage.getItem('routewithin_webinar_registrations') || '[]');
+    const record = {
+      id: 'REG-' + Date.now().toString(36).toUpperCase(),
+      registeredAt: new Date().toISOString(),
+      name: data.name || '',
+      email: data.email || '',
+      phone: data.phone || '',
+      city: data.city || '',
+      course: data.course || 'Guru Purnima Pro Bono Coaching & Masterclass',
+      type: data.type || 'Free Pro Bono',
+      paymentStatus: data.paymentStatus || 'Free',
+      challenge: data.challenge || '',
+      status: 'Joined Community'
+    };
+    existing.unshift(record);
+    localStorage.setItem('routewithin_webinar_registrations', JSON.stringify(existing));
+    sessionStorage.setItem('rw_latest_registrant', JSON.stringify(record));
+    return record;
+  } catch (err) {
+    console.error('Error saving registration:', err);
+    return null;
+  }
+}
+
+window.openWebinarModal = openWebinarModal;
+window.closeWebinarModal = closeWebinarModal;
+window.registerWebinarLead = registerWebinarLead;
+
 

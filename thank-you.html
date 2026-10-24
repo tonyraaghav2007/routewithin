@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#25D366">
+  
+  <title>Registration Confirmed — Join WhatsApp Community | RouteWithin</title>
+  <meta name="description" content="Thank you for registering for the Guru Purnima Pro Bono Coaching Journey with Coach Dimple Sandhu. Join the WhatsApp community for Zoom links and session workbooks.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/Amitmund/images@main/routewithin/rw-logo-2_150k.png">
+
+  <!-- Google Fonts & Stylesheet -->
+  <link rel="stylesheet" href="styles.css?v=20261024">
+  <script>
+    (function() {
+      const saved = localStorage.getItem('routewithin_theme');
+      if (saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+</head>
+<body class="thankyou-wrapper">
+
+  <main class="thankyou-card" role="main" aria-label="Registration Confirmation Screen">
+    <!-- Verified Celebration Ring -->
+    <div class="thankyou-icon-wrap" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+      </svg>
+    </div>
+
+    <!-- Official Badge -->
+    <div class="thankyou-tag">
+      ★ SEAT RESERVED • GURU PURNIMA SPECIAL ★
+    </div>
+
+    <!-- Dynamic Title -->
+    <h1 class="thankyou-title" id="thankyouHeading">
+      Thank You!
+    </h1>
+
+    <!-- Personal Thank You Message -->
+    <p class="thankyou-lead" id="thankyouMessage">
+      Your registration for the <strong>Guru Purnima Pro Bono Coaching Journey & Live Masterclass</strong> has been successfully confirmed.
+    </p>
+
+    <!-- Critical Mandatory Warning Alert Box -->
+    <div class="thankyou-alert-box" role="alert">
+      <h4>
+        <span style="font-size: 1.25rem;">⚠️</span> MANDATORY STEP: JOIN THE WHATSAPP COMMUNITY
+      </h4>
+      <p>
+        To ensure attendee privacy and confidentiality, <strong>the live Zoom meeting link, entry password, and masterclass workbook will ONLY be shared inside our private WhatsApp Community</strong>.
+      </p>
+      <p style="margin-top: 0.5rem; font-weight: 600;">
+        You will NOT receive the link by email. You MUST join the WhatsApp group below right now to attend.
+      </p>
+    </div>
+
+    <!-- THE ONLY OPTION: Prominent WhatsApp Community Link -->
+    <a href="https://chat.whatsapp.com/GzK7Z7nN7Q81dF2qXlY5rR" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-giant" id="whatsappCommunityLink" aria-label="Join Official WhatsApp Community">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.586-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.303-.058.116-.087.188-.173.289l-.26.302c-.087.087-.179.181-.077.355.101.174.449.741.964 1.2 1.348 1.203 1.637 1.26 1.869 1.376.231.116.368.101.505-.058.137-.159.588-.686.745-.921.157-.235.314-.197.527-.118.213.079 1.353.638 1.584.754.231.116.386.173.442.27.056.097.056.563-.088.968zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.66 1.435 5.176L2 22l4.982-1.398A9.957 9.957 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/>
+      </svg>
+      <span>Join Official WhatsApp Community →</span>
+    </a>
+
+    <!-- Security & Privacy Disclaimer -->
+    <p class="thankyou-disclaimer">
+      🔒 <strong>Official RouteWithin Community</strong> • Admin-only broadcasts (no spam) • Your phone number is strictly protected.
+    </p>
+  </main>
+
+  <script>
+    // 1. Personalize greeting with registrant's name if available
+    try {
+      const stored = sessionStorage.getItem('rw_latest_registrant');
+      if (stored) {
+        const user = JSON.parse(stored);
+        if (user && user.name) {
+          const firstName = user.name.split(' ')[0];
+          document.getElementById('thankyouHeading').textContent = 'Thank You, ' + firstName + '!';
+          document.getElementById('thankyouMessage').innerHTML = 'Thank you, <strong>' + user.name + '</strong>! Your seat for the <strong>Guru Purnima Pro Bono Coaching Journey & Live Masterclass</strong> has been successfully reserved.';
+        }
+      }
+    } catch (e) {}
+
+    // 2. STRICTLY DISABLE BACK NAVIGATION (As requested: "no back option, no nothing")
+    // Push state and trap popstate events so browser back button stays right on this page
+    (function enforceSingleActionOnly() {
+      history.pushState(null, document.title, location.href);
+      window.addEventListener('popstate', function (event) {
+        history.pushState(null, document.title, location.href);
+      });
+
+      // Prevent navigating away through unload warnings if desired
+      window.addEventListener('beforeunload', function (e) {
+        // Keeps user aware that WhatsApp is essential
+      });
+    })();
+  </script>
+</body>
+</html>
