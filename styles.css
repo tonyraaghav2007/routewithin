@@ -3863,18 +3863,46 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1.4rem;
   }
 
-  /* Modal on compact vertical screen */
+  /* Modal on compact vertical screen: full image visibility & smooth unified scrolling */
+  .webinar-modal-backdrop {
+    padding: 0.5rem 0.35rem;
+    align-items: flex-start;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
   .webinar-modal-card {
-    max-height: 92dvh;
+    max-height: 94svh;
+    max-height: 94dvh;
     border-radius: 1.15rem;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    display: flex !important;
+    flex-direction: column !important;
+    margin: auto 0;
   }
 
   .webinar-modal-poster-col {
-    max-height: 190px;
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    background: #1C120C;
+    flex-shrink: 0;
+  }
+
+  .webinar-modal-poster-img {
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    object-fit: contain !important;
+    display: block !important;
   }
 
   .webinar-modal-info-col {
-    padding: 1.25rem 1rem;
+    padding: 1.25rem 1rem 2rem !important;
+    overflow-y: visible !important;
+    flex-shrink: 0;
   }
 
   .webinar-modal-title {
@@ -4146,6 +4174,8 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   transition: opacity 0.35s ease, visibility 0.35s ease;
 }
 
@@ -4368,16 +4398,60 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 768px) {
+  .webinar-modal-backdrop {
+    padding: 1rem 0.5rem;
+    align-items: flex-start;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
   .webinar-modal-card {
     grid-template-columns: 1fr;
-    max-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    max-height: 92svh;
+    max-height: 92dvh;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    margin: auto 0;
   }
+
+  .webinar-modal-close {
+    position: sticky;
+    top: 0.75rem;
+    right: 0.75rem;
+    align-self: flex-end;
+    margin-bottom: -2.75rem;
+    z-index: 30;
+    background: rgba(20, 14, 10, 0.75) !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(6px);
+  }
+
   .webinar-modal-poster-col {
-    max-height: 220px;
+    width: 100%;
+    height: auto;
+    max-height: none !important;
+    overflow: visible !important;
+    background: #1C120C;
+    flex-shrink: 0;
   }
+
+  .webinar-modal-poster-img {
+    width: 100%;
+    height: auto;
+    max-height: none !important;
+    object-fit: contain !important;
+    display: block;
+  }
+
   .webinar-modal-info-col {
-    padding: 1.5rem 1.25rem;
+    padding: 1.5rem 1.25rem 2.25rem;
+    overflow-y: visible !important;
+    flex-shrink: 0;
   }
+
   .webinar-modal-title {
     font-size: 1.35rem;
   }

@@ -1138,6 +1138,9 @@ function openWebinarModal() {
   createWebinarModalIfMissing();
   const modal = document.getElementById('guruPurnimaModal');
   if (modal) {
+    const card = modal.querySelector('.webinar-modal-card');
+    if (card) card.scrollTop = 0;
+    modal.scrollTop = 0;
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
