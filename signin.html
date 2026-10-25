@@ -1,34 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#8B6F47">
-  
+
   <title>Sign In — RouteWithin</title>
   <meta name="description" content="Sign in to your RouteWithin portal.">
-  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/Amitmund/images@main/routewithin/rw-logo-2_150k.png">
+  <link rel="icon" type="image/png"
+    href="https://cdn.jsdelivr.net/gh/Amitmund/images@main/routewithin/rw-logo-2_150k.png">
   <link rel="stylesheet" href="styles.css?v=20261019b">
 </head>
-<body style="min-height: 100vh; display: flex; flex-direction: column;">
 
-  <!-- GURU PURNIMA WEBINAR TOP FLAG -->
-  <aside class="webinar-top-flag" id="webinarTopFlag" aria-label="Guru Purnima Special Announcement">
-    <div class="webinar-flag-container">
-      <div class="webinar-flag-left">
-        <span class="webinar-flag-badge">
-          <span class="webinar-flag-pulse"></span> GURU PURNIMA SPECIAL
-        </span>
-        <p class="webinar-flag-text">
-          <strong>100% Free Pro Bono Coaching Journey & Live Masterclass</strong> • This Wednesday, Oct 28 (4:30 PM IST) • <span class="flag-highlight">2 1:1 Spots Only!</span>
-        </p>
-      </div>
-      <div class="webinar-flag-actions">
-        <a href="webinar-register.html" class="webinar-flag-cta">Register Free →</a>
-        <button type="button" class="webinar-flag-info-btn" onclick="openWebinarModal()">View Details</button>
-      </div>
-    </div>
-  </aside>
+<body style="min-height: 100vh; display: flex; flex-direction: column;">
 
   <!-- Sticky Navbar -->
   <nav class="navbar" id="mainNavbar">
@@ -52,19 +37,30 @@
     </div>
   </nav>
 
-  <main style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 3.75rem 1.25rem; background: var(--bg-base);">
-    <div style="background: var(--bg-card); border-radius: 1.5rem; padding: 2.75rem 2.25rem; max-width: 27.5rem; width: 100%; border: 0.0625rem solid rgba(139, 111, 71, 0.2); box-shadow: var(--shadow-md);">
-      <h1 style="font-family: var(--font-heading); font-size: 2.2rem; color: var(--text-heading); margin-bottom: 0.5rem; text-align: center;">Welcome Back</h1>
-      <p style="font-size: 0.95rem; color: var(--text-secondary); text-align: center; margin-bottom: 1.75rem;">Sign in to access your RouteWithin coaching portal.</p>
-      
-      <form onsubmit="event.preventDefault(); showToast('Welcome back! Redirecting to client dashboard...'); setTimeout(() => window.location.href='index.html', 1500);">
+  <main
+    style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 3.75rem 1.25rem; background: var(--bg-base);">
+    <div
+      style="background: var(--bg-card); border-radius: 1.5rem; padding: 2.75rem 2.25rem; max-width: 27.5rem; width: 100%; border: 0.0625rem solid rgba(139, 111, 71, 0.2); box-shadow: var(--shadow-md);">
+      <h1
+        style="font-family: var(--font-heading); font-size: 2.2rem; color: var(--text-heading); margin-bottom: 0.5rem; text-align: center;">
+        Welcome Back</h1>
+      <p style="font-size: 0.95rem; color: var(--text-secondary); text-align: center; margin-bottom: 1.75rem;">Sign in
+        to access your RouteWithin coaching portal.</p>
+
+      <form
+        onsubmit="event.preventDefault(); showToast('Welcome back! Redirecting to client dashboard...'); setTimeout(() => window.location.href='index.html', 1500);">
         <div style="margin-bottom: 1.125rem;">
-          <label style="display: block; font-size: 0.88rem; font-weight: 600; color: var(--text-heading); margin-bottom: 0.375rem;">Email Address</label>
-          <input type="email" required placeholder="name@example.com" style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-sm); border: 0.0625rem solid rgba(139, 111, 71, 0.25); background: var(--bg-base); font-size: 0.95rem; outline: none; font-family: var(--font-body); color: var(--text-main);">
+          <label
+            style="display: block; font-size: 0.88rem; font-weight: 600; color: var(--text-heading); margin-bottom: 0.375rem;">Email
+            Address</label>
+          <input type="email" required placeholder="name@example.com"
+            style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-sm); border: 0.0625rem solid rgba(139, 111, 71, 0.25); background: var(--bg-base); font-size: 0.95rem; outline: none; font-family: var(--font-body); color: var(--text-main);">
         </div>
         <div style="margin-bottom: 1.5rem;">
-          <label style="display: block; font-size: 0.88rem; font-weight: 600; color: var(--text-heading); margin-bottom: 0.375rem;">Password</label>
-          <input type="password" required placeholder="••••••••" style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-sm); border: 0.0625rem solid rgba(139, 111, 71, 0.25); background: var(--bg-base); font-size: 0.95rem; outline: none; font-family: var(--font-body); color: var(--text-main);">
+          <label
+            style="display: block; font-size: 0.88rem; font-weight: 600; color: var(--text-heading); margin-bottom: 0.375rem;">Password</label>
+          <input type="password" required placeholder="••••••••"
+            style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-sm); border: 0.0625rem solid rgba(139, 111, 71, 0.25); background: var(--bg-base); font-size: 0.95rem; outline: none; font-family: var(--font-body); color: var(--text-main);">
         </div>
         <button type="submit" class="btn btn-hero-book btn-lg" style="width: 100%;">Sign In</button>
       </form>
@@ -88,4 +84,5 @@
   <div class="toast-notice" id="toastNotice"></div>
   <script src="app.js"></script>
 </body>
+
 </html>
