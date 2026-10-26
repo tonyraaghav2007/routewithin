@@ -165,7 +165,7 @@
     </main>
   </div>
 
-  <script src="app.js"></script>
+  <script src="app.js?v=20261026c"></script>
   <script>
     document.getElementById('webinarRegForm').addEventListener('submit', function(e) {
       e.preventDefault();
@@ -232,8 +232,9 @@
         paymentStatus: 'Free'
       };
 
+      let syncPromise = Promise.resolve();
       if (typeof window.registerWebinarLead === 'function') {
-        window.registerWebinarLead(leadData);
+        syncPromise = window.registerWebinarLead(leadData);
       } else {
         const list = JSON.parse(localStorage.getItem('routewithin_webinar_registrations') || '[]');
         leadData.id = 'REG-' + Date.now().toString(36).toUpperCase();
@@ -243,10 +244,20 @@
         sessionStorage.setItem('rw_latest_registrant', JSON.stringify(leadData));
       }
 
-      // Smooth redirection to thank you page
-      setTimeout(function() {
-        window.location.href = 'thank-you.html';
-      }, 400);
+      // Smooth redirection to thank you page once synced to Google Sheets
+      let navigated = false;
+      function navigateToThankYou() {
+        if (!navigated) {
+          navigated = true;
+          window.location.href = 'thank-you.html';
+        }
+      }
+
+      Promise.resolve(syncPromise).finally(function() {
+        setTimeout(navigateToThankYou, 400);
+      });
+      // Safety fallback timeout
+      setTimeout(navigateToThankYou, 2500);
     });
   </script>
 </body>

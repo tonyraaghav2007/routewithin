@@ -1160,12 +1160,11 @@ function closeWebinarModal() {
 //  GOOGLE SHEETS BACKEND INTEGRATION
 //  Replace the URL below with YOUR deployed Google Apps Script URL
 // ═══════════════════════════════════════════════════════════════
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbjOsVYOEPZr7WUFfEbWRzS3wCMOT1rUmpxOAIYsSANTAs8i30CMSu8MSiwSrQxh-nuA/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwXW2jE-bv-Lv2gDX8cNF1BeTZZpzBBucui77AaB3PGWmzBigElWHggNwO-L2WGsKnbSg/exec';
 
 /**
  * Sends registration data to Google Sheets backend.
- * Non-blocking — fires and forgets so the user isn't held up.
- * Falls back gracefully if backend is unavailable.
+ * Uses keepalive: true so browser navigation does not abort the request.
  */
 function sendToGoogleSheets(action, data) {
   if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_SCRIPT_URL_HERE') {
@@ -1177,7 +1176,8 @@ function sendToGoogleSheets(action, data) {
     method: 'POST',
     mode: 'no-cors', // Google Apps Script doesn't support CORS preflight
     headers: { 'Content-Type': 'text/plain' },
-    body: JSON.stringify({ action: action, data: data })
+    body: JSON.stringify({ action: action, data: data }),
+    keepalive: true
   })
   .then(function() {
     console.log('[RouteWithin] ✅ Registration synced to Google Sheets.');
@@ -1210,12 +1210,12 @@ function registerWebinarLead(data) {
     localStorage.setItem('routewithin_webinar_registrations', JSON.stringify(existing));
     sessionStorage.setItem('rw_latest_registrant', JSON.stringify(record));
 
-    // ── Sync to Google Sheets (non-blocking) ──
+    // ── Sync to Google Sheets ──
     const isFree = (data.type || '').toLowerCase().includes('free') ||
                    (data.paymentStatus || '').toLowerCase() === 'free';
     const action = isFree ? 'register_free' : 'register_paid';
 
-    sendToGoogleSheets(action, {
+    const syncPromise = sendToGoogleSheets(action, {
       name: record.name,
       email: record.email,
       phone: record.phone,
@@ -1228,10 +1228,10 @@ function registerWebinarLead(data) {
       sourcePage: window.location.pathname.split('/').pop() || 'unknown'
     });
 
-    return record;
+    return syncPromise;
   } catch (err) {
     console.error('Error saving registration:', err);
-    return null;
+    return Promise.resolve({ success: false, error: err.message });
   }
 }
 
