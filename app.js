@@ -1156,6 +1156,39 @@ function closeWebinarModal() {
   }
 }
 
+// ═══════════════════════════════════════════════════════════════
+//  GOOGLE SHEETS BACKEND INTEGRATION
+//  Replace the URL below with YOUR deployed Google Apps Script URL
+// ═══════════════════════════════════════════════════════════════
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbjOsVYOEPZr7WUFfEbWRzS3wCMOT1rUmpxOAIYsSANTAs8i30CMSu8MSiwSrQxh-nuA/exec';
+
+/**
+ * Sends registration data to Google Sheets backend.
+ * Non-blocking — fires and forgets so the user isn't held up.
+ * Falls back gracefully if backend is unavailable.
+ */
+function sendToGoogleSheets(action, data) {
+  if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_SCRIPT_URL_HERE') {
+    console.warn('[RouteWithin] Google Sheets backend URL not configured. Skipping cloud sync.');
+    return Promise.resolve({ success: false, reason: 'not_configured' });
+  }
+
+  return fetch(GOOGLE_SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors', // Google Apps Script doesn't support CORS preflight
+    headers: { 'Content-Type': 'text/plain' },
+    body: JSON.stringify({ action: action, data: data })
+  })
+  .then(function() {
+    console.log('[RouteWithin] ✅ Registration synced to Google Sheets.');
+    return { success: true };
+  })
+  .catch(function(err) {
+    console.warn('[RouteWithin] ⚠️ Could not sync to Google Sheets (offline?):', err.message);
+    return { success: false, reason: err.message };
+  });
+}
+
 // Global Registration Helper (Used by webinar-register.html)
 function registerWebinarLead(data) {
   try {
@@ -1176,6 +1209,25 @@ function registerWebinarLead(data) {
     existing.unshift(record);
     localStorage.setItem('routewithin_webinar_registrations', JSON.stringify(existing));
     sessionStorage.setItem('rw_latest_registrant', JSON.stringify(record));
+
+    // ── Sync to Google Sheets (non-blocking) ──
+    const isFree = (data.type || '').toLowerCase().includes('free') ||
+                   (data.paymentStatus || '').toLowerCase() === 'free';
+    const action = isFree ? 'register_free' : 'register_paid';
+
+    sendToGoogleSheets(action, {
+      name: record.name,
+      email: record.email,
+      phone: record.phone,
+      city: record.city,
+      challenge: record.challenge,
+      course: record.course,
+      amount: data.amount || 0,
+      paymentStatus: record.paymentStatus,
+      paymentMethod: data.paymentMethod || 'N/A',
+      sourcePage: window.location.pathname.split('/').pop() || 'unknown'
+    });
+
     return record;
   } catch (err) {
     console.error('Error saving registration:', err);
@@ -1186,5 +1238,6 @@ function registerWebinarLead(data) {
 window.openWebinarModal = openWebinarModal;
 window.closeWebinarModal = closeWebinarModal;
 window.registerWebinarLead = registerWebinarLead;
+window.sendToGoogleSheets = sendToGoogleSheets;
 
 

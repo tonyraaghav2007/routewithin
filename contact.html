@@ -357,7 +357,29 @@
         showToast('Please solve the verification correctly: 5 + 4 = 9');
         return;
       }
-      const name = document.getElementById('contactName').value;
+      const name = document.getElementById('contactName').value.trim();
+      const email = document.getElementById('contactEmail').value.trim();
+      const phone = document.getElementById('contactPhone').value.trim();
+      const serviceEl = document.getElementById('contactService');
+      const service = serviceEl ? serviceEl.value : '1:1 Relationship Coaching';
+      const messageEl = document.getElementById('contactMessage');
+      const message = messageEl ? messageEl.value.trim() : '';
+
+      // Auto-sync to Google Sheet and localStorage
+      if (typeof window.registerWebinarLead === 'function') {
+        window.registerWebinarLead({
+          name: name,
+          email: email,
+          phone: phone,
+          city: 'Inquiry Lead',
+          challenge: message || 'Session request via Contact Form',
+          course: service,
+          type: 'Session Inquiry',
+          paymentStatus: 'Pending',
+          paymentMethod: 'Direct'
+        });
+      }
+
       showToast(`Thank you, ${name}! Your request has been securely sent to Coach Dimple. We will connect with you within 24 hours.`);
       e.target.reset();
     }
