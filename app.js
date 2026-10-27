@@ -617,7 +617,7 @@ function renderQuizResults() {
     if (desc) desc.textContent = "You possess high emotional intelligence, but under high stress or exhaustion, subconscious defense mechanisms trigger withdrawal or over-explaining. The Anter Prakash method will give you bulletproof calm.";
   } else if (finalScore >= 55) {
     if (title) title.textContent = "Reactive Protector: Active Defense Loops & Resentment";
-    if (desc) desc.textContent = "Repeated past wounds are triggering automated fight-or-flight reactions. You often feel misunderstood and exhausted. Joining the upcoming Guru Purnima immersion will help decouple these neural loops immediately.";
+    if (desc) desc.textContent = "Repeated past wounds are triggering automated fight-or-flight reactions. You often feel misunderstood and exhausted. Joining the upcoming Karwa Chauth special masterclass will help decouple these neural loops immediately.";
   } else {
     if (title) title.textContent = "Critical Linguistic Friction: Immediate Reset Recommended";
     if (desc) desc.textContent = "Your communication channels are currently locked in survival mode, eroding daily peace. A structured, compassionate intervention with Coach Dimple Sandhu's frameworks will rebuild safety and understanding.";
@@ -912,7 +912,7 @@ function downloadCalendarInvite() {
     'PRODID:-//RouteWithin//Masterclass//EN',
     'CALSCALE:GREGORIAN',
     'BEGIN:VEVENT',
-    'SUMMARY:RouteWithin - Guru Purnima Live Masterclass with Dimple Sandhu',
+    'SUMMARY:RouteWithin - Beyond the Vrat: A Karwa Chauth Masterclass with Dimple Sandhu',
     'DESCRIPTION:Interactive Relationship and Subconscious Inner Alignment Session with Coach Dimple Sandhu.\\n\\nZoom Link: https://us06web.zoom.us/j/82870705301?pwd=Bl05nQSRaPrdk9VufbWie76UfP8cOg.1',
     'LOCATION:Zoom Live Online',
     'STATUS:CONFIRMED',
@@ -1018,7 +1018,7 @@ function closeVideoModal() {
 }
 
 /* ==========================================================================
-   12. GURU PURNIMA WEBINAR SUITE: POPUP MODAL & REGISTRATION CORE
+   12. KARWA CHAUTH SPECIAL MASTERCLASS: POPUP MODAL & REGISTRATION CORE
    ========================================================================== */
 
 function initWebinarSuite() {
@@ -1053,46 +1053,46 @@ function initWebinarSuite() {
 }
 
 function createWebinarModalIfMissing() {
-  if (document.getElementById('guruPurnimaModal')) return;
+  if (document.getElementById('karwaChauthModal')) return;
 
   const modal = document.createElement('div');
-  modal.id = 'guruPurnimaModal';
+  modal.id = 'karwaChauthModal';
   modal.className = 'webinar-modal-backdrop';
   modal.setAttribute('role', 'dialog');
   modal.setAttribute('aria-modal', 'true');
-  modal.setAttribute('aria-label', 'Guru Purnima Webinar and Pro Bono Coaching');
+  modal.setAttribute('aria-label', 'Beyond the Vrat: A Karwa Chauth Masterclass');
 
   modal.innerHTML = `
     <div class="webinar-modal-card">
       <button class="webinar-modal-close" onclick="closeWebinarModal()" aria-label="Close modal">&times;</button>
       
       <div class="webinar-modal-poster-col">
-        <img src="assets/gurupurnima.jpg" alt="Happy Guru Purnima Pro Bono Coaching Journey Poster" class="webinar-modal-poster-img" loading="eager">
+        <img src="assets/karwachauth.png" alt="Beyond the Vrat: A Karwa Chauth Masterclass with Master Coach Dimple Sandhu" class="webinar-modal-poster-img" loading="eager">
       </div>
 
       <div class="webinar-modal-info-col">
         <div>
           <span class="webinar-modal-kicker">
-            <span class="webinar-flag-pulse"></span> Free Introductory Seminar / Webinar
+            <span class="webinar-flag-pulse"></span> FREE LIVE MASTERCLASS · KARWA CHAUTH SPECIAL
           </span>
 
-          <h2 class="webinar-modal-title">Happy Guru Purnima Pro Bono Coaching Journey</h2>
+          <h2 class="webinar-modal-title">Beyond the Vrat: A Karwa Chauth Masterclass</h2>
           <p class="webinar-modal-subtitle">
-            A sacred gift of guidance & transformation by Master Coach <strong>Dimple Sandhu</strong>. Offered with Seva & Gratitude for your inner peace and emotional freedom.
+            A free live masterclass by Master Coach Dimple Sandhu, for women who give their love every day and want to feel it back.
           </p>
 
           <ul class="webinar-modal-highlights">
             <li>
               <span class="icon">✨</span>
-              <span><strong>100% Free Pro Bono Offer:</strong> Serious commitment, real emotional transformation.</span>
+              <span><strong>100% Free Live Masterclass:</strong> One honest hour on love, respect and emotional connection.</span>
             </li>
             <li>
-              <span class="icon">👥</span>
-              <span><strong>Limited to 2 1:1 Spots:</strong> Plus exclusive access to the live weekly alignment immersion.</span>
+              <span class="icon">💞</span>
+              <span><strong>For Married Women:</strong> Close the emotional distance and feel heard and valued, every day of the year, not just one.</span>
             </li>
             <li>
               <span class="icon">🕊️</span>
-              <span><strong>For Women Seeking Harmony:</strong> Heal communication gaps, anxiety, and reclaim self-worth.</span>
+              <span><strong>Gratitude-Led Practices:</strong> Simple tools to rebuild connection at home and reclaim your self-worth.</span>
             </li>
           </ul>
 
@@ -1114,7 +1114,7 @@ function createWebinarModalIfMissing() {
 
         <div>
           <a href="webinar-register.html" class="webinar-modal-cta-btn" onclick="closeWebinarModal()">
-            Fill Interest Form & Register Free →
+            Register Free for the Masterclass →
           </a>
           <p class="webinar-modal-note">
             Direct WhatsApp Community joining link provided on the next confirmation screen.
@@ -1135,7 +1135,7 @@ function createWebinarModalIfMissing() {
 
 function openWebinarModal() {
   createWebinarModalIfMissing();
-  const modal = document.getElementById('guruPurnimaModal');
+  const modal = document.getElementById('karwaChauthModal');
   if (modal) {
     const card = modal.querySelector('.webinar-modal-card');
     if (card) card.scrollTop = 0;
@@ -1146,7 +1146,7 @@ function openWebinarModal() {
 }
 
 function closeWebinarModal() {
-  const modal = document.getElementById('guruPurnimaModal');
+  const modal = document.getElementById('karwaChauthModal');
   if (modal) {
     modal.classList.remove('open');
     document.body.style.overflow = '';
@@ -1200,10 +1200,10 @@ function registerWebinarLead(data) {
       email: data.email || '',
       phone: data.phone || '',
       city: data.city || '',
-      course: data.course || 'Guru Purnima Pro Bono Coaching & Masterclass',
+      course: data.course || 'Beyond the Vrat: A Karwa Chauth Masterclass',
       type: data.type || 'Free Pro Bono',
       paymentStatus: data.paymentStatus || 'Free',
-      challenge: data.challenge || '',
+      challenge: data.challenge || 'Karwa Chauth',
       status: 'Joined Community'
     };
     existing.unshift(record);

@@ -222,13 +222,13 @@
           </td>
           <td><a href="mailto:${escapeHtml(lead.email || '')}" style="color: #F5EDE3; text-decoration: underline;">${escapeHtml(lead.email || 'N/A')}</a></td>
           <td>${escapeHtml(lead.city || 'N/A')}</td>
-          <td><span style="font-size: 0.84rem;">${escapeHtml(lead.course || 'Guru Purnima Masterclass')}</span></td>
+          <td><span style="font-size: 0.84rem;">${escapeHtml(lead.course || 'Beyond the Vrat: A Karwa Chauth Masterclass')}</span></td>
           <td>
             <span class="${isFree ? 'badge-free' : 'badge-paid'}">
               ${isFree ? 'Free Pro Bono' : 'Paid Program'}
             </span>
           </td>
-          <td style="font-size: 0.8rem; max-width: 200px; color: #D4C4AD;">${escapeHtml(lead.challenge || 'General clarity')}</td>
+          <td style="font-size: 0.8rem; max-width: 200px; color: #D4C4AD;">${escapeHtml(lead.challenge || 'Karwa Chauth')}</td>
           <td>
             <button onclick="deleteLead('${lead.id}')" style="background:none; border:none; color: #E8A88C; cursor:pointer;" title="Delete Lead">🗑️</button>
           </td>
@@ -256,8 +256,8 @@
 
     function addSampleLead() {
       const samples = [
-        { name: 'Aarohi Sen', phone: '+91 98201 12345', email: 'aarohi.sen@example.com', city: 'Mumbai', challenge: 'Overcoming emotional overthinking & anxiety', course: 'Guru Purnima Pro Bono Coaching & Masterclass', type: 'Free Pro Bono' },
-        { name: 'Sunita Mehra', phone: '+91 98112 54321', email: 'sunita.m@example.com', city: 'Delhi NCR', challenge: 'Healing communication friction with partner', course: 'Guru Purnima Pro Bono Coaching & Masterclass', type: 'Free Pro Bono' },
+        { name: 'Aarohi Sen', phone: '+91 98201 12345', email: 'aarohi.sen@example.com', city: 'Mumbai', challenge: 'Karwa Chauth', course: 'Beyond the Vrat: A Karwa Chauth Masterclass', type: 'Free Pro Bono' },
+        { name: 'Sunita Mehra', phone: '+91 98112 54321', email: 'sunita.m@example.com', city: 'Delhi NCR', challenge: 'Karwa Chauth', course: 'Beyond the Vrat: A Karwa Chauth Masterclass', type: 'Free Pro Bono' },
         { name: 'Kavita Pillai', phone: '+91 94471 99887', email: 'kavita.p@example.com', city: 'Bangalore', challenge: 'Relationship at crossroads', course: 'Signature 1:1 Relationship Alignment', type: 'Paid Program' }
       ];
       const random = samples[Math.floor(Math.random() * samples.length)];

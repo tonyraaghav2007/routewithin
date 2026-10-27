@@ -604,8 +604,8 @@ function testRegistration() {
     email: 'aarav.sharma@example.com',
     phone: '+91 98765 43210',
     city: 'Mumbai',
-    challenge: 'Relationship communication breakdown',
-    course: 'Guru Purnima Pro Bono Coaching & Masterclass',
+    challenge: 'Karwa Chauth',
+    course: 'Beyond the Vrat: A Karwa Chauth Masterclass',
     sourcePage: 'webinar-register.html'
   });
 

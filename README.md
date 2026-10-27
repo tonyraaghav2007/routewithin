@@ -10,7 +10,7 @@ High-converting, responsive web application for **RouteWithin** by Master NLP Co
 - **4-Pillar Alignment Architecture**: Interactive cards deconstructing the Anter Prakash methodology (Subconscious Decoupling, Linguistic Resonance, Mirror Principle, Relational Equilibrium).
 - **Conversations Within Audio Player**: Embedded podcast player with speed toggle, scrub bar, live waveform, and multi-episode selector.
 - **Interactive Relationship Alignment Audit**: 5-step diagnostic quiz providing instant scoring and personalized coaching pathway.
-- **Upcoming Immersion & Live Countdown**: Real-time ticker and countdown timer for the Guru Purnima cohort.
+- **Upcoming Immersion & Live Countdown**: Real-time ticker and announcement banner for the Karwa Chauth Special Masterclass cohort.
 - **Verified Hall of Fame Testimonials**: Category-filtered video breakthrough stories and student reviews.
 - **VIP Application & Consultation Forms**: Integrated validation with simple bot-prevention captcha.
 - **Smooth Scrolling Suite**: Dynamic reading progress bar, floating Back-to-Top frosted glass pill, and reveal observers.
