@@ -1099,7 +1099,7 @@ function createWebinarModalIfMissing() {
           <div class="webinar-modal-schedule">
             <div class="schedule-item">
               <span style="color: #A65A3D; font-weight: 600; font-size: 0.76rem; text-transform: uppercase;">Event Date</span>
-              <strong>Wednesday, Oct 28, 2026</strong>
+              <strong>Monday, Nov 2, 2026</strong>
             </div>
             <div class="schedule-item">
               <span style="color: #A65A3D; font-weight: 600; font-size: 0.76rem; text-transform: uppercase;">Timing</span>
