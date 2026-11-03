@@ -1018,142 +1018,20 @@ function closeVideoModal() {
 }
 
 /* ==========================================================================
-   12. KARWA CHAUTH SPECIAL MASTERCLASS: POPUP MODAL & REGISTRATION CORE
+   12. EVENT NAVIGATION & REGISTRATION CORE (POP-UP REPLACED BY DEDICATED PAGE)
    ========================================================================== */
 
 function initWebinarSuite() {
-  createWebinarModalIfMissing();
-
-  // Automatic popup trigger: 2.5s after landing if not dismissed in this session
-  // Skip auto popup on registration, thank-you, and admin pages
-  const path = window.location.pathname.toLowerCase();
-  const isExcludedPage = path.includes('webinar-register') ||
-    path.includes('thank-you') ||
-    path.includes('admin-leads');
-
-  if (!isExcludedPage) {
-    let dismissed = false;
-    try {
-      dismissed = sessionStorage.getItem('rw_webinar_popup_dismissed');
-    } catch (e) { }
-
-    if (!dismissed) {
-      setTimeout(() => {
-        openWebinarModal();
-      }, 2500);
-    }
-  }
-
-  // Keyboard accessibility
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closeWebinarModal();
-    }
-  });
-}
-
-function createWebinarModalIfMissing() {
-  if (document.getElementById('karwaChauthModal')) return;
-
-  const modal = document.createElement('div');
-  modal.id = 'karwaChauthModal';
-  modal.className = 'webinar-modal-backdrop';
-  modal.setAttribute('role', 'dialog');
-  modal.setAttribute('aria-modal', 'true');
-  modal.setAttribute('aria-label', 'Beyond the Vrat: A Karwa Chauth Masterclass');
-
-  modal.innerHTML = `
-    <div class="webinar-modal-card">
-      <button class="webinar-modal-close" onclick="closeWebinarModal()" aria-label="Close modal">&times;</button>
-      
-      <div class="webinar-modal-poster-col">
-        <img src="assets/karwachauth.png" alt="Beyond the Vrat: A Karwa Chauth Masterclass with Master Coach Dimple Sandhu" class="webinar-modal-poster-img" loading="eager">
-      </div>
-
-      <div class="webinar-modal-info-col">
-        <div>
-          <span class="webinar-modal-kicker">
-            <span class="webinar-flag-pulse"></span> FREE LIVE MASTERCLASS · KARWA CHAUTH SPECIAL
-          </span>
-
-          <h2 class="webinar-modal-title">Beyond the Vrat: A Karwa Chauth Masterclass</h2>
-          <p class="webinar-modal-subtitle">
-            A free live masterclass by Master Coach Dimple Sandhu, for women who give their love every day and want to feel it back.
-          </p>
-
-          <ul class="webinar-modal-highlights">
-            <li>
-              <span class="icon">✨</span>
-              <span><strong>100% Free Live Masterclass:</strong> One honest hour on love, respect and emotional connection.</span>
-            </li>
-            <li>
-              <span class="icon">💞</span>
-              <span><strong>For Married Women:</strong> Close the emotional distance and feel heard and valued, every day of the year, not just one.</span>
-            </li>
-            <li>
-              <span class="icon">🕊️</span>
-              <span><strong>Gratitude-Led Practices:</strong> Simple tools to rebuild connection at home and reclaim your self-worth.</span>
-            </li>
-          </ul>
-
-          <div class="webinar-modal-schedule">
-            <div class="schedule-item">
-              <span style="color: #A65A3D; font-weight: 600; font-size: 0.76rem; text-transform: uppercase;">Event Date</span>
-              <strong>Monday, Nov 2, 2026</strong>
-            </div>
-            <div class="schedule-item">
-              <span style="color: #A65A3D; font-weight: 600; font-size: 0.76rem; text-transform: uppercase;">Timing</span>
-              <strong>4:30 PM – 5:30 PM IST</strong>
-            </div>
-            <div class="schedule-item">
-              <span style="color: #A65A3D; font-weight: 600; font-size: 0.76rem; text-transform: uppercase;">Access</span>
-              <strong style="color: #2E7D32;">100% Free (Zoom)</strong>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <a href="webinar-register.html" class="webinar-modal-cta-btn" onclick="closeWebinarModal()">
-            Register Free for the Masterclass →
-          </a>
-          <p class="webinar-modal-note">
-            Direct WhatsApp Community joining link provided on the next confirmation screen.
-          </p>
-        </div>
-      </div>
-    </div>
-  `;
-
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      closeWebinarModal();
-    }
-  });
-
-  document.body.appendChild(modal);
+  // Pop-up modal removed. Event details and registration live on /events.html
 }
 
 function openWebinarModal() {
-  createWebinarModalIfMissing();
-  const modal = document.getElementById('karwaChauthModal');
-  if (modal) {
-    const card = modal.querySelector('.webinar-modal-card');
-    if (card) card.scrollTop = 0;
-    modal.scrollTop = 0;
-    modal.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
+  // Graceful redirect to the proper Free Events page
+  window.location.href = 'events.html';
 }
 
 function closeWebinarModal() {
-  const modal = document.getElementById('karwaChauthModal');
-  if (modal) {
-    modal.classList.remove('open');
-    document.body.style.overflow = '';
-    try {
-      sessionStorage.setItem('rw_webinar_popup_dismissed', 'true');
-    } catch (e) { }
-  }
+  // Safe no-op retained for backwards compatibility
 }
 
 // ═══════════════════════════════════════════════════════════════

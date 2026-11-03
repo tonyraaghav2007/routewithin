@@ -4110,6 +4110,10 @@ h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
   white-space: nowrap !important;
   transition: all 0.2s ease;
+  text-decoration: none !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .webinar-flag-info-btn:hover {
@@ -5081,3 +5085,16 @@ h1, h2, h3, h4, h5, h6 {
   gap: 0.35rem;
 }
 
+
+@media (max-width: 75rem) and (min-width: 48.0625rem) {
+  .nav-links {
+    gap: 0.25rem;
+  }
+  .nav-link {
+    padding: 0.45rem 0.625rem;
+    font-size: 0.82rem;
+  }
+  .nav-container {
+    gap: 0.75rem;
+  }
+}
