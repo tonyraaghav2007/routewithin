@@ -4021,6 +4021,14 @@ h1, h2, h3, h4, h5, h6 {
   min-width: 0;
 }
 
+
+.badge-text-mobile {
+  display: none;
+}
+.badge-text-full {
+  display: inline;
+}
+
 .webinar-flag-badge {
   display: inline-flex;
   align-items: center;
@@ -4124,7 +4132,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Compact, single-row mobile banner layout (Eliminates bulky 3-tier stacking) */
 @media (max-width: 768px) {
   .webinar-top-flag {
-    padding: 0.3rem 0;
+    padding: 0.28rem 0;
   }
 
   .webinar-flag-container {
@@ -4133,8 +4141,9 @@ h1, h2, h3, h4, h5, h6 {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    gap: 0.5rem;
+    gap: 0.75rem;
     flex-wrap: nowrap;
+    overflow: hidden;
   }
 
   .webinar-flag-left {
@@ -4142,34 +4151,46 @@ h1, h2, h3, h4, h5, h6 {
     flex-direction: row;
     align-items: center;
     gap: 0.45rem;
-    flex: 1 1 auto;
+    flex: 0 1 auto;
     min-width: 0;
+    overflow: hidden;
   }
 
   .webinar-flag-badge {
-    font-size: 0.62rem;
-    padding: 0.18rem 0.45rem;
+    font-size: 0.64rem;
+    padding: 0.2rem 0.52rem;
     letter-spacing: 0.03em;
-  }
-
-  .webinar-flag-text {
-    font-size: 0.74rem;
-    line-height: 1.25;
-    margin: 0;
     white-space: nowrap;
+    max-width: calc(100vw - 140px);
     overflow: hidden;
     text-overflow: ellipsis;
+    flex-shrink: 0;
+  }
+
+  .badge-text-full {
+    display: none !important;
+  }
+
+  .badge-text-mobile {
+    display: inline !important;
+  }
+
+  /* Hide the long schedule/title sentence on mobile so badge and button never collide */
+  .webinar-flag-text {
+    display: none !important;
   }
 
   .webinar-flag-actions {
     flex-shrink: 0;
     display: flex;
     align-items: center;
+    margin-left: auto;
   }
 
   .webinar-flag-cta {
     font-size: 0.72rem;
-    padding: 0.24rem 0.65rem;
+    padding: 0.25rem 0.7rem;
+    white-space: nowrap !important;
   }
 
   /* Hide secondary button on mobile so the flag stays a clean, single-row strip */
