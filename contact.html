@@ -19,7 +19,7 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/favicon.png">
 
-  <link rel="stylesheet" href="styles.css?v=20261110b">
+  <link rel="stylesheet" href="styles.css?v=20261110c">
   <script>
     (function() {
       const saved = localStorage.getItem('routewithin_theme');
@@ -200,10 +200,11 @@ src="https://www.facebook.com/tr?id=1365924428812836&ev=PageView&noscript=1"
             <div style="margin-bottom: 1.25rem;" id="serviceGroup">
               <label style="display: block; font-size: 0.88rem; font-weight: 600; color: var(--text-heading); margin-bottom: 0.5rem;" for="contactService">Select a Program *</label>
               <select id="contactService" style="width: 100%; padding: 0.8125rem 1.125rem; border-radius: var(--radius-sm); border: 0.0625rem solid rgba(139, 111, 71, 0.25); background: var(--bg-base); font-size: 0.95rem; outline: none; font-family: var(--font-body); color: var(--text-main); cursor: pointer;">
-                <option value="Gratitude Coaching & NLP Alignment">Gratitude Coaching & NLP Alignment</option>
-                <option value="Marriage & Long-Term Partnership Support">Marriage & Long-Term Partnership Support</option>
-                <option value="Self-Discovery & Emotional Mastery">Self-Discovery & Emotional Mastery</option>
-                <option value="Live Masterclass Cohort (Zoom)">Live Masterclass Cohort (Zoom)</option>
+                <option value="AntarPrakash (6-Weeks) — ₹11,999">AntarPrakash (6-Weeks) — ₹ 11,999</option>
+                <option value="Inner Circle (6 Months) — ₹59,999">Inner Circle (6 Months) — ₹ 59,999</option>
+                <option value="Gratitude Circle (Continuity) — ₹555/mo">Gratitude Circle (Continuity) — ₹ 555/month</option>
+                <option value="Rishta Reset Live (Weekly) — ₹99">Rishta Reset Live (Weekly) — ₹ 99</option>
+                <option value="Free Clarity Call">Free Clarity Call</option>
               </select>
             </div>
 
@@ -351,6 +352,20 @@ src="https://www.facebook.com/tr?id=1365924428812836&ev=PageView&noscript=1"
   <div class="toast-notice" id="toastNotice"></div>
 
   <script>
+    
+    // Auto-select program if query param present (e.g. ?program=antarprakash)
+    window.addEventListener('DOMContentLoaded', function() {
+      const params = new URLSearchParams(window.location.search);
+      const prog = (params.get('program') || '').toLowerCase();
+      const sel = document.getElementById('contactService');
+      if (sel && prog) {
+        if (prog.includes('antar')) sel.value = 'AntarPrakash (6-Weeks) — ₹11,999';
+        else if (prog.includes('inner')) sel.value = 'Inner Circle (6 Months) — ₹59,999';
+        else if (prog.includes('gratitude')) sel.value = 'Gratitude Circle (Continuity) — ₹555/mo';
+        else if (prog.includes('rishta')) sel.value = 'Rishta Reset Live (Weekly) — ₹99';
+      }
+    });
+
     function switchContactTab(tab) {
       const bookBtn = document.getElementById('tabBookBtn');
       const msgBtn = document.getElementById('tabMessageBtn');
@@ -381,7 +396,7 @@ src="https://www.facebook.com/tr?id=1365924428812836&ev=PageView&noscript=1"
       const email = document.getElementById('contactEmail').value.trim();
       const phone = document.getElementById('contactPhone').value.trim();
       const serviceEl = document.getElementById('contactService');
-      const service = serviceEl ? serviceEl.value : 'Gratitude Coaching';
+      const service = serviceEl ? serviceEl.value : 'AntarPrakash (6-Weeks)';
       const messageEl = document.getElementById('contactMessage');
       const message = messageEl ? messageEl.value.trim() : '';
 
