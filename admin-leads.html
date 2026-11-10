@@ -4,56 +4,178 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
-  <title>Admin Lead Dashboard — RouteWithin (Private Portal)</title>
+  <title>Admin Dashboard & Content Manager — RouteWithin (Private Portal)</title>
   <link rel="icon" type="image/png" href="assets/favicon.png">
-  <link rel="stylesheet" href="styles.css?v=20261110d">
+  <link rel="stylesheet" href="styles.css?v=20261110e">
   <style>
+    /* ─── AUTH GATE ─────────────────────────────────────────── */
     .auth-overlay {
-      position: fixed;
-      inset: 0;
-      background: #17110C;
-      z-index: 999999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem;
+      position: fixed; inset: 0; background: #17110C;
+      z-index: 999999; display: flex; align-items: center;
+      justify-content: center; padding: 1.5rem;
     }
     .auth-box {
-      background: #231913;
-      border: 1px solid rgba(212, 175, 55, 0.35);
-      border-radius: 1.25rem;
-      padding: 2.5rem;
-      max-width: 420px;
-      width: 100%;
-      text-align: center;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      background: #231913; border: 1px solid rgba(212, 175, 55, 0.35);
+      border-radius: 1.25rem; padding: 2.5rem; max-width: 420px;
+      width: 100%; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
     }
     .auth-input {
-      width: 100%;
-      padding: 0.85rem 1rem;
-      font-size: 1.1rem;
-      text-align: center;
-      letter-spacing: 0.15em;
-      border-radius: 0.5rem;
-      border: 1px solid rgba(255,255,255,0.2);
-      background: #17110C;
-      color: #FFFFFF;
-      margin: 1.25rem 0;
+      width: 100%; padding: 0.85rem 1rem; font-size: 1.1rem;
+      text-align: center; letter-spacing: 0.15em; border-radius: 0.5rem;
+      border: 1px solid rgba(255,255,255,0.2); background: #17110C;
+      color: #FFFFFF; margin: 1.25rem 0;
     }
-    .auth-input:focus {
-      outline: none;
-      border-color: #D4AF37;
-    }
+    .auth-input:focus { outline: none; border-color: #D4AF37; }
     .auth-btn {
-      width: 100%;
-      background: #D4AF37;
-      color: #17110C;
-      font-weight: 700;
-      padding: 0.85rem;
-      border-radius: 0.5rem;
-      border: none;
-      font-size: 1rem;
-      cursor: pointer;
+      width: 100%; background: #D4AF37; color: #17110C; font-weight: 700;
+      padding: 0.85rem; border-radius: 0.5rem; border: none; font-size: 1rem; cursor: pointer;
+    }
+
+    /* ─── ADMIN TABS ───────────────────────────────────────── */
+    .admin-tabs {
+      display: flex; gap: 0; background: #1E1610; border-radius: 0.75rem;
+      overflow: hidden; margin-bottom: 1.5rem; border: 1px solid rgba(212,175,55,0.2);
+    }
+    .admin-tab {
+      flex: 1; padding: 0.85rem 1rem; text-align: center; font-size: 0.88rem;
+      font-weight: 700; color: #D4C4AD; background: transparent; border: none;
+      cursor: pointer; transition: all 0.2s; white-space: nowrap;
+    }
+    .admin-tab:hover { background: rgba(212,175,55,0.1); color: #F5EDE3; }
+    .admin-tab.active { background: #D4AF37; color: #17110C; }
+    .admin-tab-panel { display: none; }
+    .admin-tab-panel.active { display: block; }
+
+    /* ─── CMS CARD GRID ────────────────────────────────────── */
+    .cms-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.25rem; margin-top: 1.25rem;
+    }
+    .cms-item-card {
+      background: #1E1610; border: 1px solid rgba(212,175,55,0.18);
+      border-radius: 1rem; padding: 1.25rem; position: relative;
+    }
+    .cms-item-card.disabled { opacity: 0.5; }
+    .cms-card-img {
+      width: 100%; height: 140px; object-fit: cover; border-radius: 0.75rem;
+      margin-bottom: 0.85rem; background: #2A2018;
+    }
+    .cms-card-badge {
+      font-size: 0.7rem; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 0.06em; color: #C67B5C; background: rgba(198,123,92,0.15);
+      padding: 0.2rem 0.5rem; border-radius: 0.35rem; display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+    .cms-card-title {
+      font-size: 1.15rem; font-weight: 700; color: #F5EDE3; margin-bottom: 0.35rem;
+      font-family: var(--font-heading, 'Playfair Display', serif);
+    }
+    .cms-card-price {
+      font-size: 0.95rem; font-weight: 800; color: #D4AF37; margin-bottom: 0.5rem;
+    }
+    .cms-card-desc {
+      font-size: 0.82rem; color: #D4C4AD; line-height: 1.5;
+      margin-bottom: 0.75rem; display: -webkit-box; -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .cms-card-actions {
+      display: flex; gap: 0.5rem; flex-wrap: wrap;
+    }
+    .cms-btn {
+      padding: 0.45rem 0.85rem; font-size: 0.78rem; font-weight: 700;
+      border-radius: 0.4rem; border: none; cursor: pointer; transition: all 0.15s;
+    }
+    .cms-btn-edit { background: #D4AF37; color: #17110C; }
+    .cms-btn-edit:hover { background: #E8C847; }
+    .cms-btn-delete { background: rgba(232,168,140,0.15); color: #E8A88C; border: 1px solid rgba(232,168,140,0.3); }
+    .cms-btn-delete:hover { background: rgba(232,168,140,0.3); }
+    .cms-btn-toggle { background: rgba(159,208,159,0.15); color: #9FD09F; border: 1px solid rgba(159,208,159,0.3); }
+    .cms-btn-add {
+      background: transparent; border: 2px dashed rgba(212,175,55,0.4);
+      color: #D4AF37; font-weight: 700; font-size: 1rem; cursor: pointer;
+      border-radius: 1rem; min-height: 140px; display: flex; align-items: center;
+      justify-content: center; transition: all 0.2s;
+    }
+    .cms-btn-add:hover { border-color: #D4AF37; background: rgba(212,175,55,0.08); }
+
+    /* ─── CMS EDIT MODAL ───────────────────────────────────── */
+    .cms-modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.75);
+      z-index: 100000; display: none; align-items: flex-start;
+      justify-content: center; padding: 2rem; overflow-y: auto;
+    }
+    .cms-modal-overlay.visible { display: flex; }
+    .cms-modal {
+      background: #231913; border: 1px solid rgba(212,175,55,0.35);
+      border-radius: 1.25rem; padding: 2rem; max-width: 680px;
+      width: 100%; max-height: 90vh; overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    }
+    .cms-modal h2 {
+      font-family: var(--font-heading, 'Playfair Display', serif);
+      font-size: 1.5rem; color: #F5EDE3; margin-bottom: 1.25rem;
+    }
+    .cms-field {
+      margin-bottom: 1rem;
+    }
+    .cms-field label {
+      display: block; font-size: 0.78rem; font-weight: 700;
+      color: #D4C4AD; text-transform: uppercase; letter-spacing: 0.04em;
+      margin-bottom: 0.35rem;
+    }
+    .cms-field input, .cms-field textarea, .cms-field select {
+      width: 100%; padding: 0.65rem 0.85rem; font-size: 0.92rem;
+      border-radius: 0.5rem; border: 1px solid rgba(255,255,255,0.15);
+      background: #17110C; color: #F5EDE3; font-family: inherit;
+    }
+    .cms-field input:focus, .cms-field textarea:focus, .cms-field select:focus {
+      outline: none; border-color: #D4AF37;
+    }
+    .cms-field textarea { min-height: 70px; resize: vertical; }
+    .cms-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .cms-field-hint {
+      font-size: 0.72rem; color: #8C7A66; margin-top: 0.2rem;
+    }
+    .cms-bullets-list { display: flex; flex-direction: column; gap: 0.4rem; }
+    .cms-bullets-list input { margin-bottom: 0; }
+    .cms-btn-add-bullet {
+      background: transparent; border: 1px dashed rgba(212,175,55,0.4);
+      color: #D4AF37; padding: 0.35rem 0.65rem; font-size: 0.78rem;
+      border-radius: 0.35rem; cursor: pointer; margin-top: 0.3rem;
+    }
+    .cms-modal-actions {
+      display: flex; gap: 0.75rem; justify-content: flex-end;
+      margin-top: 1.5rem; padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .cms-btn-save { background: #D4AF37; color: #17110C; font-weight: 700; padding: 0.65rem 1.5rem; font-size: 0.92rem; border-radius: 0.5rem; border: none; cursor: pointer; }
+    .cms-btn-cancel { background: transparent; color: #D4C4AD; border: 1px solid rgba(255,255,255,0.2); padding: 0.65rem 1.25rem; font-size: 0.92rem; border-radius: 0.5rem; cursor: pointer; }
+    .cms-img-preview {
+      width: 100%; max-height: 140px; object-fit: cover; border-radius: 0.5rem;
+      margin-top: 0.5rem; background: #2A2018;
+    }
+    .cms-toggle-switch {
+      position: relative; display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .cms-toggle-switch input[type=checkbox] {
+      width: 36px; height: 20px; appearance: none; -webkit-appearance: none;
+      background: #3A2D20; border-radius: 10px; position: relative; cursor: pointer;
+      transition: background 0.2s;
+    }
+    .cms-toggle-switch input[type=checkbox]:checked { background: #2E7D32; }
+    .cms-toggle-switch input[type=checkbox]::after {
+      content: ''; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px;
+      border-radius: 50%; background: #F5EDE3; transition: transform 0.2s;
+    }
+    .cms-toggle-switch input[type=checkbox]:checked::after { transform: translateX(16px); }
+
+    /* ─── RESPONSIVE ───────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .admin-tabs { flex-wrap: wrap; }
+      .admin-tab { font-size: 0.78rem; padding: 0.65rem 0.5rem; }
+      .cms-grid { grid-template-columns: 1fr; }
+      .cms-field-row { grid-template-columns: 1fr; }
+      .cms-modal { padding: 1.25rem; margin: 0.5rem; }
     }
   </style>
 <!-- Meta Pixel Code -->
@@ -85,7 +207,7 @@ src="https://www.facebook.com/tr?id=1365924428812836&ev=PageView&noscript=1"
       
       <form onsubmit="event.preventDefault(); verifyPin();">
         <input type="password" id="adminPin" class="auth-input" placeholder="••••" maxlength="10" autofocus autocomplete="current-password">
-        <button type="submit" class="auth-btn">Unlock Lead Portal →</button>
+        <button type="submit" class="auth-btn">Unlock Admin Portal →</button>
       </form>
       <p id="authError" style="display:none; color: #E8A88C; font-size: 0.8rem; margin-top: 0.85rem;">Incorrect PIN. (Default PIN: <code>2026</code>)</p>
     </div>
@@ -99,73 +221,139 @@ src="https://www.facebook.com/tr?id=1365924428812836&ev=PageView&noscript=1"
       <div class="admin-brand">
         <img src="assets/rw_icon_light.png" alt="RouteWithin Logo" style="width: 2.5rem; height: 2.5rem; object-fit: contain;">
         <div>
-          <h1>RouteWithin — Private Registrations Portal</h1>
-          <span>Lead Capture & Attendee CRM • Coach Dimple Sandhu</span>
+          <h1>RouteWithin — Private Admin Portal</h1>
+          <span>Lead CRM & No-Code Content Management System • Coach Dimple Sandhu</span>
         </div>
       </div>
-      <div style="display: flex; gap: 0.75rem; align-items: center;">
+      <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+        <button class="btn-admin" onclick="resetToDefaults()" title="Restore original factory contents">↺ Restore Defaults</button>
         <a href="index.html" class="btn-admin" target="_blank" style="text-decoration: none;">View Live Website ↗</a>
         <button class="btn-admin" onclick="lockPortal()">Logout / Lock</button>
       </div>
     </header>
 
-    <!-- KPI Metric Cards -->
-    <div class="admin-stats-row">
-      <div class="admin-stat-card featured">
-        <div style="font-size: 0.82rem; color: #D4C4AD; text-transform: uppercase; letter-spacing: 0.05em;">Total Registrations</div>
-        <div class="admin-stat-num" id="statTotal">0</div>
+    <!-- Admin Navigation Tabs -->
+    <div class="admin-tabs" id="adminTabs">
+      <button class="admin-tab active" data-tab="leads" onclick="switchTab('leads')">📊 Leads CRM</button>
+      <button class="admin-tab" data-tab="programs" onclick="switchTab('programs')">📦 Coaching Programs</button>
+      <button class="admin-tab" data-tab="events" onclick="switchTab('events')">🎉 Free Events</button>
+      <button class="admin-tab" data-tab="ebooks" onclick="switchTab('ebooks')">📚 E-Books & Guides</button>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         TAB 1: LEADS (Original Dashboard)
+         ═══════════════════════════════════════════════════════════════ -->
+    <div class="admin-tab-panel active" id="panel-leads">
+      <!-- KPI Metric Cards -->
+      <div class="admin-stats-row">
+        <div class="admin-stat-card featured">
+          <div style="font-size: 0.82rem; color: #D4C4AD; text-transform: uppercase; letter-spacing: 0.05em;">Total Registrations</div>
+          <div class="admin-stat-num" id="statTotal">0</div>
+        </div>
+        <div class="admin-stat-card">
+          <div style="font-size: 0.82rem; color: #9FD09F; text-transform: uppercase; letter-spacing: 0.05em;">100% Free Pro Bono</div>
+          <div class="admin-stat-num" style="color: #9FD09F;" id="statFree">0</div>
+        </div>
+        <div class="admin-stat-card">
+          <div style="font-size: 0.82rem; color: #F3E5AB; text-transform: uppercase; letter-spacing: 0.05em;">Paid / VIP Programs</div>
+          <div class="admin-stat-num" style="color: #F3E5AB;" id="statPaid">0</div>
+        </div>
+        <div class="admin-stat-card">
+          <div style="font-size: 0.82rem; color: #25D366; text-transform: uppercase; letter-spacing: 0.05em;">WhatsApp Community</div>
+          <div class="admin-stat-num" style="color: #25D366;" id="statWa">100%</div>
+        </div>
       </div>
-      <div class="admin-stat-card">
-        <div style="font-size: 0.82rem; color: #9FD09F; text-transform: uppercase; letter-spacing: 0.05em;">100% Free Pro Bono</div>
-        <div class="admin-stat-num" style="color: #9FD09F;" id="statFree">0</div>
+
+      <!-- Toolbar -->
+      <div class="admin-toolbar">
+        <input type="text" id="leadSearch" class="admin-search-input" placeholder="🔍 Search by name, phone, email, city..." oninput="filterLeads()">
+        <div class="admin-actions">
+          <button class="btn-admin primary" onclick="exportToCSV()">📥 Export to CSV / Excel</button>
+          <button class="btn-admin" onclick="addSampleLead()">+ Add Sample Lead</button>
+          <button class="btn-admin" onclick="clearLeads()" style="color: #E8A88C;">Clear All</button>
+        </div>
       </div>
-      <div class="admin-stat-card">
-        <div style="font-size: 0.82rem; color: #F3E5AB; text-transform: uppercase; letter-spacing: 0.05em;">Paid / VIP Programs</div>
-        <div class="admin-stat-num" style="color: #F3E5AB;" id="statPaid">0</div>
-      </div>
-      <div class="admin-stat-card">
-        <div style="font-size: 0.82rem; color: #25D366; text-transform: uppercase; letter-spacing: 0.05em;">WhatsApp Community</div>
-        <div class="admin-stat-num" style="color: #25D366;" id="statWa">100%</div>
+
+      <!-- Leads Table -->
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>ID</th><th>Date & Time</th><th>Full Name</th><th>WhatsApp / Phone</th>
+              <th>Email Address</th><th>City</th><th>Course / Event</th><th>Type</th>
+              <th>Life Challenge / Note</th><th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="leadsTableBody"><!-- Injected via JavaScript --></tbody>
+        </table>
       </div>
     </div>
 
-    <!-- Toolbar: Search & Action Buttons -->
-    <div class="admin-toolbar">
-      <input type="text" id="leadSearch" class="admin-search-input" placeholder="🔍 Search by name, phone, email, city..." oninput="filterLeads()">
-      
-      <div class="admin-actions">
-        <button class="btn-admin primary" onclick="exportToCSV()">📥 Export to CSV / Excel</button>
-        <button class="btn-admin" onclick="addSampleLead()">+ Add Sample Lead</button>
-        <button class="btn-admin" onclick="clearLeads()" style="color: #E8A88C;">Clear All</button>
+    <!-- ═══════════════════════════════════════════════════════════════
+         TAB 2: PROGRAMS (CMS)
+         ═══════════════════════════════════════════════════════════════ -->
+    <div class="admin-tab-panel" id="panel-programs">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+        <div>
+          <h2 style="color: #F5EDE3; font-family: var(--font-heading, 'Playfair Display', serif); margin: 0;">Coaching Programs Manager</h2>
+          <p style="color: #D4C4AD; font-size: 0.85rem; margin: 0.25rem 0 0;">Add, edit or reorder paid programs. Control prices, bullets, statics, buttons, and post-registration redirect links.</p>
+        </div>
+        <button class="cms-btn cms-btn-edit" onclick="openCMSEditor('programs', null)" style="padding: 0.55rem 1rem; font-size: 0.85rem;">+ Add New Program</button>
       </div>
+      <div class="cms-grid" id="cmsProgramsGrid"><!-- Rendered by JS --></div>
     </div>
 
-    <!-- Leads Table -->
-    <div class="admin-table-wrap">
-      <table class="admin-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Date & Time</th>
-            <th>Full Name</th>
-            <th>WhatsApp / Phone</th>
-            <th>Email Address</th>
-            <th>City</th>
-            <th>Course / Event</th>
-            <th>Type</th>
-            <th>Life Challenge / Note</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody id="leadsTableBody">
-          <!-- Injected via JavaScript -->
-        </tbody>
-      </table>
+    <!-- ═══════════════════════════════════════════════════════════════
+         TAB 3: FREE EVENTS (CMS)
+         ═══════════════════════════════════════════════════════════════ -->
+    <div class="admin-tab-panel" id="panel-events">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+        <div>
+          <h2 style="color: #F5EDE3; font-family: var(--font-heading, 'Playfair Display', serif); margin: 0;">Free Events & Masterclasses Manager</h2>
+          <p style="color: #D4C4AD; font-size: 0.85rem; margin: 0.25rem 0 0;">Edit Active Initiative and featured masterclasses. Changes appear live on the Free Events page.</p>
+        </div>
+        <button class="cms-btn cms-btn-edit" onclick="openCMSEditor('events', null)" style="padding: 0.55rem 1rem; font-size: 0.85rem;">+ Add New Event</button>
+      </div>
+      <div class="cms-grid" id="cmsEventsGrid"><!-- Rendered by JS --></div>
     </div>
 
+    <!-- ═══════════════════════════════════════════════════════════════
+         TAB 4: E-BOOKS (CMS)
+         ═══════════════════════════════════════════════════════════════ -->
+    <div class="admin-tab-panel" id="panel-ebooks">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+        <div>
+          <h2 style="color: #F5EDE3; font-family: var(--font-heading, 'Playfair Display', serif); margin: 0;">E-Books & Guides Manager</h2>
+          <p style="color: #D4C4AD; font-size: 0.85rem; margin: 0.25rem 0 0;">Manage downloadable e-books, bullet points, cover images, and download button links.</p>
+        </div>
+        <button class="cms-btn cms-btn-edit" onclick="openCMSEditor('ebooks', null)" style="padding: 0.55rem 1rem; font-size: 0.85rem;">+ Add New E-Book</button>
+      </div>
+      <div class="cms-grid" id="cmsEbooksGrid"><!-- Rendered by JS --></div>
+    </div>
+
+  </div><!-- /adminDashboard -->
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       CMS EDIT MODAL (Shared for all content types)
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="cms-modal-overlay" id="cmsModalOverlay">
+    <div class="cms-modal" id="cmsModal">
+      <h2 id="cmsModalTitle">Edit Item</h2>
+      <form id="cmsEditForm" onsubmit="event.preventDefault(); saveCMSItem();">
+        <div id="cmsFormFields"><!-- Dynamically injected --></div>
+        <div class="cms-modal-actions">
+          <button type="button" class="cms-btn-cancel" onclick="closeCMSEditor()">Cancel</button>
+          <button type="submit" class="cms-btn-save">💾 Save Changes</button>
+        </div>
+      </form>
+    </div>
   </div>
 
+  <script src="cms-engine.js"></script>
   <script>
+    /* ================================================================
+       AUTH & LEADS (Original CRM preserved)
+       ================================================================ */
     const DEFAULT_PIN = '2026';
 
     function verifyPin() {
@@ -175,6 +363,7 @@ src="https://www.facebook.com/tr?id=1365924428812836&ev=PageView&noscript=1"
         document.getElementById('authGate').style.display = 'none';
         document.getElementById('adminDashboard').style.display = 'block';
         loadLeadsTable();
+        renderCMSGrids();
       } else {
         document.getElementById('authError').style.display = 'block';
       }
@@ -185,103 +374,71 @@ src="https://www.facebook.com/tr?id=1365924428812836&ev=PageView&noscript=1"
       window.location.reload();
     }
 
-    // Auto-login if previously verified in this session
     if (sessionStorage.getItem('rw_admin_authenticated') === 'true') {
       document.getElementById('authGate').style.display = 'none';
       document.getElementById('adminDashboard').style.display = 'block';
-      window.addEventListener('DOMContentLoaded', loadLeadsTable);
+      window.addEventListener('DOMContentLoaded', function() {
+        loadLeadsTable();
+        renderCMSGrids();
+      });
     }
 
     function getLeads() {
-      try {
-        return JSON.parse(localStorage.getItem('routewithin_webinar_registrations') || '[]');
-      } catch (e) {
-        return [];
-      }
+      try { return JSON.parse(localStorage.getItem('routewithin_webinar_registrations') || '[]'); }
+      catch (e) { return []; }
     }
 
     function loadLeadsTable(leadsToRender) {
       const leads = leadsToRender || getLeads();
       const tbody = document.getElementById('leadsTableBody');
       tbody.innerHTML = '';
-
-      // Update KPIs
       const allLeads = getLeads();
       document.getElementById('statTotal').textContent = allLeads.length;
       document.getElementById('statFree').textContent = allLeads.filter(l => (l.type || '').toLowerCase().includes('free')).length;
       document.getElementById('statPaid').textContent = allLeads.filter(l => (l.type || '').toLowerCase().includes('paid')).length;
 
       if (leads.length === 0) {
-        tbody.innerHTML = `
-          <tr>
-            <td colspan="10" style="text-align: center; padding: 3rem; color: #8C7A66;">
-              No registrations recorded yet. Click <strong>"+ Add Sample Lead"</strong> above or submit the <a href="webinar-register.html" target="_blank" style="color: #D4AF37;">registration form</a> to test!
-            </td>
-          </tr>
-        `;
+        tbody.innerHTML = '<tr><td colspan="10" style="text-align: center; padding: 3rem; color: #8C7A66;">No registrations recorded yet. Click <strong>"+ Add Sample Lead"</strong> above or submit the <a href="webinar-register.html" target="_blank" style="color: #D4AF37;">registration form</a> to test!</td></tr>';
         return;
       }
-
-      leads.forEach((lead) => {
-        const cleanPhone = (lead.phone || '').replace(/[^0-9]/g, '');
-        const dateStr = lead.registeredAt ? new Date(lead.registeredAt).toLocaleString() : 'Just now';
-        const isFree = (lead.type || '').toLowerCase().includes('free');
-
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td style="font-family: monospace; font-size: 0.8rem; color: #D4AF37;">${lead.id || 'REG-00'}</td>
-          <td style="font-size: 0.8rem; color: #D4C4AD;">${dateStr}</td>
-          <td><strong>${escapeHtml(lead.name || 'Anonymous')}</strong></td>
-          <td>
-            <a href="https://wa.me/${cleanPhone}" target="_blank" class="btn-wa-link" title="Open Chat on WhatsApp">
-              💬 ${escapeHtml(lead.phone || 'N/A')}
-            </a>
-          </td>
-          <td><a href="mailto:${escapeHtml(lead.email || '')}" style="color: #F5EDE3; text-decoration: underline;">${escapeHtml(lead.email || 'N/A')}</a></td>
-          <td>${escapeHtml(lead.city || 'N/A')}</td>
-          <td><span style="font-size: 0.84rem;">${escapeHtml(lead.course || 'Beyond the Vrat: A Karwa Chauth Masterclass')}</span></td>
-          <td>
-            <span class="${isFree ? 'badge-free' : 'badge-paid'}">
-              ${isFree ? 'Free Pro Bono' : 'Paid Program'}
-            </span>
-          </td>
-          <td style="font-size: 0.8rem; max-width: 200px; color: #D4C4AD;">${escapeHtml(lead.challenge || 'Karwa Chauth')}</td>
-          <td>
-            <button onclick="deleteLead('${lead.id}')" style="background:none; border:none; color: #E8A88C; cursor:pointer;" title="Delete Lead">🗑️</button>
-          </td>
-        `;
+      leads.forEach(function(lead) {
+        var cleanPhone = (lead.phone || '').replace(/[^0-9]/g, '');
+        var dateStr = lead.registeredAt ? new Date(lead.registeredAt).toLocaleString() : 'Just now';
+        var isFree = (lead.type || '').toLowerCase().includes('free');
+        var tr = document.createElement('tr');
+        tr.innerHTML = '<td style="font-family: monospace; font-size: 0.8rem; color: #D4AF37;">' + escapeHtml(lead.id || 'REG-00') + '</td>'
+          + '<td style="font-size: 0.8rem; color: #D4C4AD;">' + dateStr + '</td>'
+          + '<td><strong>' + escapeHtml(lead.name || 'Anonymous') + '</strong></td>'
+          + '<td><a href="https://wa.me/' + cleanPhone + '" target="_blank" class="btn-wa-link" title="Open Chat on WhatsApp">💬 ' + escapeHtml(lead.phone || 'N/A') + '</a></td>'
+          + '<td><a href="mailto:' + escapeHtml(lead.email || '') + '" style="color: #F5EDE3; text-decoration: underline;">' + escapeHtml(lead.email || 'N/A') + '</a></td>'
+          + '<td>' + escapeHtml(lead.city || 'N/A') + '</td>'
+          + '<td><span style="font-size: 0.84rem;">' + escapeHtml(lead.course || 'General') + '</span></td>'
+          + '<td><span class="' + (isFree ? 'badge-free' : 'badge-paid') + '">' + (isFree ? 'Free Pro Bono' : 'Paid Program') + '</span></td>'
+          + '<td style="font-size: 0.8rem; max-width: 200px; color: #D4C4AD;">' + escapeHtml(lead.challenge || '') + '</td>'
+          + '<td><button onclick="deleteLead(\'' + lead.id + '\')" style="background:none; border:none; color: #E8A88C; cursor:pointer;" title="Delete Lead">🗑️</button></td>';
         tbody.appendChild(tr);
       });
     }
 
     function filterLeads() {
-      const q = document.getElementById('leadSearch').value.toLowerCase().trim();
-      const all = getLeads();
-      if (!q) {
-        loadLeadsTable(all);
-        return;
-      }
-      const filtered = all.filter(l => 
-        (l.name || '').toLowerCase().includes(q) ||
-        (l.phone || '').toLowerCase().includes(q) ||
-        (l.email || '').toLowerCase().includes(q) ||
-        (l.city || '').toLowerCase().includes(q) ||
-        (l.course || '').toLowerCase().includes(q)
-      );
-      loadLeadsTable(filtered);
+      var q = document.getElementById('leadSearch').value.toLowerCase().trim();
+      var all = getLeads();
+      if (!q) { loadLeadsTable(all); return; }
+      loadLeadsTable(all.filter(function(l) {
+        return (l.name||'').toLowerCase().includes(q) || (l.phone||'').toLowerCase().includes(q) || (l.email||'').toLowerCase().includes(q) || (l.city||'').toLowerCase().includes(q) || (l.course||'').toLowerCase().includes(q);
+      }));
     }
 
     function addSampleLead() {
-      const samples = [
+      var samples = [
         { name: 'Aarohi Sen', phone: '+91 98201 12345', email: 'aarohi.sen@example.com', city: 'Mumbai', challenge: 'Karwa Chauth', course: 'Beyond the Vrat: A Karwa Chauth Masterclass', type: 'Free Pro Bono' },
         { name: 'Sunita Mehra', phone: '+91 98112 54321', email: 'sunita.m@example.com', city: 'Delhi NCR', challenge: 'Karwa Chauth', course: 'Beyond the Vrat: A Karwa Chauth Masterclass', type: 'Free Pro Bono' },
         { name: 'Kavita Pillai', phone: '+91 94471 99887', email: 'kavita.p@example.com', city: 'Bangalore', challenge: 'Relationship at crossroads', course: 'Signature 1:1 Relationship Alignment', type: 'Paid Program' }
       ];
-      const random = samples[Math.floor(Math.random() * samples.length)];
-      if (typeof window.registerWebinarLead === 'function') {
-        window.registerWebinarLead(random);
-      } else {
-        const list = getLeads();
+      var random = samples[Math.floor(Math.random() * samples.length)];
+      if (typeof window.registerWebinarLead === 'function') { window.registerWebinarLead(random); }
+      else {
+        var list = getLeads();
         random.id = 'REG-' + Date.now().toString(36).toUpperCase();
         random.registeredAt = new Date().toISOString();
         list.unshift(random);
@@ -292,8 +449,7 @@ src="https://www.facebook.com/tr?id=1365924428812836&ev=PageView&noscript=1"
 
     function deleteLead(id) {
       if (!confirm('Are you sure you want to remove this lead record?')) return;
-      const list = getLeads().filter(l => l.id !== id);
-      localStorage.setItem('routewithin_webinar_registrations', JSON.stringify(list));
+      localStorage.setItem('routewithin_webinar_registrations', JSON.stringify(getLeads().filter(function(l) { return l.id !== id; })));
       loadLeadsTable();
     }
 
@@ -304,46 +460,452 @@ src="https://www.facebook.com/tr?id=1365924428812836&ev=PageView&noscript=1"
     }
 
     function exportToCSV() {
-      const leads = getLeads();
-      if (leads.length === 0) {
-        alert('No leads available to export.');
-        return;
-      }
-
-      let csv = 'ID,Date,Full Name,WhatsApp Number,Email,City,Course,Type,Challenge,Status\n';
-      leads.forEach(l => {
-        const row = [
-          `"${l.id || ''}"`,
-          `"${l.registeredAt ? new Date(l.registeredAt).toLocaleString() : ''}"`,
-          `"${(l.name || '').replace(/"/g, '""')}"`,
-          `"${l.phone || ''}"`,
-          `"${l.email || ''}"`,
-          `"${(l.city || '').replace(/"/g, '""')}"`,
-          `"${(l.course || '').replace(/"/g, '""')}"`,
-          `"${l.type || 'Free'}"`,
-          `"${(l.challenge || '').replace(/"/g, '""')}"`,
-          `"${l.status || 'Joined'}"`
-        ];
-        csv += row.join(',') + '\n';
+      var leads = getLeads();
+      if (leads.length === 0) { alert('No leads available to export.'); return; }
+      var csv = 'ID,Date,Full Name,WhatsApp Number,Email,City,Course,Type,Challenge,Status\n';
+      leads.forEach(function(l) {
+        csv += ['"'+(l.id||'')+'"', '"'+(l.registeredAt ? new Date(l.registeredAt).toLocaleString() : '')+'"', '"'+(l.name||'').replace(/"/g,'""')+'"', '"'+(l.phone||'')+'"', '"'+(l.email||'')+'"', '"'+(l.city||'').replace(/"/g,'""')+'"', '"'+(l.course||'').replace(/"/g,'""')+'"', '"'+(l.type||'Free')+'"', '"'+(l.challenge||'').replace(/"/g,'""')+'"', '"'+(l.status||'Joined')+'"'].join(',') + '\n';
       });
+      var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'RouteWithin_Registrations_' + new Date().toISOString().split('T')[0] + '.csv';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    }
 
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `RouteWithin_Webinar_Registrations_${new Date().toISOString().split('T')[0]}.csv`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+    function resetToDefaults() {
+      if (!confirm('Restore all Programs, Free Events, and E-Books to their original default content? Any custom edits will be reset.')) return;
+      localStorage.removeItem(window.ROUTEWITHIN_CMS.STORAGE_KEY);
+      window.ROUTEWITHIN_CMS.syncCatalog();
+      renderCMSGrids();
+      alert('Content restored to verified defaults.');
     }
 
     function escapeHtml(str) {
-      return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
+      return String(str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
+
+    /* ================================================================
+       TAB SWITCHING
+       ================================================================ */
+    function switchTab(tabName) {
+      document.querySelectorAll('.admin-tab').forEach(function(t) { t.classList.remove('active'); });
+      document.querySelectorAll('.admin-tab-panel').forEach(function(p) { p.classList.remove('active'); });
+      document.querySelector('.admin-tab[data-tab="' + tabName + '"]').classList.add('active');
+      document.getElementById('panel-' + tabName).classList.add('active');
+    }
+
+    /* ================================================================
+       CMS GRID RENDERING
+       ================================================================ */
+    function renderCMSGrids() {
+      renderCMSProgramsGrid();
+      renderCMSEventsGrid();
+      renderCMSEbooksGrid();
+    }
+
+    function renderCMSProgramsGrid() {
+      var data = window.ROUTEWITHIN_CMS.getData();
+      var grid = document.getElementById('cmsProgramsGrid');
+      var html = '';
+      data.programs.forEach(function(p, i) {
+        html += '<div class="cms-item-card' + (p.enabled ? '' : ' disabled') + '">'
+          + (p.image ? '<img src="' + escapeHtml(p.image) + '" alt="" class="cms-card-img" onerror="this.style.display=\'none\'">' : '')
+          + '<div class="cms-card-badge">' + escapeHtml(p.badge) + '</div>'
+          + '<div class="cms-card-title">' + escapeHtml(p.title) + '</div>'
+          + '<div class="cms-card-price">' + escapeHtml(p.priceDisplay) + (p.priceSuffix ? ' ' + escapeHtml(p.priceSuffix) : '') + '</div>'
+          + '<div class="cms-card-desc">' + escapeHtml(p.description) + '</div>'
+          + '<div style="font-size: 0.72rem; color: #8C7A66; margin-bottom: 0.5rem;">ID: ' + escapeHtml(p.catalogId || p.id) + ' • ' + (p.isPaid ? 'Paid' : 'Free') + ' • ' + (p.enabled ? '🟢 Active' : '🔴 Hidden') + '</div>'
+          + '<div class="cms-card-actions">'
+          + '<button class="cms-btn cms-btn-edit" onclick="openCMSEditor(\'programs\', ' + i + ')">✏️ Edit</button>'
+          + '<button class="cms-btn cms-btn-toggle" onclick="toggleCMSItem(\'programs\', ' + i + ')">' + (p.enabled ? '👁️ Hide' : '👁️ Show') + '</button>'
+          + '<button class="cms-btn cms-btn-delete" onclick="deleteCMSItem(\'programs\', ' + i + ')">🗑️ Delete</button>'
+          + '</div></div>';
+      });
+      html += '<button class="cms-btn-add" onclick="openCMSEditor(\'programs\', null)">+ Add New Program</button>';
+      grid.innerHTML = html;
+    }
+
+    function renderCMSEventsGrid() {
+      var data = window.ROUTEWITHIN_CMS.getData();
+      var grid = document.getElementById('cmsEventsGrid');
+      var html = '';
+      data.events.forEach(function(ev, i) {
+        html += '<div class="cms-item-card' + (ev.enabled ? '' : ' disabled') + '">'
+          + (ev.image ? '<img src="' + escapeHtml(ev.image) + '" alt="" class="cms-card-img" onerror="this.style.display=\'none\'">' : '')
+          + '<div class="cms-card-badge">' + escapeHtml(ev.badge) + (ev.badgeSecondary ? ' • ' + escapeHtml(ev.badgeSecondary) : '') + '</div>'
+          + '<div class="cms-card-title">' + escapeHtml(ev.title) + '</div>'
+          + '<div class="cms-card-price">' + escapeHtml(ev.priceDisplay || '100% Free') + '</div>'
+          + '<div class="cms-card-desc">' + escapeHtml(ev.description) + '</div>'
+          + '<div style="font-size: 0.72rem; color: #8C7A66; margin-bottom: 0.5rem;">ID: ' + escapeHtml(ev.catalogId || ev.id) + ' • ' + (ev.enabled ? '🟢 Active' : '🔴 Hidden') + '</div>'
+          + '<div class="cms-card-actions">'
+          + '<button class="cms-btn cms-btn-edit" onclick="openCMSEditor(\'events\', ' + i + ')">✏️ Edit</button>'
+          + '<button class="cms-btn cms-btn-toggle" onclick="toggleCMSItem(\'events\', ' + i + ')">' + (ev.enabled ? '👁️ Hide' : '👁️ Show') + '</button>'
+          + '<button class="cms-btn cms-btn-delete" onclick="deleteCMSItem(\'events\', ' + i + ')">🗑️ Delete</button>'
+          + '</div></div>';
+      });
+      html += '<button class="cms-btn-add" onclick="openCMSEditor(\'events\', null)">+ Add New Event</button>';
+      grid.innerHTML = html;
+    }
+
+    function renderCMSEbooksGrid() {
+      var data = window.ROUTEWITHIN_CMS.getData();
+      var grid = document.getElementById('cmsEbooksGrid');
+      var html = '';
+      data.ebooks.forEach(function(eb, i) {
+        html += '<div class="cms-item-card' + (eb.enabled ? '' : ' disabled') + '">'
+          + (eb.image ? '<img src="' + escapeHtml(eb.image) + '" alt="" class="cms-card-img" onerror="this.style.display=\'none\'">' : '')
+          + '<div class="cms-card-badge">' + escapeHtml(eb.badge || 'E-BOOK') + '</div>'
+          + '<div class="cms-card-title">' + escapeHtml(eb.title) + '</div>'
+          + '<div class="cms-card-desc">' + escapeHtml(eb.description) + '</div>'
+          + '<div style="font-size: 0.72rem; color: #8C7A66; margin-bottom: 0.5rem;">ID: ' + escapeHtml(eb.id) + ' • ' + (eb.enabled ? '🟢 Active' : '🔴 Hidden') + '</div>'
+          + '<div class="cms-card-actions">'
+          + '<button class="cms-btn cms-btn-edit" onclick="openCMSEditor(\'ebooks\', ' + i + ')">✏️ Edit</button>'
+          + '<button class="cms-btn cms-btn-toggle" onclick="toggleCMSItem(\'ebooks\', ' + i + ')">' + (eb.enabled ? '👁️ Hide' : '👁️ Show') + '</button>'
+          + '<button class="cms-btn cms-btn-delete" onclick="deleteCMSItem(\'ebooks\', ' + i + ')">🗑️ Delete</button>'
+          + '</div></div>';
+      });
+      html += '<button class="cms-btn-add" onclick="openCMSEditor(\'ebooks\', null)">+ Add New E-Book</button>';
+      grid.innerHTML = html;
+    }
+
+    /* ================================================================
+       CMS TOGGLE / DELETE
+       ================================================================ */
+    function toggleCMSItem(type, index) {
+      var data = window.ROUTEWITHIN_CMS.getData();
+      data[type][index].enabled = !data[type][index].enabled;
+      window.ROUTEWITHIN_CMS.saveData(data);
+      renderCMSGrids();
+    }
+
+    function deleteCMSItem(type, index) {
+      var data = window.ROUTEWITHIN_CMS.getData();
+      var item = data[type][index];
+      if (!confirm('Delete "' + (item.title || 'this item') + '"? This will remove it from the website.')) return;
+      data[type].splice(index, 1);
+      window.ROUTEWITHIN_CMS.saveData(data);
+      renderCMSGrids();
+    }
+
+    /* ================================================================
+       CMS EDITOR MODAL
+       ================================================================ */
+    var currentEditType = null;
+    var currentEditIndex = null;
+
+    function openCMSEditor(type, index) {
+      currentEditType = type;
+      currentEditIndex = index;
+
+      var data = window.ROUTEWITHIN_CMS.getData();
+      var item = index !== null ? JSON.parse(JSON.stringify(data[type][index])) : null;
+      var isNew = item === null;
+
+      var title = isNew ? 'Add New ' : 'Edit ';
+      if (type === 'programs') title += 'Coaching Program';
+      else if (type === 'events') title += 'Free Event / Masterclass';
+      else title += 'E-Book / Guide';
+      document.getElementById('cmsModalTitle').textContent = title;
+
+      var html = '';
+      if (type === 'programs') {
+        html = buildProgramForm(item || getBlankProgram());
+      } else if (type === 'events') {
+        html = buildEventForm(item || getBlankEvent());
+      } else {
+        html = buildEbookForm(item || getBlankEbook());
+      }
+
+      document.getElementById('cmsFormFields').innerHTML = html;
+      document.getElementById('cmsModalOverlay').classList.add('visible');
+      setupImagePreviews();
+    }
+
+    function closeCMSEditor() {
+      document.getElementById('cmsModalOverlay').classList.remove('visible');
+      currentEditType = null;
+      currentEditIndex = null;
+    }
+
+    function saveCMSItem() {
+      var data = window.ROUTEWITHIN_CMS.getData();
+      var item;
+
+      if (currentEditType === 'programs') {
+        item = readProgramForm();
+      } else if (currentEditType === 'events') {
+        item = readEventForm();
+      } else {
+        item = readEbookForm();
+      }
+
+      if (!item.title) { alert('Title is required.'); return; }
+
+      if (currentEditIndex !== null) {
+        data[currentEditType][currentEditIndex] = item;
+      } else {
+        data[currentEditType].push(item);
+      }
+
+      window.ROUTEWITHIN_CMS.saveData(data);
+      renderCMSGrids();
+      closeCMSEditor();
+    }
+
+    /* ================================================================
+       FORM BUILDERS
+       ================================================================ */
+
+    function getBlankProgram() {
+      var id = 'prog_' + Date.now().toString(36);
+      return { id: id, title: '', badge: '', description: '', duration: '', price: 0, priceDisplay: '', priceSuffix: '', isPaid: true, image: 'assets/couch_woman.jpg', imageAlt: '', bullets: ['', '', '', ''], buttonPrimaryText: 'Enroll Now', buttonPrimaryAction: 'register:' + id, buttonSecondaryText: 'Inquire / Register →', buttonSecondaryAction: 'register:' + id, catalogId: id, redirectAfterRegister: 'thank-you.html', enabled: true };
+    }
+    function getBlankEvent() {
+      var id = 'ev_' + Date.now().toString(36);
+      return { id: id, title: '', badge: 'Active Initiative', badgeSecondary: 'Wednesday', description: '', subtitle: '', eventDate: 'Every Wednesday', eventTime: '5:30 PM IST', eventFormat: 'Live Zoom (Interactive)', eventAdmission: '100% Free', image: 'assets/golden_banner.jpg', imageAlt: '', buttonPrimaryText: 'Register Free (Zoom) →', buttonPrimaryAction: 'register:' + id, buttonSecondaryText: 'Free Assessment →', buttonSecondaryAction: 'https://docs.google.com/forms/d/e/1FAIpQLScrNnLXRHfBjrXH3cYRRZdRRx5i7UOSnIl0DyTIbgQJ7RzJHw/viewform?usp=sharing&ouid=100820665491908733403', catalogId: id, isPaid: false, price: 0, priceDisplay: '100% Free (Zoom)', redirectAfterRegister: 'thank-you.html', enabled: true };
+    }
+    function getBlankEbook() {
+      var id = 'ebook_' + Date.now().toString(36);
+      return { id: id, title: '', description: '', image: 'assets/book_cover.jpg', imageAlt: '', badge: '100% Free Instant Download (PDF)', bullets: ['', '', ''], buttonPrimaryText: 'Download Free E-Book (PDF) →', buttonPrimaryAction: 'https://chat.whatsapp.com/Fc81XFO5SPgEh1IOyou7V5?s=cl&p=a&mlu=4&ilr=4', buttonSecondaryText: 'Attend Masterclass →', buttonSecondaryAction: 'register:active-initiative', redirectAfterRegister: 'thank-you.html', enabled: true };
+    }
+
+    function buildProgramForm(p) {
+      var bulletsHtml = '<div class="cms-bullets-list" id="cmsBulletsList">';
+      (p.bullets || []).forEach(function(b, i) {
+        bulletsHtml += '<input type="text" name="bullet_' + i + '" value="' + escapeAttr(b) + '" placeholder="Key outcome / curriculum benefit #' + (i+1) + '">';
+      });
+      bulletsHtml += '</div><button type="button" class="cms-btn-add-bullet" onclick="addBulletField()">+ Add Benefit Point</button>';
+
+      return ''
+        + field('Program Title *', 'text', 'cms_title', p.title, 'e.g. AntarPrakash')
+        + '<div class="cms-field-row">'
+        + field('Top Badge / Tag', 'text', 'cms_badge', p.badge, 'e.g. 6-Weeks Guided Cohort')
+        + field('Duration Label', 'text', 'cms_duration', p.duration, 'e.g. 6-Weeks')
+        + '</div>'
+        + fieldTextarea('Description (Short summary displayed on card)', 'cms_description', p.description, 'Describe the program...')
+        + '<div class="cms-field-row">'
+        + field('Price (₹ Number)', 'number', 'cms_price', p.price, '11999')
+        + field('Price Display Text', 'text', 'cms_priceDisplay', p.priceDisplay, '₹ 11,999')
+        + '</div>'
+        + '<div class="cms-field-row">'
+        + field('Price Suffix (optional)', 'text', 'cms_priceSuffix', p.priceSuffix, 'e.g. / month or (Live Workshop)')
+        + fieldSelect('Payment Type', 'cms_isPaid', p.isPaid ? 'paid' : 'free', [['paid','Paid Program (Razorpay Gateway)'],['free','100% Free Pro Bono']])
+        + '</div>'
+        + field('Static / Image URL or Path', 'text', 'cms_image', p.image, 'assets/couch_woman.jpg or paste URL')
+        + '<div class="cms-field-hint">Static Graphic spacer for this card. Paste an image path (assets/...) or image URL.</div>'
+        + '<img id="cmsImgPreview" class="cms-img-preview" src="' + escapeAttr(p.image) + '" onerror="this.style.display=\'none\'" style="' + (p.image ? '' : 'display:none') + '">'
+        + '<div class="cms-field" style="margin-top: 1rem;"><label>Feature / Curriculum Bullet Points</label>' + bulletsHtml + '</div>'
+        + '<div class="cms-field-row">'
+        + field('Primary Button Text', 'text', 'cms_btnPrimary', p.buttonPrimaryText, 'Enroll in AntarPrakash — ₹11,999')
+        + field('Primary Button Action / Link', 'text', 'cms_btnPrimaryAction', p.buttonPrimaryAction || ('register:' + (p.catalogId || p.id)), 'register:antarprakash OR url')
+        + '</div>'
+        + '<div class="cms-field-hint">Action tip: Use <code>register:SLUG</code> to open the instant registration form & Razorpay modal, or paste a link/anchor.</div>'
+        + '<div class="cms-field-row" style="margin-top: 0.75rem;">'
+        + field('Secondary Button Text', 'text', 'cms_btnSecondary', p.buttonSecondaryText, 'Inquire / Register →')
+        + field('Secondary Button Action / Link', 'text', 'cms_btnSecondaryAction', p.buttonSecondaryAction || ('register:' + (p.catalogId || p.id)), 'register:antarprakash OR url')
+        + '</div>'
+        + '<div class="cms-field-row" style="margin-top: 0.75rem;">'
+        + field('Catalog ID (Internal Slug)', 'text', 'cms_catalogId', p.catalogId || p.id, 'antarprakash')
+        + field('Post-Registration Redirect URL', 'text', 'cms_redirect', p.redirectAfterRegister || 'thank-you.html', 'thank-you.html or custom page')
+        + '</div>'
+        + '<div class="cms-field-hint">Where the registrant gets sent immediately after successfully submitting / paying!</div>'
+        + '<div class="cms-field" style="margin-top: 1rem;"><div class="cms-toggle-switch"><input type="checkbox" id="cms_enabled" ' + (p.enabled ? 'checked' : '') + '><label for="cms_enabled" style="color: #D4C4AD; font-size: 0.85rem;">' + (p.enabled ? 'Active (Live on Website)' : 'Hidden (Not Visible to Public)') + '</label></div></div>'
+        + '<input type="hidden" id="cms_itemId" value="' + escapeAttr(p.id) + '">';
+    }
+
+    function buildEventForm(ev) {
+      return ''
+        + field('Event Title *', 'text', 'cms_title', ev.title, 'e.g. Weekly Interactive Masterclasses')
+        + '<div class="cms-field-row">'
+        + field('Primary Badge', 'text', 'cms_badge', ev.badge, 'e.g. Active Initiative')
+        + field('Secondary Badge (e.g. Day)', 'text', 'cms_badgeSecondary', ev.badgeSecondary, 'e.g. Wednesday')
+        + '</div>'
+        + fieldTextarea('Description', 'cms_description', ev.description, 'Describe the event...')
+        + field('Subtitle / Spotlight Headline', 'text', 'cms_subtitle', ev.subtitle, 'Rebuild Emotional Closeness & Feel Truly Heard')
+        + '<div class="cms-field-row">'
+        + field('Event Date', 'text', 'cms_eventDate', ev.eventDate, 'e.g. Monday, Nov 2, 2026 or Every Wednesday')
+        + field('Event Time', 'text', 'cms_eventTime', ev.eventTime, 'e.g. 5:30 PM IST')
+        + '</div>'
+        + '<div class="cms-field-row">'
+        + field('Format', 'text', 'cms_eventFormat', ev.eventFormat, 'Live Zoom (Interactive)')
+        + field('Admission / Price Text', 'text', 'cms_eventAdmission', ev.eventAdmission || ev.priceDisplay, '100% Free')
+        + '</div>'
+        + field('Static / Image URL or Path', 'text', 'cms_image', ev.image, 'assets/golden_banner.jpg or paste URL')
+        + '<img id="cmsImgPreview" class="cms-img-preview" src="' + escapeAttr(ev.image) + '" onerror="this.style.display=\'none\'" style="' + (ev.image ? '' : 'display:none') + '">'
+        + '<div class="cms-field-row" style="margin-top: 0.85rem;">'
+        + field('Primary Button Text', 'text', 'cms_btnPrimary', ev.buttonPrimaryText, 'Register Free (Zoom) →')
+        + field('Primary Button Action', 'text', 'cms_btnPrimaryAction', ev.buttonPrimaryAction || ('register:' + (ev.catalogId || ev.id)), 'register:active-initiative')
+        + '</div>'
+        + '<div class="cms-field-row">'
+        + field('Secondary Button Text', 'text', 'cms_btnSecondary', ev.buttonSecondaryText, 'Free Assessment →')
+        + field('Secondary Button Action / Link', 'text', 'cms_btnSecondaryAction', ev.buttonSecondaryAction, 'https://... or #pillars')
+        + '</div>'
+        + '<div class="cms-field-row">'
+        + field('Catalog ID', 'text', 'cms_catalogId', ev.catalogId || ev.id, 'active-initiative')
+        + field('Post-Registration Redirect URL', 'text', 'cms_redirect', ev.redirectAfterRegister || 'thank-you.html', 'thank-you.html')
+        + '</div>'
+        + '<div class="cms-field" style="margin-top: 1rem;"><div class="cms-toggle-switch"><input type="checkbox" id="cms_enabled" ' + (ev.enabled ? 'checked' : '') + '><label for="cms_enabled" style="color: #D4C4AD; font-size: 0.85rem;">' + (ev.enabled ? 'Active (Live on Website)' : 'Hidden (Not Visible to Public)') + '</label></div></div>'
+        + '<input type="hidden" id="cms_itemId" value="' + escapeAttr(ev.id) + '">';
+    }
+
+    function buildEbookForm(eb) {
+      var bulletsHtml = '<div class="cms-bullets-list" id="cmsBulletsList">';
+      (eb.bullets || []).forEach(function(b, i) {
+        bulletsHtml += '<input type="text" name="bullet_' + i + '" value="' + escapeAttr(b) + '" placeholder="Key chapter / takeaway #' + (i+1) + '">';
+      });
+      bulletsHtml += '</div><button type="button" class="cms-btn-add-bullet" onclick="addBulletField()">+ Add Takeaway Point</button>';
+
+      return ''
+        + field('E-Book Title *', 'text', 'cms_title', eb.title, 'e.g. Route Within: From Conflict to Clarity')
+        + field('Badge / Tag', 'text', 'cms_badge', eb.badge, 'e.g. 100% Free Instant Download (PDF)')
+        + fieldTextarea('Description', 'cms_description', eb.description, 'Describe the e-book...')
+        + field('Cover Image URL / Path', 'text', 'cms_image', eb.image, 'assets/book_cover.jpg')
+        + '<img id="cmsImgPreview" class="cms-img-preview" src="' + escapeAttr(eb.image) + '" onerror="this.style.display=\'none\'" style="' + (eb.image ? '' : 'display:none') + '">'
+        + '<div class="cms-field" style="margin-top: 1rem;"><label>Key Takeaways / Highlights</label>' + bulletsHtml + '</div>'
+        + '<div class="cms-field-row">'
+        + field('Primary Button Text', 'text', 'cms_btnPrimary', eb.buttonPrimaryText, 'Download Free E-Book (PDF) →')
+        + field('Primary Button Link / Action', 'text', 'cms_btnPrimaryAction', eb.buttonPrimaryAction || eb.buttonPrimaryLink, 'URL to download or WhatsApp group')
+        + '</div>'
+        + '<div class="cms-field-row">'
+        + field('Secondary Button Text', 'text', 'cms_btnSecondary', eb.buttonSecondaryText, 'Attend Masterclass →')
+        + field('Secondary Button Link / Action', 'text', 'cms_btnSecondaryAction', eb.buttonSecondaryAction || eb.buttonSecondaryLink, 'register:active-initiative or URL')
+        + '</div>'
+        + '<div class="cms-field"><div class="cms-toggle-switch"><input type="checkbox" id="cms_enabled" ' + (eb.enabled ? 'checked' : '') + '><label for="cms_enabled" style="color: #D4C4AD; font-size: 0.85rem;">' + (eb.enabled ? 'Active (Live on Website)' : 'Hidden (Not Visible to Public)') + '</label></div></div>'
+        + '<input type="hidden" id="cms_itemId" value="' + escapeAttr(eb.id) + '">';
+    }
+
+    /* ================================================================
+       FORM READERS
+       ================================================================ */
+
+    function readProgramForm() {
+      var bullets = [];
+      document.querySelectorAll('#cmsBulletsList input').forEach(function(inp) {
+        if (inp.value.trim()) bullets.push(inp.value.trim());
+      });
+      return {
+        id: gv('cms_itemId'),
+        title: gv('cms_title'),
+        badge: gv('cms_badge'),
+        description: gv('cms_description'),
+        duration: gv('cms_duration'),
+        price: parseInt(gv('cms_price')) || 0,
+        priceDisplay: gv('cms_priceDisplay'),
+        priceSuffix: gv('cms_priceSuffix'),
+        isPaid: gv('cms_isPaid') === 'paid',
+        image: gv('cms_image'),
+        imageAlt: gv('cms_title') + ' — ' + gv('cms_priceDisplay'),
+        bullets: bullets,
+        buttonPrimaryText: gv('cms_btnPrimary'),
+        buttonPrimaryAction: gv('cms_btnPrimaryAction'),
+        buttonSecondaryText: gv('cms_btnSecondary'),
+        buttonSecondaryAction: gv('cms_btnSecondaryAction'),
+        catalogId: gv('cms_catalogId') || gv('cms_itemId'),
+        redirectAfterRegister: gv('cms_redirect') || 'thank-you.html',
+        enabled: document.getElementById('cms_enabled').checked
+      };
+    }
+
+    function readEventForm() {
+      return {
+        id: gv('cms_itemId'),
+        title: gv('cms_title'),
+        badge: gv('cms_badge'),
+        badgeSecondary: gv('cms_badgeSecondary'),
+        description: gv('cms_description'),
+        subtitle: gv('cms_subtitle'),
+        eventDate: gv('cms_eventDate'),
+        eventTime: gv('cms_eventTime'),
+        eventFormat: gv('cms_eventFormat'),
+        eventAdmission: gv('cms_eventAdmission'),
+        image: gv('cms_image'),
+        imageAlt: gv('cms_title'),
+        buttonPrimaryText: gv('cms_btnPrimary'),
+        buttonPrimaryAction: gv('cms_btnPrimaryAction'),
+        buttonSecondaryText: gv('cms_btnSecondary'),
+        buttonSecondaryAction: gv('cms_btnSecondaryAction'),
+        catalogId: gv('cms_catalogId') || gv('cms_itemId'),
+        isPaid: false,
+        price: 0,
+        priceDisplay: gv('cms_eventAdmission') || '100% Free (Zoom)',
+        redirectAfterRegister: gv('cms_redirect') || 'thank-you.html',
+        enabled: document.getElementById('cms_enabled').checked
+      };
+    }
+
+    function readEbookForm() {
+      var bullets = [];
+      document.querySelectorAll('#cmsBulletsList input').forEach(function(inp) {
+        if (inp.value.trim()) bullets.push(inp.value.trim());
+      });
+      return {
+        id: gv('cms_itemId'),
+        title: gv('cms_title'),
+        badge: gv('cms_badge'),
+        description: gv('cms_description'),
+        image: gv('cms_image'),
+        imageAlt: gv('cms_title'),
+        bullets: bullets,
+        buttonPrimaryText: gv('cms_btnPrimary'),
+        buttonPrimaryAction: gv('cms_btnPrimaryAction'),
+        buttonSecondaryText: gv('cms_btnSecondary'),
+        buttonSecondaryAction: gv('cms_btnSecondaryAction'),
+        enabled: document.getElementById('cms_enabled').checked
+      };
+    }
+
+    /* ================================================================
+       FORM UTILITIES
+       ================================================================ */
+
+    function gv(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; }
+    function escapeAttr(s) { return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+    function field(label, type, id, value, placeholder) {
+      return '<div class="cms-field"><label for="' + id + '">' + label + '</label>'
+        + '<input type="' + type + '" id="' + id + '" value="' + escapeAttr(value) + '" placeholder="' + escapeAttr(placeholder) + '"></div>';
+    }
+    function fieldTextarea(label, id, value, placeholder) {
+      return '<div class="cms-field"><label for="' + id + '">' + label + '</label>'
+        + '<textarea id="' + id + '" placeholder="' + escapeAttr(placeholder) + '">' + escapeHtml(value) + '</textarea></div>';
+    }
+    function fieldSelect(label, id, value, options) {
+      var html = '<div class="cms-field"><label for="' + id + '">' + label + '</label><select id="' + id + '">';
+      options.forEach(function(o) { html += '<option value="' + o[0] + '"' + (value === o[0] ? ' selected' : '') + '>' + o[1] + '</option>'; });
+      html += '</select></div>';
+      return html;
+    }
+
+    function addBulletField() {
+      var list = document.getElementById('cmsBulletsList');
+      var count = list.querySelectorAll('input').length;
+      var inp = document.createElement('input');
+      inp.type = 'text';
+      inp.name = 'bullet_' + count;
+      inp.placeholder = 'Point #' + (count + 1);
+      list.appendChild(inp);
+    }
+
+    function setupImagePreviews() {
+      var imgInput = document.getElementById('cms_image');
+      var preview = document.getElementById('cmsImgPreview');
+      if (imgInput && preview) {
+        imgInput.addEventListener('input', function() {
+          if (this.value.trim()) {
+            preview.src = this.value.trim();
+            preview.style.display = '';
+          } else {
+            preview.style.display = 'none';
+          }
+        });
+      }
+    }
+
+    document.getElementById('cmsModalOverlay').addEventListener('click', function(e) {
+      if (e.target === this) closeCMSEditor();
+    });
+
   </script>
 </body>
 </html>

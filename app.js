@@ -1409,7 +1409,8 @@ function handleRegistrationSubmit(e) {
 
     Promise.resolve(syncPromise).finally(function() {
       setTimeout(function() {
-        window.location.href = 'thank-you.html';
+        const dest = (currentRegProgram && currentRegProgram.redirectAfterRegister) ? currentRegProgram.redirectAfterRegister : 'thank-you.html';
+        window.location.href = dest;
       }, 400);
     });
     return;
@@ -1552,7 +1553,9 @@ function finalizePaidRegistration(paymentId, paymentMethod) {
   // Smooth redirect to thank you page with verified payment details
   Promise.resolve(syncPromise).finally(function() {
     setTimeout(function() {
-      window.location.href = 'thank-you.html?status=paid&program=' + 
+      const baseDest = (program && program.redirectAfterRegister) ? program.redirectAfterRegister : 'thank-you.html';
+      const sep = baseDest.indexOf('?') >= 0 ? '&' : '?';
+      window.location.href = baseDest + sep + 'status=paid&program=' + 
         encodeURIComponent(program.title) + 
         '&payment_id=' + encodeURIComponent(finalizedLead.paymentId);
     }, 450);

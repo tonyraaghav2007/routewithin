@@ -18,7 +18,7 @@
   <link rel="icon" type="image/png" href="assets/favicon.png">
 
   <!-- Google Fonts & Stylesheet -->
-  <link rel="stylesheet" href="styles.css?v=20261110d">
+  <link rel="stylesheet" href="styles.css?v=20261110e">
   <script>
     (function() {
       const saved = localStorage.getItem('routewithin_theme');
@@ -172,7 +172,7 @@
 
     <!-- 2. WEEKLY INTERACTIVE MASTERCLASSES (ACTIVE INITIATIVE) -->
     <section id="weekly-masterclasses" style="padding: 1rem 0 3.5rem; background: var(--bg-surface); border-bottom: 1px solid var(--border-subtle);">
-      <div class="container" style="max-width: 61.25rem;">
+      <div class="container" style="max-width: 61.25rem;" id="cmsActiveInitiativeContainer">
         <div class="active-initiative-card reveal-scale">
           <div class="active-initiative-image">
             <img src="assets/golden_banner.jpg" alt="RouteWithin Masterclass & Cohort Banner" class="active-initiative-img">
@@ -203,7 +203,7 @@
 
     <!-- 3. FEATURED MASTERCLASS SPOTLIGHT -->
     <section id="featured-masterclass" style="padding: 4.5rem 0 3.5rem; background: var(--bg-base);">
-      <div class="container" style="max-width: 68rem;">
+      <div class="container" style="max-width: 68rem;" id="cmsFeaturedMasterclassContainer">
         
         <div style="text-align: center; margin-bottom: 3rem;" class="reveal-on-scroll">
           <span style="font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--terracotta); background: rgba(198, 123, 92, 0.12); padding: 0.3rem 0.75rem; border-radius: 9999px; display: inline-block; margin-bottom: 0.6rem;">
@@ -638,7 +638,8 @@
     </div>
   </footer>
 
-  <script src="app.js?v=20261110d"></script>
+  <script src="cms-engine.js?v=20261110e"></script>
+  <script src="app.js?v=20261110e"></script>
   <script>
     // Events page registration form handling
     document.getElementById('eventsPageRegForm').addEventListener('submit', function(e) {
