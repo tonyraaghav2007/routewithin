@@ -5165,6 +5165,14 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: center;
 }
 
+.active-initiative-tags {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
 .active-initiative-tag {
   font-size: 0.75rem;
   font-weight: 800;
@@ -5177,6 +5185,10 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-block;
   margin-bottom: 0.75rem;
   align-self: flex-start;
+}
+
+.active-initiative-tags .active-initiative-tag {
+  margin-bottom: 0;
 }
 
 .active-initiative-title {
