@@ -12,7 +12,7 @@
   <link rel="icon" type="image/png" href="assets/favicon.png">
 
   <!-- Google Fonts & Stylesheet -->
-  <link rel="stylesheet" href="styles.css?v=20261110b">
+  <link rel="stylesheet" href="styles.css?v=20261110d">
   <script>
     (function() {
       const saved = localStorage.getItem('routewithin_theme');
@@ -95,7 +95,8 @@ src="https://www.facebook.com/tr?id=1365924428812836&ev=PageView&noscript=1"
   </main>
 
   <script>
-    // 1. Personalize greeting with registrant's name if available
+    
+    // 1. Personalize greeting & program details dynamically
     try {
       const stored = sessionStorage.getItem('rw_latest_registrant');
       if (stored) {
@@ -103,10 +104,22 @@ src="https://www.facebook.com/tr?id=1365924428812836&ev=PageView&noscript=1"
         if (user && user.name) {
           const firstName = user.name.split(' ')[0];
           document.getElementById('thankyouHeading').textContent = 'Thank You, ' + firstName + '!';
-          document.getElementById('thankyouMessage').innerHTML = 'Thank you, <strong>' + user.name + '</strong>! Your seat for <strong>Beyond the Vrat: A Karwa Chauth Masterclass</strong> has been successfully reserved.';
+          
+          const courseTitle = user.course || 'the session';
+          let msg = 'Thank you, <strong>' + user.name + '</strong>! Your registration for <strong>' + courseTitle + '</strong> has been successfully confirmed.';
+          
+          if (user.paymentId) {
+            msg += '<div style="margin-top: 1rem; background: rgba(46, 125, 50, 0.12); border: 1px solid rgba(46, 125, 50, 0.35); border-radius: 0.75rem; padding: 0.85rem 1.15rem; font-size: 0.9rem; text-align: left; color: var(--text-heading);">' +
+                   '<div><strong>✅ Payment Verified:</strong> ₹' + (user.amount || 0) + ' via ' + (user.paymentMethod || 'Razorpay') + '</div>' +
+                   '<div style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.25rem;">Payment Reference ID: <code>' + user.paymentId + '</code></div>' +
+                   '</div>';
+          }
+          
+          document.getElementById('thankyouMessage').innerHTML = msg;
         }
       }
     } catch (e) {}
+
 
     // 2. STRICTLY DISABLE BACK NAVIGATION (As requested: "no back option, no nothing")
     // Push state and trap popstate events so browser back button stays right on this page

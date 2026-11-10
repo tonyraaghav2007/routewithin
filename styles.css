@@ -5264,3 +5264,251 @@ h1, h2, h3, h4, h5, h6 {
     grid-template-columns: 1fr !important;
   }
 }
+
+
+/* ==========================================================================
+   ROUTEWITHIN UNIFIED REGISTRATION & RAZORPAY CHECKOUT MODAL
+   ========================================================================== */
+
+.rw-reg-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(23, 17, 12, 0.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s ease;
+}
+
+.rw-reg-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.rw-reg-modal {
+  background: var(--bg-card);
+  border: 1px solid rgba(139, 111, 71, 0.3);
+  border-radius: 1.5rem;
+  width: 100%;
+  max-width: 33.75rem;
+  max-height: 92vh;
+  overflow-y: auto;
+  box-shadow: 0 1.5rem 3.5rem rgba(0, 0, 0, 0.45);
+  position: relative;
+  transform: translateY(20px) scale(0.97);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rw-reg-backdrop.active .rw-reg-modal {
+  transform: translateY(0) scale(1);
+}
+
+.rw-reg-header {
+  padding: 1.75rem 1.75rem 1.25rem;
+  border-bottom: 1px solid rgba(139, 111, 71, 0.15);
+  position: relative;
+}
+
+.rw-reg-close-btn {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: rgba(139, 111, 71, 0.1);
+  border: none;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  font-size: 1.35rem;
+  color: var(--text-heading);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.rw-reg-close-btn:hover {
+  background: rgba(198, 123, 92, 0.2);
+  transform: rotate(90deg);
+}
+
+.rw-reg-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--terracotta);
+  background: rgba(198, 123, 92, 0.12);
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  margin-bottom: 0.5rem;
+}
+
+.rw-reg-title {
+  font-family: var(--font-heading);
+  font-size: 1.85rem;
+  color: var(--text-heading);
+  margin: 0 0 0.35rem;
+  line-height: 1.25;
+}
+
+.rw-reg-price-tag {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--terracotta);
+  font-family: var(--font-heading);
+}
+
+.rw-reg-body {
+  padding: 1.5rem 1.75rem;
+}
+
+.rw-reg-group {
+  margin-bottom: 1.15rem;
+}
+
+.rw-reg-label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin-bottom: 0.4rem;
+}
+
+.rw-reg-input,
+.rw-reg-textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius-sm, 0.6rem);
+  border: 1px solid rgba(139, 111, 71, 0.28);
+  background: var(--bg-base);
+  font-size: 0.95rem;
+  font-family: var(--font-body);
+  color: var(--text-main);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.rw-reg-input:focus,
+.rw-reg-textarea:focus {
+  border-color: var(--terracotta);
+  box-shadow: 0 0 0 3px rgba(198, 123, 92, 0.18);
+}
+
+.rw-reg-summary {
+  background: rgba(198, 123, 92, 0.08);
+  border: 1px dashed rgba(198, 123, 92, 0.35);
+  border-radius: 0.85rem;
+  padding: 1rem 1.15rem;
+  margin: 1.25rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.rw-reg-error {
+  color: #D32F2F;
+  font-size: 0.78rem;
+  margin-top: 0.3rem;
+  display: none;
+}
+
+
+/* ==========================================================================
+   ENHANCED CARD TEXT SCALING & FLUID TYPOGRAPHY (MOBILE / DESKTOP)
+   ========================================================================== */
+
+.split-quote-cta {
+  overflow: hidden;
+  word-break: break-word;
+}
+
+.split-cta-content {
+  box-sizing: border-box;
+}
+
+.split-cta-content h2,
+.split-cta-content h3 {
+  font-size: clamp(1.35rem, 3.2vw, 2.1rem) !important;
+  line-height: 1.25 !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  letter-spacing: -0.01em;
+}
+
+.split-cta-content p {
+  font-size: clamp(0.88rem, 2vw, 1.02rem) !important;
+  line-height: 1.6 !important;
+  word-break: break-word !important;
+}
+
+.split-cta-content ul li {
+  font-size: clamp(0.82rem, 1.8vw, 0.95rem) !important;
+  line-height: 1.5 !important;
+  word-break: break-word !important;
+}
+
+.split-cta-content .btn {
+  font-size: clamp(0.82rem, 1.8vw, 0.95rem) !important;
+  white-space: normal !important;
+  text-align: center;
+}
+
+.emotive-card-quote {
+  font-size: clamp(0.95rem, 2.5vw, 1.15rem) !important;
+  line-height: 1.4 !important;
+  word-break: break-word !important;
+}
+
+.active-initiative-title {
+  font-size: clamp(1.35rem, 3.5vw, 1.95rem) !important;
+  line-height: 1.25 !important;
+  word-break: break-word !important;
+}
+
+.active-initiative-desc {
+  font-size: clamp(0.88rem, 2vw, 1rem) !important;
+  line-height: 1.6 !important;
+}
+
+@media (max-width: 64rem) {
+  .split-quote-cta {
+    display: flex !important;
+    flex-direction: column !important;
+    border-radius: 1.25rem !important;
+  }
+  .split-cta-image {
+    width: 100% !important;
+    min-height: 13.5rem !important;
+    max-height: 20rem !important;
+    order: 1 !important;
+  }
+  .split-cta-content {
+    width: 100% !important;
+    order: 2 !important;
+    padding: 1.5rem 1.25rem !important;
+  }
+  .split-cta-content h2,
+  .split-cta-content h3 {
+    font-size: clamp(1.3rem, 5vw, 1.75rem) !important;
+  }
+}
+
+@media (max-width: 30rem) {
+  .split-cta-content {
+    padding: 1.25rem 1rem !important;
+  }
+  .split-cta-content .btn {
+    width: 100% !important;
+    padding: 0.75rem 1rem !important;
+  }
+}

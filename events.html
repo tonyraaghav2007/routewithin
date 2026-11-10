@@ -18,7 +18,7 @@
   <link rel="icon" type="image/png" href="assets/favicon.png">
 
   <!-- Google Fonts & Stylesheet -->
-  <link rel="stylesheet" href="styles.css?v=20261110b">
+  <link rel="stylesheet" href="styles.css?v=20261110d">
   <script>
     (function() {
       const saved = localStorage.getItem('routewithin_theme');
@@ -47,24 +47,27 @@
   src="https://www.facebook.com/tr?id=1365924428812836&ev=PageView&noscript=1"
   /></noscript>
   <!-- End Meta Pixel Code -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body>
 
-  <!-- KARWA CHAUTH SPECIAL MASTERCLASS TOP FLAG -->
-  <aside class="webinar-top-flag" id="webinarTopFlag" aria-label="Karwa Chauth Masterclass Special Announcement">
+    <!-- FREE LIVE MASTERCLASS TOP FLAG (ACTIVE INITIATIVE - WEDNESDAY) -->
+  <aside class="webinar-top-flag" id="webinarTopFlag" aria-label="Free Live Masterclass Announcement">
     <div class="webinar-flag-container">
       <div class="webinar-flag-left">
         <span class="webinar-flag-badge">
           <span class="webinar-flag-pulse"></span>
-          <span class="badge-text-full">FREE LIVE MASTERCLASS · KARWA CHAUTH SPECIAL</span>
-          <span class="badge-text-mobile">FREE MASTERCLASS</span>
+          <span class="badge-text-full">FREE LIVE MASTERCLASS · WEDNESDAY SPECIAL</span>
+          <span class="badge-text-short">FREE MASTERCLASS</span>
         </span>
         <p class="webinar-flag-text">
-          <strong>Beyond the Vrat: A Karwa Chauth Masterclass</strong> • Mon, Nov 2, 2026 (4:30 PM – 5:30 PM IST) • <span class="flag-highlight">100% Free (Zoom)</span>
+          <strong>Weekly Interactive Masterclasses</strong> • Every Wednesday (5:30 PM IST) • <span class="flag-highlight">100% Free (Zoom)</span>
         </p>
       </div>
       <div class="webinar-flag-actions">
-        <a href="#register" class="webinar-flag-cta">Reserve Your Seat ↓</a>
+        <a href="events.html" class="webinar-flag-cta">Register Free →</a>
+        <a href="events.html" class="webinar-flag-info-btn">View Details</a>
+        <button class="webinar-flag-close" onclick="dismissWebinarFlag()" aria-label="Dismiss banner">✕</button>
       </div>
     </div>
   </aside>
@@ -84,7 +87,7 @@
         <li><a href="events.html" class="nav-link active">Free Events</a></li>
         <li><a href="how-it-works.html" class="nav-link">How It Works</a></li>
         <li><a href="testimonials.html" class="nav-link">Testimonials</a></li>
-        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="blog.html" class="nav-link">E-Book</a></li>
         <li><a href="contact.html" class="nav-link">Contact</a></li>
       </ul>
 
@@ -136,7 +139,7 @@
     <a href="events.html" class="mobile-nav-link active">Free Events</a>
     <a href="how-it-works.html" class="mobile-nav-link">How It Works</a>
     <a href="testimonials.html" class="mobile-nav-link">Testimonials</a>
-    <a href="blog.html" class="mobile-nav-link">Blog</a>
+    <a href="blog.html" class="mobile-nav-link">E-Book</a>
     <a href="contact.html" class="mobile-nav-link">Contact</a>
     <div style="margin-top: 0.875rem;">
       <a href="contact.html" class="btn btn-hero-book btn-sm" style="width: 100%; text-align: center;">Book a Session</a>
@@ -190,7 +193,7 @@
               Join Dimple Sandhu for live cohorts breaking down subconscious conflict loops, emotional triggers, and daily communication frameworks.
             </p>
             <div class="active-initiative-actions">
-              <a href="https://us06web.zoom.us/j/82870705301?pwd=Bl05nQSRaPrdk9VufbWie76UfP8cOg.1" target="_blank" rel="noopener noreferrer" class="btn btn-hero-book btn-sm">Join Free Masterclass →</a>
+              <button type="button" onclick="openRegistrationModal('active-initiative')" class="btn btn-hero-book btn-sm">Register Free (Zoom) →</button>
               <a href="https://docs.google.com/forms/d/e/1FAIpQLScrNnLXRHfBjrXH3cYRRZdRRx5i7UOSnIl0DyTIbgQJ7RzJHw/viewform?usp=sharing&ouid=100820665491908733403" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">Free Assessment →</a>
             </div>
           </div>
@@ -256,7 +259,7 @@
             </div>
 
             <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
-              <a href="#register" class="btn btn-hero-book btn-md">Claim Your Free Seat Now →</a>
+              <button type="button" onclick="openRegistrationModal('karwa-chauth')" class="btn btn-hero-book btn-md">Claim Your Free Seat Now →</button>
               <a href="#pillars" class="btn btn-secondary btn-md">View Core Takeaways ↓</a>
             </div>
           </div>
@@ -612,7 +615,7 @@
             <li><a href="events.html">Free Events</a></li>
             <li><a href="how-it-works.html">How It Works</a></li>
             <li><a href="testimonials.html">Testimonials</a></li>
-            <li><a href="blog.html">Blog</a></li>
+            <li><a href="blog.html">E-Book</a></li>
             <li><a href="contact.html">Contact</a></li>
           </ul>
           <div class="footer-social-row">
@@ -635,7 +638,7 @@
     </div>
   </footer>
 
-  <script src="app.js?v=20261103"></script>
+  <script src="app.js?v=20261110d"></script>
   <script>
     // Events page registration form handling
     document.getElementById('eventsPageRegForm').addEventListener('submit', function(e) {
