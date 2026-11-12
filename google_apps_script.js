@@ -93,6 +93,22 @@ const HEADERS = {
     'Metric',
     'Value',
     'Last Updated'
+  ],
+  // Dedicated Assessment Responses Tab
+  ASSESSMENT: [
+    'Submission ID',
+    'Date & Time',
+    'Full Name',
+    'Age (years)',
+    'Gender',
+    'City, State, Country',
+    'Contact No.',
+    'WhatsApp No.',
+    'Top 3 Challenges in Life',
+    'Top 3 Goals to Achieve',
+    'Hurdles Facing in Achieving Goals',
+    'Commitment Level (1-10)',
+    'Source Page'
   ]
 };
 
@@ -403,6 +419,7 @@ function ensureAllTabs() {
   ensureTab(ss, CONFIG.TAB_PAID, HEADERS.PAID);
   ensureTab(ss, CONFIG.TAB_COURSE_SALES, HEADERS.COURSE_SALES);
   ensureTab(ss, CONFIG.TAB_TOTAL_SALES, HEADERS.TOTAL_SALES);
+  ensureTab(ss, CONFIG.TAB_ASSESSMENT, HEADERS.ASSESSMENT);
 }
 
 function ensureTab(ss, tabName, headers) {
