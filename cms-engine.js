@@ -132,7 +132,7 @@
       buttonPrimaryText: 'Register Free (Zoom) →',
       buttonPrimaryAction: 'register:active-initiative',
       buttonSecondaryText: 'Free Assessment →',
-      buttonSecondaryAction: 'https://docs.google.com/forms/d/e/1FAIpQLScrNnLXRHfBjrXH3cYRRZdRRx5i7UOSnIl0DyTIbgQJ7RzJHw/viewform?usp=sharing&ouid=100820665491908733403',
+      buttonSecondaryAction: 'assessment.html',
       catalogId: 'active-initiative',
       isPaid: false,
       price: 0,

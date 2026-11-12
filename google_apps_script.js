@@ -33,6 +33,7 @@ const CONFIG = {
   TAB_PAID: 'Paid Plans',
   TAB_COURSE_SALES: 'Course Sales',
   TAB_TOTAL_SALES: 'Total Sales',
+  TAB_ASSESSMENT: 'Assessment Responses',
 };
 
 function getSpreadsheet() {
@@ -139,6 +140,9 @@ function doPost(e) {
           type: 'Contact'
         });
         break;
+      case 'submit_assessment':
+        result = logAssessmentSubmission(data);
+        break;
       default:
         result = { success: false, error: 'Unknown action: ' + action };
     }
@@ -231,6 +235,52 @@ function logPaidRegistration(data) {
     type: 'paid',
     consumerName: data.name || '',
     message: 'Paid plan registration logged successfully.'
+  };
+}
+
+function logAssessmentSubmission(data) {
+  const ss = getSpreadsheet();
+  let sheet = ss.getSheetByName(CONFIG.TAB_ASSESSMENT);
+  if (!sheet) {
+    sheet = ss.insertSheet(CONFIG.TAB_ASSESSMENT);
+    const headers = [
+      'Submission ID', 'Date & Time', 'Full Name', 'Age', 'Gender',
+      'Location (City, State, Country)', 'Contact No.', 'WhatsApp No.',
+      'Top 3 Challenges', 'Top 3 Goals', 'Hurdles', 'Commitment (1-10)', 'Source'
+    ];
+    sheet.appendRow(headers);
+    const r = sheet.getRange(1, 1, 1, headers.length);
+    r.setFontWeight('bold');
+    r.setBackground('#8B6F47');
+    r.setFontColor('#FFFFFF');
+    sheet.setFrozenRows(1);
+  }
+
+  const subId = data.id || generateRegId('ASST');
+  const timestamp = data.submittedAt || new Date().toISOString();
+
+  const row = [
+    subId,
+    timestamp,
+    data.name || 'Anonymous',
+    data.age || '',
+    data.gender || '',
+    data.city || '',
+    sanitizePhone(data.contact),
+    sanitizePhone(data.whatsapp),
+    data.challenges || '',
+    data.goals || '',
+    data.hurdles || '',
+    data.commitment || '',
+    data.source || 'assessment.html'
+  ];
+
+  sheet.appendRow(row);
+
+  return {
+    success: true,
+    submissionId: subId,
+    message: 'Assessment logged successfully.'
   };
 }
 

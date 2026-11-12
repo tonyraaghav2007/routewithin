@@ -6,7 +6,7 @@
   <meta name="robots" content="noindex, nofollow">
   <title>Admin Dashboard & Content Manager — RouteWithin (Private Portal)</title>
   <link rel="icon" type="image/png" href="assets/favicon.png">
-  <link rel="stylesheet" href="styles.css?v=20261110e">
+  <link rel="stylesheet" href="styles.css?v=20261112a">
   <style>
     /* ─── AUTH GATE ─────────────────────────────────────────── */
     .auth-overlay {
@@ -238,6 +238,7 @@ src="https://www.facebook.com/tr?id=1365924428812836&ev=PageView&noscript=1"
       <button class="admin-tab" data-tab="programs" onclick="switchTab('programs')">📦 Coaching Programs</button>
       <button class="admin-tab" data-tab="events" onclick="switchTab('events')">🎉 Free Events</button>
       <button class="admin-tab" data-tab="ebooks" onclick="switchTab('ebooks')">📚 E-Books & Guides</button>
+      <button class="admin-tab" data-tab="assessments" onclick="switchTab('assessments')">📝 Assessment Submissions</button>
     </div>
 
     <!-- ═══════════════════════════════════════════════════════════════
@@ -331,6 +332,48 @@ src="https://www.facebook.com/tr?id=1365924428812836&ev=PageView&noscript=1"
       <div class="cms-grid" id="cmsEbooksGrid"><!-- Rendered by JS --></div>
     </div>
 
+    <!-- ═══════════════════════════════════════════════════════════════
+         TAB 5: ASSESSMENTS (Responses from assessment.html)
+         ═══════════════════════════════════════════════════════════════ -->
+    <div class="admin-tab-panel" id="panel-assessments">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1rem;">
+        <div>
+          <h2 style="color: #F5EDE3; font-family: var(--font-heading, 'Playfair Display', serif); margin: 0;">Life & Relationship Assessments</h2>
+          <p style="color: #D4C4AD; font-size: 0.85rem; margin: 0.25rem 0 0;">In-depth answers from <code>assessment.html</code>. Click WhatsApp to contact or export to Excel/CSV.</p>
+        </div>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <button class="btn-admin primary" onclick="exportAssessmentsToCSV()">📥 Export Assessments CSV</button>
+          <button class="btn-admin" onclick="addSampleAssessment()">+ Add Sample Assessment</button>
+          <button class="btn-admin" onclick="clearAssessments()" style="color: #E8A88C;">Clear All</button>
+        </div>
+      </div>
+
+      <div class="admin-toolbar" style="margin-top: 0;">
+        <input type="text" id="asstSearch" class="admin-search-input" placeholder="🔍 Search assessments by name, phone, city, challenges, goals..." oninput="filterAssessments()">
+      </div>
+
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Date</th>
+              <th>Full Name</th>
+              <th>Age / Gender</th>
+              <th>Location</th>
+              <th>WhatsApp / Contact</th>
+              <th style="min-width: 180px;">Top Challenges</th>
+              <th style="min-width: 180px;">Top Goals</th>
+              <th style="min-width: 180px;">Hurdles</th>
+              <th>Score</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="asstTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
   </div><!-- /adminDashboard -->
 
   <!-- ═══════════════════════════════════════════════════════════════
@@ -364,6 +407,8 @@ src="https://www.facebook.com/tr?id=1365924428812836&ev=PageView&noscript=1"
         document.getElementById('adminDashboard').style.display = 'block';
         loadLeadsTable();
         renderCMSGrids();
+        loadAssessmentsTable();
+        loadAssessmentsTable();
       } else {
         document.getElementById('authError').style.display = 'block';
       }
@@ -388,7 +433,156 @@ src="https://www.facebook.com/tr?id=1365924428812836&ev=PageView&noscript=1"
       catch (e) { return []; }
     }
 
-    function loadLeadsTable(leadsToRender) {
+    
+    /* ================================================================
+       ASSESSMENT SUBMISSIONS LOGIC
+       ================================================================ */
+    function getAssessments() {
+      try { return JSON.parse(localStorage.getItem('routewithin_assessment_submissions') || '[]'); }
+      catch (e) { return []; }
+    }
+
+    function loadAssessmentsTable(itemsToRender) {
+      const items = itemsToRender || getAssessments();
+      const tbody = document.getElementById('asstTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      if (items.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="11" style="text-align: center; padding: 3rem; color: #8C7A66;">No assessment submissions recorded yet. Click <strong>"+ Add Sample Assessment"</strong> above or fill the form on <a href="assessment.html" target="_blank" style="color: #D4AF37;">assessment.html</a> to test!</td></tr>';
+        return;
+      }
+
+      items.forEach(function(item) {
+        const cleanWa = (item.whatsapp || item.contact || '').replace(/[^0-9]/g, '');
+        const dateStr = item.submittedAt ? new Date(item.submittedAt).toLocaleString() : 'Just now';
+        const score = parseInt(item.commitment) || 10;
+        const scoreColor = score >= 8 ? '#2E7D32' : (score >= 5 ? '#D4AF37' : '#C67B5C');
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = '<td style="font-family: monospace; font-size: 0.8rem; color: #D4AF37;">' + escapeHtml(item.id || 'ASST-00') + '</td>'
+          + '<td style="font-size: 0.8rem; color: #D4C4AD;">' + dateStr + '</td>'
+          + '<td><strong>' + escapeHtml(item.name || 'Anonymous') + '</strong></td>'
+          + '<td style="font-size: 0.85rem;">' + escapeHtml(item.age || '—') + ' yrs • ' + escapeHtml(item.gender || '—') + '</td>'
+          + '<td style="font-size: 0.85rem;">' + escapeHtml(item.city || '—') + '</td>'
+          + '<td>'
+          + (cleanWa ? '<a href="https://wa.me/' + cleanWa + '" target="_blank" class="btn-wa-link" title="Open Chat on WhatsApp">💬 ' + escapeHtml(item.whatsapp || item.contact) + '</a>' : 'N/A')
+          + '</td>'
+          + '<td style="font-size: 0.82rem; color: #D4C4AD; max-width: 200px; white-space: pre-wrap;">' + escapeHtml(item.challenges || '—') + '</td>'
+          + '<td style="font-size: 0.82rem; color: #D4C4AD; max-width: 200px; white-space: pre-wrap;">' + escapeHtml(item.goals || '—') + '</td>'
+          + '<td style="font-size: 0.82rem; color: #D4C4AD; max-width: 200px; white-space: pre-wrap;">' + escapeHtml(item.hurdles || '—') + '</td>'
+          + '<td><span style="font-weight: 800; font-size: 0.95rem; color: ' + scoreColor + ';">' + score + '/10</span></td>'
+          + '<td><button onclick="deleteAssessment(\'' + item.id + '\')" style="background:none; border:none; color: #E8A88C; cursor:pointer;" title="Delete Record">🗑️</button></td>';
+        tbody.appendChild(tr);
+      });
+    }
+
+    function filterAssessments() {
+      const q = (document.getElementById('asstSearch').value || '').toLowerCase().trim();
+      const all = getAssessments();
+      if (!q) { loadAssessmentsTable(all); return; }
+      loadAssessmentsTable(all.filter(function(it) {
+        return (it.name||'').toLowerCase().includes(q) ||
+               (it.whatsapp||'').toLowerCase().includes(q) ||
+               (it.contact||'').toLowerCase().includes(q) ||
+               (it.city||'').toLowerCase().includes(q) ||
+               (it.challenges||'').toLowerCase().includes(q) ||
+               (it.goals||'').toLowerCase().includes(q) ||
+               (it.hurdles||'').toLowerCase().includes(q);
+      }));
+    }
+
+    function addSampleAssessment() {
+      const samples = [
+        {
+          id: 'ASST-' + Date.now().toString(36).toUpperCase(),
+          submittedAt: new Date().toISOString(),
+          name: 'Meera Kapoor',
+          age: '34',
+          gender: 'Female',
+          city: 'South Delhi, India',
+          contact: '+91 98102 33445',
+          whatsapp: '+91 98102 33445',
+          challenges: '1) Repetitive silence & walking on eggshells with husband
+2) Emotional exhaustion from constantly accommodating
+3) Feeling misunderstood',
+          goals: '1) Rebuild deep warmth & mutual respect
+2) Express needs calmly without tears or defensiveness
+3) Inner peace',
+          hurdles: 'Fear of conflict, resentment built over 7 years of marriage',
+          commitment: '10'
+        },
+        {
+          id: 'ASST-' + (Date.now() + 1).toString(36).toUpperCase(),
+          submittedAt: new Date().toISOString(),
+          name: 'Rohit Verma',
+          age: '38',
+          gender: 'Male',
+          city: 'Bengaluru, Karnataka',
+          contact: '+91 98450 67890',
+          whatsapp: '+91 98450 67890',
+          challenges: '1) High workplace stress bleeding into marriage
+2) Reactive arguments over petty household decisions
+3) Emotional disconnect',
+          goals: '1) Learn real-time conflict de-escalation
+2) Be a calmer partner and father
+3) Restore daily affection',
+          hurdles: 'Impulsive defensive reactions, shortage of quality time together',
+          commitment: '9'
+        }
+      ];
+      const random = samples[Math.floor(Math.random() * samples.length)];
+      const list = getAssessments();
+      list.unshift(random);
+      localStorage.setItem('routewithin_assessment_submissions', JSON.stringify(list));
+      loadAssessmentsTable();
+      showToast('Sample assessment added!');
+    }
+
+    function deleteAssessment(id) {
+      if (!confirm('Are you sure you want to remove this assessment submission?')) return;
+      const filtered = getAssessments().filter(function(it) { return it.id !== id; });
+      localStorage.setItem('routewithin_assessment_submissions', JSON.stringify(filtered));
+      loadAssessmentsTable();
+    }
+
+    function clearAssessments() {
+      if (!confirm('Warning: This will delete ALL assessment submissions stored locally. Proceed?')) return;
+      localStorage.removeItem('routewithin_assessment_submissions');
+      loadAssessmentsTable();
+    }
+
+    function exportAssessmentsToCSV() {
+      const items = getAssessments();
+      if (items.length === 0) { alert('No assessments available to export.'); return; }
+      let csv = 'ID,Date,Full Name,Age,Gender,Location,WhatsApp,Contact,Top 3 Challenges,Top 3 Goals,Hurdles,Commitment (1-10)
+';
+      items.forEach(function(it) {
+        csv += [
+          '"' + (it.id||'') + '"',
+          '"' + (it.submittedAt ? new Date(it.submittedAt).toLocaleString() : '') + '"',
+          '"' + (it.name||'').replace(/"/g,'""') + '"',
+          '"' + (it.age||'') + '"',
+          '"' + (it.gender||'') + '"',
+          '"' + (it.city||'').replace(/"/g,'""') + '"',
+          '"' + (it.whatsapp||'') + '"',
+          '"' + (it.contact||'') + '"',
+          '"' + (it.challenges||'').replace(/"/g,'""').replace(/\n/g,' ') + '"',
+          '"' + (it.goals||'').replace(/"/g,'""').replace(/\n/g,' ') + '"',
+          '"' + (it.hurdles||'').replace(/"/g,'""').replace(/\n/g,' ') + '"',
+          '"' + (it.commitment||'10') + '"'
+        ].join(',') + '\n';
+      });
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'RouteWithin_Assessment_Submissions_' + new Date().toISOString().split('T')[0] + '.csv';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+function loadLeadsTable(leadsToRender) {
       const leads = leadsToRender || getLeads();
       const tbody = document.getElementById('leadsTableBody');
       tbody.innerHTML = '';
@@ -481,6 +675,10 @@ src="https://www.facebook.com/tr?id=1365924428812836&ev=PageView&noscript=1"
       alert('Content restored to verified defaults.');
     }
 
+    function showToast(msg) {
+      alert(msg);
+    }
+
     function escapeHtml(str) {
       return String(str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
@@ -493,6 +691,11 @@ src="https://www.facebook.com/tr?id=1365924428812836&ev=PageView&noscript=1"
       document.querySelectorAll('.admin-tab-panel').forEach(function(p) { p.classList.remove('active'); });
       document.querySelector('.admin-tab[data-tab="' + tabName + '"]').classList.add('active');
       document.getElementById('panel-' + tabName).classList.add('active');
+      if (tabName === 'assessments') {
+        loadAssessmentsTable();
+      } else if (tabName === 'leads') {
+        loadLeadsTable();
+      }
     }
 
     /* ================================================================
@@ -663,15 +866,7 @@ src="https://www.facebook.com/tr?id=1365924428812836&ev=PageView&noscript=1"
     }
     function getBlankEvent() {
       var id = 'ev_' + Date.now().toString(36);
-      return { id: id, title: '', badge: 'Active Initiative', badgeSecondary: 'Wednesday', description: '', subtitle: '', eventDate: 'Every Wednesday', eventTime: '5:30 PM IST', eventFormat: 'Live Zoom (Interactive)', eventAdmission: '100% Free', image: 'assets/golden_banner.jpg', imageAlt: '', buttonPrimaryText: 'Register Free (Zoom) →', buttonPrimaryAction: 'register:' + id, buttonSecondaryText: 'Free Assessment →', buttonSecondaryAction: 'https://docs.google.com/forms/d/e/1FAIpQLScrNnLXRHfBjrXH3cYRRZdRRx5i7UOSnIl0DyTIbgQJ7RzJHw/viewform?usp=sharing&ouid=100820665491908733403', catalogId: id, isPaid: false, price: 0, priceDisplay: '100% Free (Zoom)', redirectAfterRegister: 'thank-you.html', enabled: true };
-    }
-    function getBlankEbook() {
-      var id = 'ebook_' + Date.now().toString(36);
-      return { id: id, title: '', description: '', image: 'assets/book_cover.jpg', imageAlt: '', badge: '100% Free Instant Download (PDF)', bullets: ['', '', ''], buttonPrimaryText: 'Download Free E-Book (PDF) →', buttonPrimaryAction: 'https://chat.whatsapp.com/Fc81XFO5SPgEh1IOyou7V5?s=cl&p=a&mlu=4&ilr=4', buttonSecondaryText: 'Attend Masterclass →', buttonSecondaryAction: 'register:active-initiative', redirectAfterRegister: 'thank-you.html', enabled: true };
-    }
-
-    function buildProgramForm(p) {
-      var bulletsHtml = '<div class="cms-bullets-list" id="cmsBulletsList">';
+      return { id: id, title: '', badge: 'Active Initiative', badgeSecondary: 'Wednesday', description: '', subtitle: '', eventDate: 'Every Wednesday', eventTime: '5:30 PM IST', eventFormat: 'Live Zoom (Interactive)', eventAdmission: '100% Free', image: 'assets/golden_banner.jpg', imageAlt: '', buttonPrimaryText: 'Register Free (Zoom) →', buttonPrimaryAction: 'register:' + id, buttonSecondaryText: 'Free Assessment →', buttonSecondaryAction: 'assessment.html"cms-bullets-list" id="cmsBulletsList">';
       (p.bullets || []).forEach(function(b, i) {
         bulletsHtml += '<input type="text" name="bullet_' + i + '" value="' + escapeAttr(b) + '" placeholder="Key outcome / curriculum benefit #' + (i+1) + '">';
       });
