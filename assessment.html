@@ -19,7 +19,7 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/favicon.png">
 
-  <link rel="stylesheet" href="styles.css?v=20261112a">
+  <link rel="stylesheet" href="styles.css?v=20261112b">
   <script>
     (function() {
       const saved = localStorage.getItem('routewithin_theme');
@@ -631,8 +631,8 @@
   </footer>
 
   <div class="toast-notice" id="toastNotice"></div>
-  <script src="cms-engine.js?v=20261112a"></script>
-  <script src="app.js?v=20261112a"></script>
+  <script src="cms-engine.js?v=20261112b"></script>
+  <script src="app.js?v=20261112b"></script>
 
   <!-- ASSESSMENT FORM SUBMISSION & MULTI-CHANNEL SCRIPT -->
   <script>
@@ -742,7 +742,17 @@
         keepalive: true
       }).catch(e => console.warn('[RouteWithin] Google Form sync error:', e));
 
-      // 3. SUBMIT TO GOOGLE APPS SCRIPT BACKEND (Separate Sheet integration)
+      // 3. SUBMIT TO DEDICATED GOOGLE APPS SCRIPT WEB APP (Direct to your Assessment Sheet)
+      const DEDICATED_ASSESSMENT_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyo1ID3ord2NRw57X8fRLCm73K7acdzWyY0eHjHwnX5JRNnEp_SG1Rikw5J0NW5lqte/exec';
+      const dedicatedSheetPromise = fetch(DEDICATED_ASSESSMENT_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify(assessmentRecord),
+        keepalive: true
+      }).catch(e => console.warn('[RouteWithin] Dedicated sheet sync error:', e));
+
+      // 4. SUBMIT TO MAIN BACKEND SCRIPT (Backup sheet sync)
       let appsScriptPromise = Promise.resolve();
       if (typeof sendToGoogleSheets === 'function') {
         appsScriptPromise = sendToGoogleSheets('submit_assessment', assessmentRecord).catch(e => console.warn(e));
@@ -757,7 +767,7 @@
       }
 
       // Smooth transition to Success Card
-      Promise.all([googleFormPromise, appsScriptPromise]).finally(function() {
+      Promise.all([googleFormPromise, dedicatedSheetPromise, appsScriptPromise]).finally(function() {
         setTimeout(function() {
           document.getElementById('assessmentFormCard').style.display = 'none';
           document.getElementById('successUserName').textContent = name;
