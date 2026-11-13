@@ -19,7 +19,7 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/favicon.png">
 
-  <link rel="stylesheet" href="styles.css?v=20261112b">
+  <link rel="stylesheet" href="styles.css?v=20261113a">
   <script>
     (function() {
       const saved = localStorage.getItem('routewithin_theme');
@@ -214,11 +214,24 @@
       display: none;
       background: var(--bg-card);
       border: 1px solid rgba(46, 125, 50, 0.35);
-      border-radius: 1.5rem;
-      padding: 3.5rem 2.5rem;
+      border-radius: 1.25rem;
+      padding: 2.75rem 2rem;
       text-align: center;
+      max-width: 28rem;
+      margin: 2.5rem auto 4rem;
       box-shadow: var(--shadow-lg);
-      margin-bottom: 3.5rem;
+    }
+    @keyframes pulseDot {
+      0% { opacity: 0.3; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1.1); }
+    }
+    .redirect-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--terracotta);
+      animation: pulseDot 0.8s infinite alternate ease-in-out;
     }
 
     @media (max-width: 640px) {
@@ -364,35 +377,20 @@
     <section style="padding: 2.75rem 0 4.5rem; background: var(--bg-base);">
       <div class="container" style="max-width: 50rem;">
 
-        <!-- SUCCESS CONFIRMATION STATE -->
+        <!-- SMALL CONFIRMATION STATE (Auto-redirects to home) -->
         <div class="assessment-success-card" id="assessmentSuccessCard">
-          <div style="font-size: 3.5rem; margin-bottom: 1rem;">🎉</div>
-          <span style="font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #2E7D32; background: rgba(46, 125, 50, 0.12); padding: 0.35rem 0.85rem; border-radius: 9999px; display: inline-block; margin-bottom: 1rem;">
-            ✓ ASSESSMENT RECEIVED SUCCESSFULLY
-          </span>
-          <h2 style="font-family: var(--font-heading); font-size: 2.1rem; color: var(--text-heading); margin-bottom: 0.75rem;">
+          <div style="width: 58px; height: 58px; margin: 0 auto 1.25rem; background: rgba(46, 125, 50, 0.12); border: 2px solid #2E7D32; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.85rem; color: #2E7D32;">
+            ✓
+          </div>
+          <h2 style="font-family: var(--font-heading, 'Playfair Display', serif); font-size: 1.75rem; color: var(--text-heading); margin: 0 0 0.5rem;">
             Thank You, <span id="successUserName">Seeker</span>!
           </h2>
-          <p style="font-size: 1.05rem; color: var(--text-secondary); line-height: 1.65; max-width: 38rem; margin: 0 auto 1.75rem;">
-            Your personal assessment has been recorded. Master Coach Dimple Sandhu reviews each submission personally to help identify your subconscious alignment roadmap.
+          <p style="font-size: 1rem; color: var(--text-secondary); line-height: 1.55; max-width: 24rem; margin: 0 auto 1.5rem;">
+            Your assessment has been submitted successfully. Coach Dimple will review your responses.
           </p>
-
-          <div style="background: rgba(139, 111, 71, 0.08); border-radius: 1rem; padding: 1.25rem; max-width: 32rem; margin: 0 auto 2rem; text-align: left;">
-            <div style="font-size: 0.9rem; color: var(--text-heading); margin-bottom: 0.4rem;">
-              <strong>📱 WhatsApp Delivery:</strong> We have noted your WhatsApp number. Guidance and workshop credentials will be sent directly.
-            </div>
-            <div style="font-size: 0.9rem; color: var(--text-heading);">
-              <strong>🔒 Strict Privacy:</strong> Your answers are 100% confidential and never shared with third parties.
-            </div>
-          </div>
-
-          <div style="display: flex; gap: 0.85rem; justify-content: center; flex-wrap: wrap;">
-            <a href="https://chat.whatsapp.com/Fc81XFO5SPgEh1IOyou7V5?s=cl&p=a&mlu=4&ilr=4" target="_blank" rel="noopener noreferrer" class="btn btn-hero-book btn-md">
-              Join RouteWithin WhatsApp Sangha →
-            </a>
-            <a href="events.html" class="btn btn-secondary btn-md">
-              Explore Free Masterclasses →
-            </a>
+          <div style="display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.88rem; color: var(--terracotta); background: rgba(139, 111, 71, 0.08); padding: 0.45rem 1.1rem; border-radius: 9999px;">
+            <span class="redirect-dot"></span>
+            <span>Redirecting to home page...</span>
           </div>
         </div>
 
@@ -631,8 +629,8 @@
   </footer>
 
   <div class="toast-notice" id="toastNotice"></div>
-  <script src="cms-engine.js?v=20261112b"></script>
-  <script src="app.js?v=20261112b"></script>
+  <script src="cms-engine.js?v=20261113a"></script>
+  <script src="app.js?v=20261113a"></script>
 
   <!-- ASSESSMENT FORM SUBMISSION & MULTI-CHANNEL SCRIPT -->
   <script>
@@ -766,15 +764,30 @@
         });
       }
 
-      // Smooth transition to Success Card
-      Promise.all([googleFormPromise, dedicatedSheetPromise, appsScriptPromise]).finally(function() {
+      // Smooth transition to Small Confirmation & Auto-Redirect to Home
+      let hasTransitioned = false;
+      function transitionToSuccessAndRedirect() {
+        if (hasTransitioned) return;
+        hasTransitioned = true;
+
+        document.getElementById('assessmentFormCard').style.display = 'none';
+        document.getElementById('successUserName').textContent = name;
+        const successCard = document.getElementById('assessmentSuccessCard');
+        successCard.style.display = 'block';
+        successCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        // Auto-redirect to home page (no buttons, automatic redirect)
         setTimeout(function() {
-          document.getElementById('assessmentFormCard').style.display = 'none';
-          document.getElementById('successUserName').textContent = name;
-          const successCard = document.getElementById('assessmentSuccessCard');
-          successCard.style.display = 'block';
-          successCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 600);
+          window.location.href = 'index.html';
+        }, 1800);
+      }
+
+      // Safety timeout: If network requests take > 2s, show confirmation & redirect anyway
+      const fallbackTimer = setTimeout(transitionToSuccessAndRedirect, 2000);
+
+      Promise.all([googleFormPromise, dedicatedSheetPromise, appsScriptPromise]).finally(function() {
+        clearTimeout(fallbackTimer);
+        setTimeout(transitionToSuccessAndRedirect, 300);
       });
     });
   </script>
