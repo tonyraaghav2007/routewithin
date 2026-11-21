@@ -1025,7 +1025,7 @@ function closeVideoModal() {
 // ─── RAZORPAY PAYMENT GATEWAY CONFIGURATION ─────────────────────────
 // You can paste your live or test Razorpay Key ID below when ready:
 window.RAZORPAY_CONFIG = window.RAZORPAY_CONFIG || {
-  key: 'rzp_test_YOUR_KEY_HERE', // <-- PASTE YOUR RAZORPAY KEY ID HERE
+  key: 'rzp_live_U2i2syjaUd3nZQ', // LIVE Razorpay Key ID
   companyName: 'RouteWithin',
   companyLogo: 'assets/rw_icon.png',
   themeColor: '#C67B5C'
