@@ -499,6 +499,76 @@ h1, h2, h3, h4, h5, h6 {
   background: rgba(139, 111, 71, 0.08);
 }
 
+/* WhatsApp Glowing Button in Navbar */
+.nav-wa-glow-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+  background: linear-gradient(135deg, #25D366 0%, #1EBE5D 100%);
+  color: #FFFFFF !important;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.38rem 0.82rem;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+  box-shadow: 0 0 10px rgba(37, 211, 102, 0.55), 0 2px 6px rgba(0, 0, 0, 0.12);
+  animation: wa-nav-glow 2.4s infinite ease-in-out;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  margin-left: 0.25rem;
+}
+
+.nav-wa-icon {
+  width: 1.05rem;
+  height: 1.05rem;
+  fill: #FFFFFF;
+  flex-shrink: 0;
+}
+
+@keyframes wa-nav-glow {
+  0% {
+    box-shadow: 0 0 6px rgba(37, 211, 102, 0.4), 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 16px 4px rgba(37, 211, 102, 0.75), 0 3px 8px rgba(37, 211, 102, 0.35);
+    transform: translateY(-1px);
+  }
+  100% {
+    box-shadow: 0 0 6px rgba(37, 211, 102, 0.4), 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.nav-wa-glow-btn:hover {
+  background: linear-gradient(135deg, #2cf073 0%, #20ce64 100%);
+  color: #FFFFFF !important;
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 0 22px 6px rgba(37, 211, 102, 0.85), 0 4px 12px rgba(0, 0, 0, 0.18);
+  animation: none;
+}
+
+/* Mobile Drawer WhatsApp Button */
+.mobile-wa-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #25D366 0%, #1EBE5D 100%);
+  color: #FFFFFF !important;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 0.65rem 1rem;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  margin-top: 0.5rem;
+  box-shadow: 0 0 12px rgba(37, 211, 102, 0.45);
+  transition: all 0.25s ease;
+}
+
+.mobile-wa-btn:hover {
+  background: linear-gradient(135deg, #28e26c 0%, #17a950 100%);
+}
+
 .nav-actions {
   display: flex;
   align-items: center;
@@ -5146,6 +5216,14 @@ h1, h2, h3, h4, h5, h6 {
   }
   .brand-logo-img {
     height: 2.5rem;
+  }
+  .nav-wa-glow-btn span {
+    display: none;
+  }
+  .nav-wa-glow-btn {
+    padding: 0.38rem 0.45rem;
+    border-radius: 50%;
+    margin-left: 0.1rem;
   }
 }
 
