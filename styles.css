@@ -5618,3 +5618,460 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0.75rem 1rem !important;
   }
 }
+
+/* ==========================================================================
+   6. INVITATION LANDING PAGE — STANDALONE SCREENSHOT STORY RECREATION
+   Recreation of https://routewithin-screenshot-story.lovable.app/
+   With RouteWithin warm earthy coaching theme & explore website capability
+   ========================================================================== */
+
+.invitation-body {
+  min-height: 100vh;
+  background-color: var(--bg-base);
+  color: var(--text-main);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Minimal Top Utility Header (Standalone feel) */
+.invitation-top-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 2rem;
+  background: transparent;
+  z-index: 50;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.invitation-brand-link {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  text-decoration: none;
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  transition: opacity 0.2s ease;
+}
+
+.invitation-brand-link:hover {
+  opacity: 0.85;
+}
+
+.invitation-brand-link img {
+  width: 2.25rem;
+  height: 2.25rem;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.invitation-brand-link span span {
+  color: var(--brown-primary);
+  font-weight: 400;
+}
+
+.invitation-top-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn-explore-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: 9999px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-brown);
+  color: var(--text-heading);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s ease;
+}
+
+.btn-explore-pill:hover {
+  background: var(--bg-subtle);
+  border-color: var(--brown-primary);
+  color: var(--brown-primary);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-explore-pill svg {
+  width: 1rem;
+  height: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.btn-explore-pill:hover svg {
+  transform: translateX(3px);
+}
+
+/* Main Standalone Hero Container */
+.invitation-main-hero {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1.5rem 4rem;
+  text-align: center;
+}
+
+.invitation-card {
+  width: 100%;
+  max-width: 48rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+
+/* Avatar / Profile Frame */
+.invitation-avatar-frame {
+  width: 7.25rem;
+  height: 7.25rem;
+  border-radius: 9999px;
+  border: 2px solid rgba(139, 111, 71, 0.25);
+  background: var(--bg-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(61, 43, 31, 0.08);
+  position: relative;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.invitation-avatar-frame:hover {
+  transform: scale(1.04);
+  border-color: var(--brown-primary);
+}
+
+.invitation-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+/* Name & Brand */
+.invitation-coach-block {
+  margin-top: 1.25rem;
+}
+
+.invitation-coach-name {
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-heading);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.invitation-brand-sub {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--brown-primary);
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+
+/* Group Pre-heading */
+.invitation-circle-label {
+  margin-top: 2.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+}
+
+/* H1 Headline */
+.invitation-headline {
+  margin-top: 1.25rem;
+  max-width: 44rem;
+  font-family: var(--font-heading);
+  font-size: clamp(2.15rem, 5vw, 3.25rem);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--text-heading);
+  letter-spacing: -0.015em;
+}
+
+/* Subtitle */
+.invitation-subtitle {
+  margin-top: 1.25rem;
+  max-width: 36rem;
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+/* Feature Checklist */
+.invitation-features-list {
+  margin-top: 2.25rem;
+  width: 100%;
+  max-width: 36rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  text-align: left;
+  list-style: none;
+  padding: 0;
+}
+
+.invitation-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+}
+
+.invitation-check-icon {
+  margin-top: 0.2rem;
+  width: 1.35rem;
+  height: 1.35rem;
+  flex-shrink: 0;
+  color: var(--brown-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.invitation-check-icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.invitation-feature-text {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text-heading);
+  font-weight: 450;
+}
+
+/* Banner / Highlight text */
+.invitation-banner-badge {
+  margin-top: 2.25rem;
+  font-size: clamp(0.75rem, 2vw, 0.875rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.5;
+  color: var(--brown-primary);
+  text-transform: uppercase;
+}
+
+/* WhatsApp CTA Button */
+.invitation-whatsapp-cta {
+  margin-top: 1.25rem;
+  height: 3.5rem;
+  width: 100%;
+  max-width: 28rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: #FFFFFF !important;
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  font-weight: 700;
+  text-decoration: none !important;
+  border-radius: 0.625rem;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
+  transition: all 0.3s ease;
+  padding: 0 1.5rem;
+}
+
+.invitation-whatsapp-cta:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 14px 32px rgba(37, 211, 102, 0.5);
+  color: #FFFFFF !important;
+}
+
+.invitation-whatsapp-cta svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+/* Subtext */
+.invitation-leave-anytime {
+  margin-top: 0.875rem;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+/* Standalone Explore Section */
+.invitation-explore-section {
+  width: 100%;
+  max-width: 980px;
+  margin: 3.5rem auto 1.5rem;
+  padding: 3rem 1.5rem;
+  border-top: 1px solid var(--border-brown);
+  position: relative;
+}
+
+.invitation-explore-header {
+  text-align: center;
+  margin-bottom: 2.25rem;
+}
+
+.invitation-explore-tag {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--brown-primary);
+  margin-bottom: 0.5rem;
+}
+
+.invitation-explore-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+  font-weight: 600;
+  color: var(--text-heading);
+  margin-bottom: 0.75rem;
+}
+
+.invitation-explore-desc {
+  max-width: 36rem;
+  margin: 0 auto;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.invitation-explore-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.invitation-explore-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-sm);
+}
+
+.invitation-explore-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--brown-primary);
+  box-shadow: var(--shadow-md);
+}
+
+.invitation-explore-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+  display: inline-block;
+}
+
+.invitation-explore-card-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin-bottom: 0.375rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.invitation-explore-card-title svg {
+  width: 1rem;
+  height: 1rem;
+  color: var(--brown-primary);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: all 0.25s ease;
+}
+
+.invitation-explore-card:hover .invitation-explore-card-title svg {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.invitation-explore-card-desc {
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.invitation-explore-cta-wrap {
+  text-align: center;
+  margin-top: 2.25rem;
+}
+
+/* Standalone Minimal Footer */
+.invitation-minimal-footer {
+  width: 100%;
+  border-top: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  padding: 1.75rem 1.5rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.invitation-footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.invitation-footer-links {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.invitation-footer-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: color 0.2s ease;
+}
+
+.invitation-footer-links a:hover {
+  color: var(--brown-primary);
+}
+
+@media (max-width: 640px) {
+  .invitation-top-bar {
+    padding: 1rem 1.25rem;
+  }
+  .invitation-main-hero {
+    padding: 2rem 1rem 3.5rem;
+  }
+  .invitation-footer-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+  .invitation-footer-links {
+    justify-content: center;
+  }
+}
