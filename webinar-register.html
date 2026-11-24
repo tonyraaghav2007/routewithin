@@ -176,6 +176,18 @@ src="https://www.facebook.com/tr?id=1365924428812836&ev=PageView&noscript=1"
 
   <script src="app.js?v=20261112a"></script>
   <script>
+    // Real-time error dismissal on input typing
+    ['regName', 'regEmail', 'regPhone', 'regCity'].forEach(function(id) {
+      var input = document.getElementById(id);
+      if (input) {
+        input.addEventListener('input', function() {
+          var errId = id === 'regName' ? 'nameError' : id === 'regEmail' ? 'emailError' : id === 'regPhone' ? 'phoneError' : 'cityError';
+          var err = document.getElementById(errId);
+          if (err) err.style.display = 'none';
+        });
+      }
+    });
+
     document.getElementById('webinarRegForm').addEventListener('submit', function(e) {
       e.preventDefault();
 
@@ -195,8 +207,10 @@ src="https://www.facebook.com/tr?id=1365924428812836&ev=PageView&noscript=1"
         document.getElementById('nameError').style.display = 'none';
       }
 
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(emailInput.value.trim())) {
+      // Clean & normalize email: remove invisible zero-width chars and trim
+      const cleanEmail = emailInput.value.trim().replace(/[\u200B-\u200D\uFEFF]/g, '');
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+      if (!emailRegex.test(cleanEmail)) {
         document.getElementById('emailError').style.display = 'block';
         isValid = false;
       } else {
@@ -228,44 +242,37 @@ src="https://www.facebook.com/tr?id=1365924428812836&ev=PageView&noscript=1"
       submitBtn.disabled = true;
       submitBtn.textContent = 'Securing Your Seat...';
 
-      // Save registration lead
+      // Save registration lead with normalized email
       const leadData = {
         name: nameInput.value.trim(),
-        email: emailInput.value.trim(),
+        email: cleanEmail.toLowerCase(),
         phone: phoneInput.value.trim(),
         city: cityInput.value.trim(),
         challenge: 'Karwa Chauth',
         course: 'Beyond the Vrat: A Karwa Chauth Masterclass',
         type: 'Free Pro Bono',
-        paymentStatus: 'Free'
+        paymentStatus: 'Free',
+        sourcePage: 'webinar-register.html'
       };
 
-      let syncPromise = Promise.resolve();
+      // 1. Immediately store lead and dispatch background sync with keepalive/sendBeacon
       if (typeof window.registerWebinarLead === 'function') {
-        syncPromise = window.registerWebinarLead(leadData);
+        window.registerWebinarLead(leadData);
       } else {
         const list = JSON.parse(localStorage.getItem('routewithin_webinar_registrations') || '[]');
         leadData.id = 'REG-' + Date.now().toString(36).toUpperCase();
         leadData.registeredAt = new Date().toISOString();
         list.unshift(leadData);
         localStorage.setItem('routewithin_webinar_registrations', JSON.stringify(list));
-        sessionStorage.setItem('rw_latest_registrant', JSON.stringify(leadData));
       }
 
-      // Smooth redirection to thank you page once synced to Google Sheets
-      let navigated = false;
-      function navigateToThankYou() {
-        if (!navigated) {
-          navigated = true;
-          window.location.href = 'thank-you.html';
-        }
-      }
+      sessionStorage.setItem('rw_latest_registrant', JSON.stringify(leadData));
 
-      Promise.resolve(syncPromise).finally(function() {
-        setTimeout(navigateToThankYou, 400);
-      });
-      // Safety fallback timeout
-      setTimeout(navigateToThankYou, 2500);
+      // 2. Fast, responsive redirection to thank you page (150ms for smooth UI feedback)
+      // The background sync continues independently via keepalive / sendBeacon
+      setTimeout(function() {
+        window.location.href = 'thank-you.html';
+      }, 150);
     });
   </script>
 </body>

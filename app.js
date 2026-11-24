@@ -1246,6 +1246,17 @@ function ensureRegistrationModalDOM() {
       closeSandboxModal();
     }
   });
+
+  // Real-time error dismissal on input typing
+  ['rwRegName', 'rwRegEmail', 'rwRegPhone', 'rwRegCity'].forEach(function(id) {
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener('input', function() {
+        const err = document.getElementById(id.replace('rwReg', 'rw') + 'Error');
+        if (err) err.style.display = 'none';
+      });
+    }
+  });
 }
 
 function openRegistrationModal(programId) {
@@ -1344,8 +1355,11 @@ function handleRegistrationSubmit(e) {
     document.getElementById('rwNameError').style.display = 'none';
   }
 
-  const emailRegex = /^[^s@]+@[^s@]+.[^s@]+$/;
-  if (!emailRegex.test(emailEl.value.trim())) {
+  // Clean & normalize email: remove invisible zero-width chars and trim
+  const cleanEmail = emailEl.value.trim().replace(/[\u200B-\u200D\uFEFF]/g, '');
+  // Standard RFC-compliant email regex: requires @, valid domain, and 2+ char TLD
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+  if (!emailRegex.test(cleanEmail)) {
     document.getElementById('rwEmailError').style.display = 'block';
     valid = false;
   } else {
@@ -1370,7 +1384,7 @@ function handleRegistrationSubmit(e) {
 
   const formData = {
     name: nameEl.value.trim(),
-    email: emailEl.value.trim(),
+    email: cleanEmail.toLowerCase(),
     phone: phoneEl.value.trim(),
     city: cityEl.value.trim(),
     challenge: challengeEl ? challengeEl.value.trim() : '',
@@ -1402,17 +1416,17 @@ function handleRegistrationSubmit(e) {
       sourcePage: formData.sourcePage
     };
 
-    let syncPromise = Promise.resolve();
+    // 1. Instantly register lead (saves to localStorage, sessionStorage, and dispatches background sync)
     if (typeof registerWebinarLead === 'function') {
-      syncPromise = registerWebinarLead(freeLead);
+      registerWebinarLead(freeLead);
     }
 
-    Promise.resolve(syncPromise).finally(function() {
-      setTimeout(function() {
-        const dest = (currentRegProgram && currentRegProgram.redirectAfterRegister) ? currentRegProgram.redirectAfterRegister : 'thank-you.html';
-        window.location.href = dest;
-      }, 400);
-    });
+    // 2. Fast, snappy redirect to thank you page (150ms for smooth UI feedback)
+    // The background keepalive sync to Google Sheets continues independently
+    setTimeout(function() {
+      const dest = (currentRegProgram && currentRegProgram.redirectAfterRegister) ? currentRegProgram.redirectAfterRegister : 'thank-you.html';
+      window.location.href = dest;
+    }, 150);
     return;
   }
 
@@ -1622,16 +1636,32 @@ function sendToGoogleSheets(action, data) {
     return Promise.resolve({ success: false, reason: 'not_configured' });
   }
 
+  const payload = JSON.stringify({ action: action, data: data });
+
+  // 1. Prefer sendBeacon for non-blocking instantaneous browser handoff if supported
+  if (typeof navigator !== 'undefined' && typeof navigator.sendBeacon === 'function') {
+    try {
+      const blob = new Blob([payload], { type: 'text/plain;charset=UTF-8' });
+      if (navigator.sendBeacon(GOOGLE_SCRIPT_URL, blob)) {
+        console.log('[RouteWithin] ✅ Registration synced to Google Sheets via sendBeacon.');
+        return Promise.resolve({ success: true, method: 'beacon' });
+      }
+    } catch (e) {
+      console.warn('[RouteWithin] sendBeacon fallback to fetch keepalive:', e);
+    }
+  }
+
+  // 2. Reliable fetch with keepalive: true (persists across page unloads)
   return fetch(GOOGLE_SCRIPT_URL, {
     method: 'POST',
     mode: 'no-cors', // Google Apps Script doesn't support CORS preflight
     headers: { 'Content-Type': 'text/plain' },
-    body: JSON.stringify({ action: action, data: data }),
+    body: payload,
     keepalive: true
   })
   .then(function() {
     console.log('[RouteWithin] ✅ Registration synced to Google Sheets.');
-    return { success: true };
+    return { success: true, method: 'fetch' };
   })
   .catch(function(err) {
     console.warn('[RouteWithin] ⚠️ Could not sync to Google Sheets (offline?):', err.message);

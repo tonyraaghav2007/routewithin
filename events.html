@@ -658,6 +658,17 @@
   <script src="app.js?v=20261112a"></script>
   <script>
     // Events page registration form handling
+    // Real-time error dismissal on input typing
+    ['eventRegName', 'eventRegEmail', 'eventRegPhone', 'eventRegCity'].forEach(function(id) {
+      var input = document.getElementById(id);
+      if (input) {
+        input.addEventListener('input', function() {
+          var err = document.getElementById(id.replace('eventReg', 'event') + 'Error');
+          if (err) err.style.display = 'none';
+        });
+      }
+    });
+
     document.getElementById('eventsPageRegForm').addEventListener('submit', function(e) {
       e.preventDefault();
 
@@ -677,8 +688,10 @@
         document.getElementById('eventNameError').style.display = 'none';
       }
 
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(emailInput.value.trim())) {
+      // Clean & normalize email: remove invisible zero-width chars and trim
+      const cleanEmail = emailInput.value.trim().replace(/[\u200B-\u200D\uFEFF]/g, '');
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+      if (!emailRegex.test(cleanEmail)) {
         document.getElementById('eventEmailError').style.display = 'block';
         isValid = false;
       } else {
@@ -710,10 +723,10 @@
       submitBtn.disabled = true;
       submitBtn.textContent = 'Securing Your Seat...';
 
-      // Save registration lead
+      // Save registration lead with normalized email
       const leadData = {
         name: nameInput.value.trim(),
-        email: emailInput.value.trim(),
+        email: cleanEmail.toLowerCase(),
         phone: phoneInput.value.trim(),
         city: cityInput.value.trim(),
         challenge: 'Karwa Chauth',
@@ -723,9 +736,9 @@
         sourcePage: 'events.html'
       };
 
-      let syncPromise = Promise.resolve();
+      // 1. Immediately store lead and dispatch background sync with keepalive/sendBeacon
       if (typeof window.registerWebinarLead === 'function') {
-        syncPromise = window.registerWebinarLead(leadData);
+        window.registerWebinarLead(leadData);
       } else {
         const list = JSON.parse(localStorage.getItem('routewithin_webinar_registrations') || '[]');
         leadData.id = 'REG-' + Date.now().toString(36).toUpperCase();
@@ -736,20 +749,11 @@
 
       sessionStorage.setItem('rw_latest_registrant', JSON.stringify(leadData));
 
-      // Smooth redirection to thank you page once synced to Google Sheets
-      let navigated = false;
-      function navigateToThankYou() {
-        if (!navigated) {
-          navigated = true;
-          window.location.href = 'thank-you.html';
-        }
-      }
-
-      Promise.resolve(syncPromise).finally(function() {
-        setTimeout(navigateToThankYou, 400);
-      });
-      // Safety fallback timeout
-      setTimeout(navigateToThankYou, 2500);
+      // 2. Fast, responsive redirection to thank you page (150ms for smooth UI feedback)
+      // The background sync continues independently via keepalive / sendBeacon
+      setTimeout(function() {
+        window.location.href = 'thank-you.html';
+      }, 150);
     });
   </script>
 </body>
