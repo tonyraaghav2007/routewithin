@@ -134,6 +134,42 @@ src="https://www.facebook.com/tr?id=1365924428812836&ev=PageView&noscript=1"
         // Keeps user aware that WhatsApp is essential
       });
     })();
+
+    // 3. Auto-redirect to homepage after clicking WhatsApp community link
+    (function setupWhatsAppRedirect() {
+      const waLink = document.getElementById('whatsappCommunityLink');
+      if (!waLink) return;
+
+      let isRedirecting = false;
+
+      function redirectToHome() {
+        if (!isRedirecting) return;
+        window.location.href = 'index.html';
+      }
+
+      waLink.addEventListener('click', function () {
+        if (isRedirecting) return;
+        isRedirecting = true;
+
+        const span = waLink.querySelector('span');
+        if (span) {
+          span.textContent = 'Joining WhatsApp & Returning to Homepage...';
+        }
+        waLink.style.opacity = '0.85';
+        waLink.style.pointerEvents = 'none';
+
+        // 1. Allow outbound WhatsApp tab/app launch to initiate, then redirect current page to homepage
+        setTimeout(redirectToHome, 600);
+
+        // 2. Extra reliability: redirect when tab regains focus or visibility (common on mobile app-switch)
+        window.addEventListener('focus', redirectToHome);
+        document.addEventListener('visibilitychange', function () {
+          if (document.visibilityState === 'visible') {
+            redirectToHome();
+          }
+        });
+      });
+    })();
   </script>
 </body>
 </html>
