@@ -303,56 +303,90 @@
     let html = '';
 
     programs.forEach(function(p) {
+      const catalogKey = p.catalogId || p.id;
+      const prodMeta = (root.ROUTEWITHIN_PRODUCTS && root.ROUTEWITHIN_PRODUCTS[catalogKey]) || null;
+      const primaryGroup = prodMeta && prodMeta.optionGroups && prodMeta.optionGroups[0] ? prodMeta.optionGroups[0] : null;
+      const defaultOpt = primaryGroup && primaryGroup.options[0] ? primaryGroup.options[0] : null;
+
+      const basePrice = defaultOpt && typeof defaultOpt.price === 'number' ? defaultOpt.price : (Number(p.price) || 0);
+      const mrpPrice = defaultOpt && typeof defaultOpt.compareAtPrice === 'number' ? defaultOpt.compareAtPrice : (prodMeta ? prodMeta.compareAtPrice : 0);
+      const pctOff = (mrpPrice > basePrice && basePrice > 0) ? Math.round(((mrpPrice - basePrice) / mrpPrice) * 100) + '% OFF' : '';
+      const ratingText = prodMeta ? ('★ ' + prodMeta.rating + ' (' + prodMeta.reviewCount + ' reviews)') : '★ 4.9';
+
       const priceSuffixHtml = p.priceSuffix
         ? ' <span style="font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); font-family: var(--font-body);">' + escapeHtml(p.priceSuffix) + '</span>'
         : '';
 
+      let variantPillsHtml = '';
+      if (primaryGroup && primaryGroup.options && primaryGroup.options.length > 0) {
+        variantPillsHtml = '<div class="rw-prog-variants-block">'
+          + '<span class="rw-prog-variants-lbl">' + escapeHtml(primaryGroup.label) + ':</span>'
+          + '<div class="rw-prog-variants-row">';
+        primaryGroup.options.forEach(function(opt, idx) {
+          const optPrice = typeof opt.price === 'number' ? opt.price : basePrice;
+          const optMrp = typeof opt.compareAtPrice === 'number' ? opt.compareAtPrice : mrpPrice;
+          variantPillsHtml += '<button type="button" class="rw-prog-variant-pill' + (idx === 0 ? ' active' : '') + '"'
+            + ' data-price="' + optPrice + '"'
+            + ' data-mrp="' + (optMrp || 0) + '"'
+            + ' data-label="' + escapeHtml(opt.label) + '"'
+            + ' data-duration="' + escapeHtml(opt.durationTag || p.duration || p.badge) + '">'
+            + escapeHtml(opt.label)
+            + '</button>';
+        });
+        variantPillsHtml += '</div></div>';
+      }
+
       let bulletsHtml = '';
       if (p.bullets && p.bullets.length > 0) {
-        bulletsHtml = '<ul style="list-style: none; padding: 0; margin: 0 0 1.625rem; display: flex; flex-direction: column; gap: 0.625rem;">';
+        bulletsHtml = '<ul style="list-style: none; padding: 0; margin: 0 0 1.45rem; display: flex; flex-direction: column; gap: 0.55rem;">';
         p.bullets.forEach(function(b) {
           if (b && b.trim()) {
-            bulletsHtml += '<li style="display: flex; align-items: center; gap: 0.625rem; font-size: 0.95rem; color: var(--text-heading);">'
-              + '<span style="color: var(--terracotta); font-weight: 800;">✓</span> ' + escapeHtml(b)
+            bulletsHtml += '<li style="display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.94rem; color: var(--text-heading); line-height: 1.45;">'
+              + '<span style="color: var(--terracotta); font-weight: 800;">✓</span> <span>' + escapeHtml(b) + '</span>'
               + '</li>';
           }
         });
         bulletsHtml += '</ul>';
       }
 
-      const catalogKey = p.catalogId || p.id;
       const primaryAction = p.buttonPrimaryAction || ('register:' + catalogKey);
-      const secondaryAction = p.buttonSecondaryAction || ('register:' + catalogKey);
+      const pdpUrl = 'product.html?id=' + encodeURIComponent(catalogKey);
 
-      html += '<div class="split-quote-cta reveal-on-scroll" style="margin: 0; background: var(--bg-card); border-radius: 1.5rem;">'
-        + '<div class="split-cta-image" style="min-height: 21.25rem; position: relative;">'
+      html += '<div class="split-quote-cta rw-ecom-card reveal-on-scroll" data-prog-id="' + escapeHtml(catalogKey) + '" data-prog-title="' + escapeHtml(p.title) + '">'
+        + '<a href="' + pdpUrl + '" class="split-cta-image" style="min-height: 21.5rem; position: relative; display: block;">'
         + '<img src="' + escapeHtml(p.image) + '" alt="' + escapeHtml(p.imageAlt || p.title) + '" class="split-cta-img-tag">'
+        + '</a>'
+        + '<div class="split-cta-content" style="padding: 2.25rem 2.25rem;">'
+        + '<div class="rw-ecom-top-meta">'
+        + '<span class="rw-ecom-badge-pill">' + escapeHtml(p.badge) + '</span>'
+        + '<span class="rw-ecom-rating-badge">' + escapeHtml(ratingText) + '</span>'
         + '</div>'
-        + '<div class="split-cta-content" style="padding: 2.5rem 2.25rem;">'
-        + '<div style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.85rem; flex-wrap: wrap;">'
-        + '<span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--terracotta); background: rgba(198, 123, 92, 0.12); padding: 0.3rem 0.75rem; border-radius: 9999px;">'
-        + escapeHtml(p.badge)
-        + '</span>'
-        + '<span style="font-size: 1.35rem; font-weight: 800; color: var(--terracotta); font-family: var(--font-heading);">'
-        + escapeHtml(p.priceDisplay) + priceSuffixHtml
-        + '</span>'
-        + '</div>'
-        + '<h2 style="font-family: var(--font-heading); font-size: 2.15rem; color: var(--text-heading); margin-bottom: 0.75rem; line-height: 1.25;">'
-        + escapeHtml(p.title)
+        + '<h2 style="font-family: var(--font-heading); font-size: 2.05rem; color: var(--text-heading); margin-bottom: 0.55rem; line-height: 1.22;">'
+        + '<a href="' + pdpUrl + '" style="color: inherit; text-decoration: none;">' + escapeHtml(p.title) + '</a>'
         + '</h2>'
-        + '<p style="font-size: 1rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 1.25rem;">'
+        + '<div class="rw-ecom-price-wrap">'
+        + '<span class="rw-ecom-price">' + escapeHtml(p.priceDisplay) + priceSuffixHtml + '</span>'
+        + (mrpPrice > basePrice ? '<span class="rw-ecom-mrp">₹ ' + Number(mrpPrice).toLocaleString('en-IN') + '</span>' : '<span class="rw-ecom-mrp" style="display:none;"></span>')
+        + (pctOff ? '<span class="rw-ecom-discount">' + escapeHtml(pctOff) + '</span>' : '<span class="rw-ecom-discount" style="display:none;"></span>')
+        + '</div>'
+        + '<p style="font-size: 0.98rem; color: var(--text-secondary); line-height: 1.62; margin-bottom: 1.15rem;">'
         + escapeHtml(p.description)
         + '</p>'
+        + variantPillsHtml
         + bulletsHtml
-        + '<div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">'
-        + renderActionButton(p.buttonPrimaryText, primaryAction, true)
-        + renderActionButton(p.buttonSecondaryText, secondaryAction, false)
+        + '<div style="display: flex; gap: 0.85rem; align-items: center; flex-wrap: wrap;">'
+        + renderActionButton(p.buttonPrimaryText, primaryAction, true, 'btn btn-hero-book btn-md rw-ecom-enroll-btn')
+        + '<a href="' + pdpUrl + '" class="btn btn-secondary btn-md">View Full Details &amp; Size Options →</a>'
         + '</div>'
         + '</div>'
         + '</div>';
     });
 
     container.innerHTML = html;
+
+    if (root.ROUTEWITHIN_PRODUCTS_UI && typeof root.ROUTEWITHIN_PRODUCTS_UI.wireProgramCardVariants === 'function') {
+      root.ROUTEWITHIN_PRODUCTS_UI.wireProgramCardVariants(container);
+    }
 
     if (typeof initRevealAnimations === 'function') {
       initRevealAnimations();
@@ -436,7 +470,7 @@
           + '</div>'
           + '<div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">'
           + renderActionButton(ev.buttonPrimaryText, primaryAction, true)
-          + renderActionButton(ev.buttonSecondaryText, secondaryAction, false)
+          + '<a href="product.html?id=' + encodeURIComponent(catalogKey) + '" class="btn btn-secondary btn-md">Full Details &amp; Highlights →</a>'
           + '</div>'
           + '</div>'
           + '</div>';
@@ -486,7 +520,7 @@
         + '<p class="active-initiative-desc">' + escapeHtml(ev0.description) + '</p>'
         + '<div class="active-initiative-actions">'
         + renderActionButton(ev0.buttonPrimaryText, primaryAction0, true, 'btn btn-hero-book btn-sm')
-        + renderActionButton(ev0.buttonSecondaryText, secondaryAction0, false, 'btn btn-secondary btn-sm')
+        + '<a href="product.html?id=' + encodeURIComponent(catalogKey0) + '" class="btn btn-secondary btn-sm">Full Details &amp; Highlights →</a>'
         + '</div>'
         + '</div>'
         + '</div>';
@@ -552,7 +586,7 @@
           + '</div>'
           + '<div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">'
           + renderActionButton(ev.buttonPrimaryText, primaryAction, true)
-          + renderActionButton(ev.buttonSecondaryText, secondaryAction, false)
+          + '<a href="product.html?id=' + encodeURIComponent(catalogKey) + '" class="btn btn-secondary btn-md">Full Details &amp; Highlights →</a>'
           + '</div>'
           + '</div>'
           + '</div>';
@@ -606,7 +640,7 @@
         + bulletsHtml
         + '<div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">'
         + renderActionButton(eb.buttonPrimaryText, eb.buttonPrimaryAction, true)
-        + renderActionButton(eb.buttonSecondaryText, eb.buttonSecondaryAction, false)
+        + '<a href="product.html?id=' + encodeURIComponent(eb.id || 'ebook-spotlight') + '" class="btn btn-secondary btn-md">Full Guide Details →</a>'
         + '</div>'
         + '</div>'
         + '</div>';

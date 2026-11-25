@@ -1098,6 +1098,17 @@ window.ROUTEWITHIN_CATALOG = {
     isPaid: false,
     badge: 'ACTIVE INITIATIVE • WEDNESDAY',
     description: 'Live cohorts breaking down subconscious conflict loops, emotional triggers, and daily communication frameworks.'
+  },
+  // 7) Free E-Book: Route Within: From Conflict to Clarity
+  'ebook-spotlight': {
+    id: 'ebook-spotlight',
+    title: 'Route Within: From Conflict to Clarity (E-Book)',
+    duration: 'Digital PDF Guide (Instant Access)',
+    priceDisplay: '100% Free (PDF)',
+    amount: 0,
+    isPaid: false,
+    badge: '100% FREE DIGITAL GUIDE',
+    description: 'Discover the 3 subconscious loops driving distance, 90-second de-escalation scripts, and 7 daily gratitude journal prompts.'
   }
 };
 
@@ -1259,8 +1270,9 @@ function ensureRegistrationModalDOM() {
   });
 }
 
-function openRegistrationModal(programId) {
-  const prog = window.ROUTEWITHIN_CATALOG[programId] || window.ROUTEWITHIN_CATALOG['antarprakash'];
+function openRegistrationModal(programId, customOverride) {
+  const baseProg = window.ROUTEWITHIN_CATALOG[programId] || window.ROUTEWITHIN_CATALOG['antarprakash'];
+  const prog = customOverride ? Object.assign({}, baseProg, customOverride) : baseProg;
   currentRegProgram = prog;
 
   ensureRegistrationModalDOM();
